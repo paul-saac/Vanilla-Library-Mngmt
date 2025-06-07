@@ -1,0 +1,13 @@
+:root {
+    --base-clr: #363743;
+    --line-clr: #42434a;
+    --blue-clr: #76A4FF;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+html {
+    font-family: Poppins, 'Inter';
+    line-height: 1.5rem;
+}
