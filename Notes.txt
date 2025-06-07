@@ -1,0 +1,4 @@
+Font-Style: Inter 
+Text-color: 363743
+Buttons-clr: 363743
+Blue: 76A4FF
