@@ -38,18 +38,25 @@ nav {
     align-items: center;
     justify-content: space-between;
 }
-.clockin-btn {
+.search-bar {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
     gap: 0.5em; 
-    padding: 6px 10px 5px;
-    background: var(--blue-clr);
-    cursor: pointer;
-    border: none;
-    color: white;
-    border-radius: .5em;
 }
+.search-bar input {
+    flex: 1;
+    padding: 0.5em;
+    border: none;
+}  
+.search-bar input:focus {
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+.dropdown {
+    cursor: pointer;
+}
+
 
 /*======= SIDE BAR ==================*/
 aside {
@@ -102,7 +109,6 @@ aside ul li.active a {
     height: 100%;
     padding: 15px;
     background: none;
-    font: inherit;
     cursor: pointer;
     border: none;
     color: var(--base-clr);
@@ -123,7 +129,7 @@ footer {
 main { 
     grid-area: main;
     background: white;
-    padding: 1em;
+    padding: 3em;
 }
 
 @media(max-width: 800px) {
