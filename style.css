@@ -4,10 +4,46 @@
     --blue-clr: #76A4FF;
 }
 * {
-    margin: 0;
-    padding: 0;
+   margin: 0;
+   padding: 0;
 }
 html {
     font-family: Poppins, 'Inter';
     line-height: 1.5rem;
+}
+body {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: 
+    "sidebar navbar"
+    "sidebar main"
+    "sidebar footer";
+}
+nav {
+    top: 0;
+    position: sticky;
+    grid-area: navbar;
+    background: gray;
+    padding: 1em;
+}
+aside {
+    height: calc(100vh - 33px);
+    top: 0;
+    position: sticky;
+    align-self: start;
+    grid-area: sidebar;
+    background: #76A4FF;
+    padding: 1em;
+}
+footer {
+    grid-area: footer;
+    background: #363743;
+    padding: 1em;
+}
+main { 
+    grid-area: main;
+    background: rebeccapurple;
+    padding: 1em;
 }
