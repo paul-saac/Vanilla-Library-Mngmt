@@ -2,51 +2,107 @@
     --base-clr: #363743;
     --line-clr: #42434a;
     --blue-clr: #76A4FF;
+    --border-clr: #D4D4D4;
+    --hover-clr: #EAEAEA;
 }
 * {
    margin: 0;
    padding: 0;
 }
 html {
-    font-family: Poppins, 'Inter';
+    font-family: 'Poppins', Arial, sans-serif;
     line-height: 1.5rem;
 }
 body {
     min-height: 100vh;
     display: grid;
-    grid-template-columns: 300px 1fr;
+    grid-template-columns: 230px 1fr;
     grid-template-rows: auto 1fr auto;
     grid-template-areas: 
     "sidebar navbar"
     "sidebar main"
     "sidebar footer";
 }
+
+/*======= NAVIGATION ==================*/
 nav {
     top: 0;
     position: sticky;
     grid-area: navbar;
-    background: gray;
-    padding: 1em;
+    background: white;
+    padding: 1.5em;
+    border-bottom: 1px solid var(--border-clr);
 }
+
+
+
+/*======= SIDE BAR ==================*/
 aside {
-    height: calc(100vh - 33px);
+    height: calc(100vh - 50px);
     top: 0;
     position: sticky;
     align-self: start;
     grid-area: sidebar;
-    background: #76A4FF;
-    padding: 1em;
+    background: white;
+    padding: 1.5em;
+    border-right: 1px solid var(--border-clr)
+
 }
+aside ul li {
+    list-style-type: none;
+}  
+aside ul li a {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5em; 
+    height: 100%;
+    padding: 15px;
+    list-style-type: none;
+    text-decoration: none;
+    color: var(--base-clr);
+    border-radius: .5em;
+}
+aside ul li a svg {
+    flex-shrink: 0;
+    fill: var(--base-clr);
+}
+aside ul li a:hover {
+    background: var(--hover-clr);
+}
+.alert-btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5em; 
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    background: none;
+    font: inherit;
+    cursor: pointer;
+    border: none;
+    color: var(--base-clr);
+    border-radius: .5em;
+}
+.alert-btn:hover {
+    background: var(--hover-clr);
+}
+
+/*======= FOOTER ==================*/
 footer {
     grid-area: footer;
-    background: #363743;
+    background: white;
     padding: 1em;
 }
+
+/*======= MAIN ==================*/
 main { 
     grid-area: main;
-    background: rebeccapurple;
+    background: white;
     padding: 1em;
 }
+
 @media(max-width: 800px) {
     body {
         grid-template-columns: 1fr;
@@ -59,5 +115,4 @@ main {
     .show {
         display: block;
     }
-    
 }
