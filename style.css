@@ -33,8 +33,23 @@ nav {
     padding: 1.5em;
     border-bottom: 1px solid var(--border-clr);
 }
-
-
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.clockin-btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5em; 
+    padding: 6px 10px 5px;
+    background: var(--blue-clr);
+    cursor: pointer;
+    border: none;
+    color: white;
+    border-radius: .5em;
+}
 
 /*======= SIDE BAR ==================*/
 aside {
@@ -69,6 +84,14 @@ aside ul li a svg {
 }
 aside ul li a:hover {
     background: var(--hover-clr);
+}
+aside ul li.active a {
+    background: var(--hover-clr);
+    color: #363743;
+
+    svg{
+        fill: #363743;
+    }
 }
 .alert-btn {
     display: flex;
