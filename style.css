@@ -156,5 +156,30 @@ footer {
 main { 
     grid-area: main;
     background: white;
-    padding: 3em;
+    padding: 3.5em;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+    
+}
+.tricycle-table {
+    border-collapse: collapse;
+    border-right: 1px solid #dddddd;
+    border-left: 1px solid #dddddd;
+    overflow: hidden;
+    width: 100%;
+    
+}
+td, th {
+    border: none; 
+    border-bottom: 1px solid #dddddd;
+    border-top: 1px solid #dddddd;
+    text-align: left;
+    padding: 13px 10px 13px 50px;
+}
+th {
+    background-color: #EAEAEA;
 }
