@@ -71,6 +71,7 @@ aside {
 }
 body:has(aside:hover) {
     grid-template-columns: 250px 1fr;
+    grid-template-rows: auto 1fr auto;
 }
 body:has(aside:hover) .active a {
     border-radius: 0.5em;
@@ -156,18 +157,4 @@ main {
     grid-area: main;
     background: white;
     padding: 3em;
-}
-
-@media(max-width: 800px) {
-    body {
-        grid-template-columns: 1fr;
-    }
-    aside {
-        position: fixed;
-        width: 300px;
-        display: none;
-    }
-    .show {
-        display: block;
-    }
 }
