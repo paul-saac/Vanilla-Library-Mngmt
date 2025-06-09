@@ -183,3 +183,33 @@ td, th {
 th {
     background-color: #EAEAEA;
 }
+
+
+/*======= LOGIN PAGEA ==================*/
+.login-body {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas:
+    "login illus";
+}
+.login {
+    grid-area: login;
+    background: white;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+
+
+
+.illus {
+    grid-area: illus;
+    background: red;
+}
+
