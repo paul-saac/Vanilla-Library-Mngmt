@@ -70,6 +70,10 @@ nav {
         width: 350px;
         display: none;
     }
+    .dropdown {
+        display: none;
+    }
+
     .show {
         position: fixed;
         display: block;
@@ -107,7 +111,9 @@ aside {
     body:has(aside:hover) aside a {
         border-radius: 0.5em;
     }
-    
+    .sidebar-btn {
+        display: none;
+    }
 }
 
 aside ul li {
