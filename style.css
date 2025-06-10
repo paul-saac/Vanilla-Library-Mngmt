@@ -64,7 +64,7 @@ nav {
         grid-template-areas: 
         "navbar"
         "main"
-        "footer";
+        "footer"; 
     }
     aside {
         width: 350px;
@@ -73,8 +73,12 @@ nav {
     .show {
         position: fixed;
         display: block;
-
+        a {
+            border-radius: 0.5em;
+            background: white;
+        }
     }
+    
 }
 
 
@@ -88,19 +92,24 @@ aside {
     padding: 1.5em;
     border-right: 1px solid var(--border-clr);
 }
-body:has(aside:hover) {
-    grid-template-columns: 250px 1fr;
-    grid-template-rows: auto 1fr auto;
+
+@media (min-width: 800px) {
+    body:has(aside:hover) {
+        grid-template-columns: 250px 1fr;
+        grid-template-rows: auto 1fr auto;
+    }
+    body:has(aside:hover) .active a {
+        border-radius: 0.5em;
+        background: var(--hover-clr);
+        color: var(--base-clr);
+    }
+    /* SET BORDER RADIUS TO ALL*/
+    body:has(aside:hover) aside a {
+        border-radius: 0.5em;
+    }
+    
 }
-body:has(aside:hover) .active a {
-    border-radius: 0.5em;
-    background: var(--hover-clr);
-    color: var(--base-clr);
-}
-/* SET BORDER RADIUS TO ALL*/
-body:has(aside:hover) aside a {
-    border-radius: 0.5em;
-}
+
 aside ul li {
     list-style-type: none;
 }  
