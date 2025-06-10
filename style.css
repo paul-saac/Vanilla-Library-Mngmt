@@ -57,6 +57,11 @@ nav {
 .dropdown {
     cursor: pointer;
 }
+.sidebar-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
 
 @media (max-width: 800px) {
     body {
@@ -73,7 +78,6 @@ nav {
     .dropdown {
         display: none;
     }
-
     .show {
         position: fixed;
         display: block;

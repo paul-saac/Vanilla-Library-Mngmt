@@ -1,5 +1,5 @@
 const sidebar = document.getElementById('sidebar')
 
-function toggleSidebar() {
+function toggleSidebar() {  
     sidebar.classList.toggle('show')
 }
