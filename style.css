@@ -227,79 +227,33 @@ th {
 /*======= LOGIN PAGE ==================*/
 .login-body {
     min-height: 100vh;
+    background: #F9F9F9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-container{
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
+    background: white;
+    grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
     grid-template-areas:
-    "login illus";
+    "illus login-form";
+    border-radius: 20px;
+    padding: 0;
+    box-shadow: 0 24px 52.4px -23px rgba(0, 0, 0, 0.25);
 }
-.login {
-    grid-area: login;
-    background: white;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-}
-.login-header {
-    min-height: 100px;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 30px;
+.illus {
+    grid-area: illus;
+    background: #D9D9D9;
+    width: 486px;
+    height: 520px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
 }
 .login-form {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-}
-.login-form span {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
-.login-form p {
-    font-size: 12px;
-    line-height: 2;
-    color: #9C9C9C;
-}
-.login-form input {
-    border: 1px solid var(--border-clr);
-    border-radius: 5px;
-    padding: 8px;
-    width: 200px;
-}
-.login-btn {
-    background: var(--base-clr);
-    border-radius: 5px;
-    width: 220px;
-    padding: 8px;
-    color: white;
+    grid-area: login-form;
 }
 
-
-
-
-.illus {
-    grid-area: illus;
-    background: red;
-}
-.illus {
-    grid-area: illus;
-    background: #f5f5f5; /* Fallback background */
-    position: relative;
-    overflow: hidden;
-}
-.illus img {
-    height: 100vh;
-    object-fit: contain;
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: block; /* Ensures proper image display */
-}
 
 

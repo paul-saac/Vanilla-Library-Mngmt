@@ -3,3 +3,9 @@ Text-color: 363743
 Buttons-clr: 363743
 Blue: 76A4FF
 
+
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas:
+    "login illus";
