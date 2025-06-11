@@ -75,7 +75,9 @@ nav {
     background: none;
     cursor: pointer;
 }
-
+.notif-btn {
+    cursor: pointer;
+}
 @media (max-width: 800px) {
     body {
         grid-template-columns: 1fr;
@@ -99,7 +101,6 @@ nav {
             background: white;
         }
     }
-    
 }
 
 
@@ -182,20 +183,25 @@ footer {
 
 /*======= MAIN ==================*/
 main { 
+    color: #73737C;
     background: #F9F9F9;
     grid-area: main;
     padding: 66px;
 }
 main h3 {
+    font-weight: 450;
     font-size: 17px;
 }
 main p {
-    font-size: medium;
-    font-size: 23px;
+    font-weight: 600;
+    font-size: 20px;
 }
 .count-container div{
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
     background: white;
-    width: 195px;
+    width: 100%;
     height: 48px;
     padding: 26px;
     border-radius: 5px;
