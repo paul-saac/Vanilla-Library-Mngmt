@@ -1,79 +1,16 @@
-Font-Style: Inter 
-Text-color: 363743
-Buttons-clr: 363743
-Blue: 76A4FF
-
-
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    grid-template-rows: 1fr;
-    grid-template-areas:
-    "login illus";
-
-
-    .login-form span input {
-    border: 1px solid var(--border-clr);
-    width: 330px;
-    border-radius: 5px;
-    padding: 12px 12px;
-}
-
-.login-form a {
-    text-align: end;
-    text-decoration: none;
-    font-weight: bold;
-    color: var(--base-clr);
-}
-.login-btn {
-    background: var(--base-clr);
-    border-radius: 5px;
-    width: 100%;
-    padding: 12px;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 17px;
-}
-.login-footer {
-    text-align: center;;
-}
-.login-footer p {
-    color: var(--base-clr);
-    font-size: 12px;
-}
-.login-footer b{
-    color: var(--base-clr);
-    font-size: 10px;
-}
-
-.login-form span p {
-    color: #9C9C9C;
-    font-size: 13px;
-    padding-left: 9px;
-}
-
-
-.illus {
-    grid-area: illus;
-    background: #D9D9D9;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-}
-
-.login-form {
-    grid-area: login-form;
+.header {
     display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
-.login-form b {
-    color: var(--base-clr);
-    font-size: 25px;
-}
-
-.text-fields {
-    display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    flex-direction: column;
+    margin-bottom: 35px;
+    
 }
+
+
+  <span class="search-bar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="currentColor" d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 7-7a7 7 0 0 1-7 7Z"/></svg>
+            <input type="text" placeholder="Search..">
+        </span>
+        <span class="dropdown">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m7 10l5 5m0 0l5-5"/></svg>
+</span>
