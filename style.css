@@ -293,7 +293,7 @@ main p {
     font-size: 13px;
 }
 
-.login-btn {
+#loginbtn {
     background: var(--base-clr);
     border-radius: 5px;
     border: none;
