@@ -1,0 +1,99 @@
+@import '../shared/styles/variables.css';
+@import '../shared/styles/common.css';
+
+.login-body {
+    min-height: 100vh;
+    background: #F9F9F9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-container{
+    display: grid;
+    background: white;
+    grid-template-columns: 486px 486px;
+    grid-template-rows: 518px;
+    padding: 0px;
+    grid-template-areas:
+    "illus login-form";
+    border-radius: 20px;
+    box-shadow: 0 24px 52.4px -23px rgba(0, 0, 0, 0.25);
+    overflow: auto;
+}
+.illus {
+    grid-area: illus;
+    background: #D9D9D9; 
+}
+.login-form {
+    grid-area: login-form;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 70px 70px 40px 70px;
+}
+.login-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 40px;
+}   
+.text-fields {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+/*======= LOGIN PAGE DESGIN PROPERTIES ==================*/
+.login-header b {
+    text-align: start;
+    color: var(--base-clr);
+    font-size: 25px;
+}
+.text-fields p {
+    color: #9C9C9C;
+    font-size: 13px;
+    padding-left: 9px;
+}
+.text-fields input {
+    border: 1px solid var(--border-clr);
+    border-radius: 5px;
+    width: 325px;
+    padding: 12px;
+}
+.text-fields a {
+    width: 100%;
+    text-align: end;
+    text-decoration: none;
+    font-weight: 800;
+    color: var(--base-clr);
+    font-size: 13px;
+}
+
+#loginbtn {
+    background: var(--base-clr);
+    border-radius: 5px;
+    border: none;
+    width: 100%;
+    padding: 12px;
+    color: white;
+    cursor: pointer;
+    font-weight: semi-bold;
+    font-size: 17px;
+}
+.login-footer {
+    width: 100%;
+    text-align: center;
+    padding: 50px 0 0 0;
+}
+.login-footer p {
+    color: var(--base-clr);
+    font-size: 12px;
+}
+.login-footer b{
+    color: var(--base-clr);
+    font-size: 10px;
+}

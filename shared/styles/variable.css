@@ -1,0 +1,17 @@
+:root {
+    /* Colors */
+    --base-clr: #363743;
+    --line-clr: #D9D9D9;
+    --border-clr: #D9D9D9;
+    --hover-clr: #EAEAEA;
+    
+    /* Spacing */
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    
+    /* Typography */
+    --font-size-small: 0.875rem;
+    --font-size-normal: 1rem;
+    --font-size-large: 1.25rem;
+}

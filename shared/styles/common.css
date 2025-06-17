@@ -1,0 +1,30 @@
+/* shared/styles/common.css */
+@import '../shared/styles/variables.css';
+
+/* Reset/normalize */
+* {
+    letter-spacing: 1.5px;
+    margin: 0;
+    padding: 0;
+}
+
+/* Base typography */
+html {
+    font-family: 'Inter', Arial, sans-serif;
+    line-height: 1.5rem;
+    
+}
+
+/* Layout */
+body {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    grid-template-rows: 84px 1fr auto;
+    grid-template-areas: 
+    "sidebar navbar"
+    "sidebar main"
+    "sidebar footer";
+    transition: grid-template-columns 0.3s cubic-bezier(0.4,0,0.2,1);
+    overflow: hidden;
+}
