@@ -1,5 +1,4 @@
-@import '../shared/styles/variables.css';
-@import '../shared/styles/common.css';
+@import '/shared/styles/common.css';
 
 .login-body {
     min-height: 100vh;
