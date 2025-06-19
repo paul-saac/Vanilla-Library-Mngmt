@@ -1,0 +1,154 @@
+@import '/shared/styles/common.css';
+
+/*======= NAVIGATION ==================*/
+nav {
+    top: 0;
+    position: sticky;
+    grid-area: navbar;
+    background: white;
+    padding: 1.5em;
+    border-bottom: 1px solid var(--border-clr);
+}
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 30px;
+}
+.profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 11px;
+
+}
+.profile-pic {
+    width: 36px;
+    height: 36px;
+    border-radius: 100%;
+    background: var(--base-clr);
+}
+.profile button {
+    background: none;
+    border: none;
+}
+.nav-header span{
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--base-clr);
+}
+.profile span {
+    font-size: 12px;
+    color: var(--base-clr);
+}
+.dropdown {
+    cursor: pointer;
+}
+.sidebar-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+.notif-btn {
+    cursor: pointer;
+}
+@media (max-width: 800px) {
+    body {
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+        "navbar"
+        "main"
+        "footer"; 
+    }
+    aside {
+        width: 350px;
+        display: none;
+    }
+    .dropdown {
+        display: none;
+    }
+    .show {
+        position: fixed;
+        display: block;
+        a {
+            border-radius: 0.5em;
+            background: white;
+        }
+    }
+}
+
+
+/*======= SIDE BAR ==================*/
+aside {
+    height: calc(100vh - 50px);
+    top: 0;
+    position: sticky;
+    grid-area: sidebar;
+    background: white;
+    padding: 1.5em;
+    border-right: 1px solid var(--border-clr);  
+}
+
+@media (min-width: 800px) {
+    body:has(aside:hover) {
+        grid-template-columns: 250px 1fr;
+        grid-template-rows: auto 1fr auto;
+    }
+    body:has(aside:hover) .active a {
+        border-radius: 0.5em;
+        background: var(--hover-clr);
+        color: var(--base-clr);
+    }
+    /* SET BORDER RADIUS TO ALL*/
+    body:has(aside:hover) aside a {
+        border-radius: 0.5em;
+    }
+    .sidebar-btn {
+        display: none;
+    }
+}
+aside ul li {
+    list-style-type: none;
+}  
+aside ul li a:hover {
+    background: var(--hover-clr);
+}
+aside ul li a {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5em; 
+    padding: 15px;
+    text-decoration: none;
+    color: var(--base-clr);
+    border-radius: 50em;
+}
+aside a span{
+    font-size: 13px;
+    overflow: hidden;
+}
+aside ul li a svg {
+    flex-shrink: 0;
+}
+aside ul li.active a {
+    background: var(--base-clr);
+    color: white;
+    svg{
+        fill: white;
+    }
+}
+.settings {
+    position: absolute;
+    bottom: 1.5em; /* Match bottom padding of aside */
+    left: 1.5em;
+    right: 1.5em
+}
+
+
+
+/*======= FOOTER ==================*/
+footer {
+    grid-area: footer;
+    background: white;
+    padding: 1em;
+}
