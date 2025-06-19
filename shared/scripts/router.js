@@ -1,7 +1,10 @@
  const routes = {
-  "/home": "views/home/home.html",
-  "/about": "views/about/about.html",
-  "/contact": "views/contact/contact.html"
+  "/dashboard": "pages/dashboard/dashboard.html",
+  "/books": "pages/books/books.html",
+  "/members": "pages/members/members.html",
+  "/issue": "pages/issue/issue.html",
+  "/logbook": "pages/logbook/logbook.html",
+  "/settings": "pages/settings/settings.html"
 };
 
 function router() {
@@ -37,20 +40,30 @@ function loadContent(path) {
     });
 }
 
-function loadAssets(path) { //loadAssests(views/about/about.html)
+function loadAssets(path) {
+  // Determine section name (e.g., "dashboard" from "/dashboard")
   const section = path === "/" ? "home" : path.replace("/", "");
-  const basePath = `views/${section}/`;
+  // Set base path for assets (e.g., "pages/dashboard/")
+  const basePath = `pages/${section}/`;
 
   // Load per-page CSS
-  const css = document.createElement("link");
-  css.rel = "stylesheet";
-  css.href = `${basePath}${section}.css`;
-  document.head.appendChild(css);
+  const cssId = `${section}-css`;
+  if (!document.getElementById(cssId)) {
+    const css = document.createElement("link");
+    css.id = cssId;
+    css.rel = "stylesheet";
+    css.href = `${basePath}${section}.css`;
+    document.head.appendChild(css);
+  }
 
   // Load per-page JS
-  const js = document.createElement("script");
-  js.src = `${basePath}${section}.js`;
-  document.body.appendChild(js);
+  const jsId = `${section}-js`;
+  if (!document.getElementById(jsId)) {
+    const js = document.createElement("script");
+    js.id = jsId;
+    js.src = `${basePath}${section}.js`;
+    document.body.appendChild(js);
+  }
 }
 
 window.addEventListener("hashchange", router);
