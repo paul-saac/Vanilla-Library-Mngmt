@@ -10,11 +10,11 @@
 function router() {
   const hash = window.location.hash || "#/";
   const path = hash.slice(1);
-  loadContent(path);
+  loadContent(path); // PINASA AS AN ARGUMENT YUNG PATH SA loadContent() function
 }
 
-function loadContent(path) {
-  const file = routes[path] || "views/404.html";
+function loadContent(path1) {
+  const file = routes[path1] || "views/404.html";
 
   fetch(file)
     .then(res => res.text()) /* fetch first .then will always be referring to RESPONSE OBJECT and 
@@ -36,7 +36,7 @@ function loadContent(path) {
     */
     .then(html => { // THE .TEXT() RETURNS BECOMES THE HTML WHICH IS NOW WILL STORE IN INNERHTML OF ELEMENT OF APP
         document.getElementById("app").innerHTML = html;
-        loadAssets(path);
+        loadAssets(path1);
     });
 }
 

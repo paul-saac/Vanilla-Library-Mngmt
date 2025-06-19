@@ -146,6 +146,28 @@ aside ul li.active a {
 
 
 
+
+/*======= MAIN ==================*/
+main { 
+
+    background: #F9F9F9;
+    grid-area: main;
+    padding: 66px;
+}
+main h3 {
+    font-weight: 450;
+    font-size: 17px;
+}
+main p {
+    font-weight: 600;
+    font-size: 20px;
+}
+
+
+
+
+
+
 /*======= FOOTER ==================*/
 footer {
     grid-area: footer;
