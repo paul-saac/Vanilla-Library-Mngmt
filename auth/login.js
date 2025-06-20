@@ -17,6 +17,9 @@ const firebaseConfig = {
   auth.languageCode = 'en'
   const provider = new GoogleAuthProvider();
 
+
+
+
 // ✅ Handle Google Login
 const googleLoginBtn = document.getElementById("googleLoginBtn");
 

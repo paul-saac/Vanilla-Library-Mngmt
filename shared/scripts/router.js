@@ -13,8 +13,8 @@ function router() {
   loadContent(path); // PINASA AS AN ARGUMENT YUNG PATH SA loadContent() function
 }
 
-function loadContent(path1) {
-  const file = routes[path1] || "views/404.html";
+function loadContent(path) {
+  const file = routes[path] || "pages/dashboard/dashboard.html";
 
   fetch(file)
     .then(res => res.text()) /* fetch first .then will always be referring to RESPONSE OBJECT and 
@@ -36,13 +36,14 @@ function loadContent(path1) {
     */
     .then(html => { // THE .TEXT() RETURNS BECOMES THE HTML WHICH IS NOW WILL STORE IN INNERHTML OF ELEMENT OF APP
         document.getElementById("app").innerHTML = html;
-        loadAssets(path1);
+        loadAssets(path);
     });
 }
 
 function loadAssets(path) {
   // Determine section name (e.g., "dashboard" from "/dashboard")
   const section = path === "/" ? "home" : path.replace("/", "");
+
   // Set base path for assets (e.g., "pages/dashboard/")
   const basePath = `pages/${section}/`;
 
@@ -66,6 +67,7 @@ function loadAssets(path) {
   }
 }
 
+
+
 window.addEventListener("hashchange", router);
 window.addEventListener("load", router);
-
