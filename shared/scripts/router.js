@@ -19,11 +19,9 @@ function loadContent(path) {
   fetch(file)
     .then(res => res.text()) /* fetch first .then will always be referring to RESPONSE OBJECT and 
     then returning the text() method that reads the response body as a plain text string.
-    WHICH IS: for example in 
+    WHICH IS: for example in pages/dashboard/dashboard.html
     
-    views/about/about.html
-    
-    THE ABOUT.HTML FILE HAS
+    THE dashboard.html FILE HAS
     <h2>About Us</h2>
     <p>This is the about page.</p>  
     
@@ -34,6 +32,7 @@ function loadContent(path) {
     MEANING IF ABOUT.HTML FILE HAS ALL DOCTYPE AND SHITS IT WILL RETURN THE WHOLE AS A STRING
     "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <title>About</title>\n</head>\n<body>\n  <h2>About Page</h2>\n  <p>This is the About section.</p>\n</body>\n</html>"
     */
+   
     .then(html => { // THE .TEXT() RETURNS BECOMES THE HTML WHICH IS NOW WILL STORE IN INNERHTML OF ELEMENT OF APP
         document.getElementById("app").innerHTML = html;
         loadAssets(path);
