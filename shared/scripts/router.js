@@ -1,4 +1,5 @@
  const routes = {
+  "/": "pages/dashboard/dashboard.html",
   "/dashboard": "pages/dashboard/dashboard.html",
   "/books": "pages/books/books.html",
   "/members": "pages/members/members.html",
