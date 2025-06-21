@@ -12,7 +12,37 @@ function router() {
   const hash = window.location.hash || "#/";
   const path = hash.slice(1);
   loadContent(path); // PINASA AS AN ARGUMENT YUNG PATH SA loadContent() function
+  Navtitle(path);
 }
+
+function Navtitle(path) {
+  const navtitle = document.getElementById('nav-title');
+
+  switch(path) {
+    case "/dashboard":
+        navtitle.textContent = "Dashboard";
+      break;
+    case "/books":
+        navtitle.textContent = "Books";
+      break;
+    case "/members":
+        navtitle.textContent = "Members";
+      break;
+    case "/issue":
+        navtitle.textContent = "Issue Books";
+      break;
+    case "/logbook":
+        navtitle.textContent = "Log Book";
+      break;
+    case "/settings":
+        navtitle.textContent = "Settings";
+      break;      
+
+    default:
+      // code block
+  }
+}
+
 
 function loadContent(path) {
   const file = routes[path] || "pages/dashboard/dashboard.html";
