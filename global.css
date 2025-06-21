@@ -130,13 +130,16 @@ aside a span{
 aside ul li a svg {
     flex-shrink: 0;
 }
-aside ul li.active a {
+
+.active a {
     background: var(--base-clr);
     color: white;
     svg{
         fill: white;
     }
 }
+
+
 .settings {
     position: absolute;
     bottom: 1.5em; /* Match bottom padding of aside */
