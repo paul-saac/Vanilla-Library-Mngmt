@@ -44,6 +44,7 @@ function Navtitle(path) {
 }
 
 
+
 function loadContent(path) {
   const file = routes[path] || "pages/dashboard/dashboard.html";
 
