@@ -1,6 +1,5 @@
  const routes = {
   "/": "pages/dashboard/dashboard.html",
-  "/dashboard": "pages/dashboard/dashboard.html",
   "/books": "pages/books/books.html",
   "/members": "pages/members/members.html",
   "/issue": "pages/issue/issue.html",
@@ -19,7 +18,7 @@ function Navtitle(path) {
   const navtitle = document.getElementById('nav-title');
 
   switch(path) {
-    case "/dashboard":
+    case "/":
         navtitle.textContent = "Dashboard";
       break;
     case "/books":
@@ -42,8 +41,6 @@ function Navtitle(path) {
       // code block
   }
 }
-
-
 
 function loadContent(path) {
   const file = routes[path] || "pages/dashboard/dashboard.html";
@@ -73,7 +70,7 @@ function loadContent(path) {
 
 function loadAssets(path) {
   // Determine section name (e.g., "dashboard" from "/dashboard")
-  const section = path === "/" ? "home" : path.replace("/", "");
+  const section = path === "/" ? "dashboard" : path.slice(1);
 
   // Set base path for assets (e.g., "pages/dashboard/")
   const basePath = `pages/${section}/`;
@@ -88,6 +85,7 @@ function loadAssets(path) {
     document.head.appendChild(css);
   }
 
+
   // Load per-page JS
   const jsId = `${section}-js`;
   if (!document.getElementById(jsId)) {
@@ -97,7 +95,6 @@ function loadAssets(path) {
     document.body.appendChild(js);
   }
 }
-
 
 
 window.addEventListener("hashchange", router);
