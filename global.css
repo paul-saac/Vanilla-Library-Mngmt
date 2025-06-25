@@ -20,11 +20,14 @@ nav {
     justify-content: center;
     align-items: center;
     gap: 11px;
-
+    position: absolute;
+    z-index: 1;
+    top: 21px;
+    left: 83em;
 }
 .profile-pic {
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
     border-radius: 100%;
     background: var(--base-clr);
 }
@@ -96,7 +99,7 @@ aside {
     }
     body:has(aside:hover) .active a {
         border-radius: 0.5em;
-        background: var(--base-clr);
+        background: var(--base-clr);    
         color: whiteS;
     }
     /* SET BORDER RADIUS TO ALL*/
