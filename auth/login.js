@@ -38,3 +38,4 @@ googleLoginBtn.addEventListener("click", async (e) => {
     alert("Google Sign-In failed. Please try again.");
   }
 });
+
