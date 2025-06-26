@@ -16,7 +16,7 @@
     grid-template-areas:
     "illus login-form";
     border-radius: 20px;
-    box-shadow: 0 24px 52.4px -23px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 40px 52.4px -23px rgba(0, 0, 0, 0.25);
     overflow: auto;
 }
 .illus {
