@@ -156,6 +156,8 @@ main {
     background: #F9F9F9;
     grid-area: main;
     padding: 66px;
+    height: 100vh;           /* Or use a calculated height if you have a header/footer */
+    overflow-y: auto;
 }
 main h3 {
     font-weight: 450;

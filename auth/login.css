@@ -83,16 +83,31 @@
     font-weight: semi-bold;
     font-size: 17px;
 }
-.login-footer {
-    width: 100%;
-    text-align: center;
-    padding: 50px 0 0 0;
+.google-login {
+    display: flex;
+    flex-direction: column;
 }
-.login-footer p {
-    color: var(--base-clr);
-    font-size: 12px;
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 10x;
+  color: #ccc;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  
 }
-.login-footer b{
-    color: var(--base-clr);
-    font-size: 10px;
+.divider hr {
+  flex: 1;
+  border: none;
+  border-top: 1.5px solid var(--line-clr);
+  margin: 0;
+  width: 80px;
+}
+.divider span {
+  padding: 0 8px;
+  color: #bbb;
+  font-size: 1rem;
+  white-space: nowrap;
 }
