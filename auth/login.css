@@ -88,26 +88,40 @@
     flex-direction: column;
 }
 .divider {
-  display: flex;
-  align-items: center;
-  gap: 10x;
-  color: #ccc;
-  font-weight: 600;
-  font-size: 1rem;
-  margin-top: 20px;
-  margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10x;
+    color: #ccc;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 20px;
+    margin-bottom: 20px;
   
 }
 .divider hr {
-  flex: 1;
-  border: none;
-  border-top: 1.5px solid var(--line-clr);
-  margin: 0;
-  width: 80px;
+    flex: 1;
+    border: none;
+    border-top: 1.5px solid var(--line-clr);
+    margin: 0;
+    width: 80px;
 }
 .divider span {
-  padding: 0 8px;
-  color: #bbb;
-  font-size: 1rem;
-  white-space: nowrap;
+    padding: 0 8px;
+    color: #bbb;
+    font-size: 1rem;
+    white-space: nowrap;
+    font-size: medium;
+}
+.googlebtn {
+    display: flex;
+    gap: 10px;
+}
+.googlebtn button{
+    border: none;
+    background: white;
+    color: var(--base-clr);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
 }
