@@ -114,7 +114,10 @@
 }
 .googlebtn {
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 10px;
+
 }
 .googlebtn button{
     border: none;
