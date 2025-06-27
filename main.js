@@ -1,3 +1,12 @@
+
+
+
+
+
+
+
+
+
 // SIDEBAR RESPONSIVE
 const sidebar = document.getElementById('sidebar')
 
@@ -16,4 +25,6 @@ sidebarLinks.forEach(link => {
         this.parentElement.classList.add('active');
     });
 });
+
+
 

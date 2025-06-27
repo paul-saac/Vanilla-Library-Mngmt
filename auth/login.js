@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBzVudrq_MK5GXiVIlrsDRV5XtGPZ8K5ro",
@@ -29,7 +29,7 @@ googleLoginBtn.addEventListener("click", async (e) => {
   try {
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
-
+    console.log(user);
     // ✅ Redirect to homepage
     window.location.href = "/index.html";
 
