@@ -22,13 +22,11 @@ const googleLoginBtn = document.getElementById("googleLoginBtn");
 
 googleLoginBtn.addEventListener("click", async (e) => {
   e.preventDefault(); // Prevent form submission
-
   try {
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
     // ✅ Redirect to homepage
     window.location.href = "/index.html";
-
   } catch (error) {
     console.error("Google Sign-In Error:", error);
     alert("Google Sign-In failed. Please try again.");

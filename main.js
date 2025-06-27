@@ -1,12 +1,5 @@
 
 
-
-
-
-
-
-
-
 // SIDEBAR RESPONSIVE
 const sidebar = document.getElementById('sidebar')
 
