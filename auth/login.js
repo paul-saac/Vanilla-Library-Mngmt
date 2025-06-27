@@ -17,9 +17,6 @@ const firebaseConfig = {
   auth.languageCode = 'en'
   const provider = new GoogleAuthProvider();
 
-
-
-
 // ✅ Handle Google Login
 const googleLoginBtn = document.getElementById("googleLoginBtn");
 
@@ -29,7 +26,6 @@ googleLoginBtn.addEventListener("click", async (e) => {
   try {
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
-    console.log(user);
     // ✅ Redirect to homepage
     window.location.href = "/index.html";
 
