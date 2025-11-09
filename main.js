@@ -1,5 +1,5 @@
 import { signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-import { auth } from './auth/login.js';
+// import { auth, app } from './scripts/firebase-config.js';
 // SIDEBAR RESPONSIVE
 const sidebar = document.getElementById('sidebar')
 
