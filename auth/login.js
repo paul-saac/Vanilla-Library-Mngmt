@@ -17,19 +17,30 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// ✅ Handle Google Login
-const googleLoginBtn = document.getElementById("googleLoginBtn");
+// LOGIN
+const emailinput = document.getElementById('email');
+const passwordinput = document.getElementById('password');
+const loginform = document.getElementById('login-form');
 
-googleLoginBtn.addEventListener("click", async (e) => {
-  e.preventDefault(); // Prevent form submission
-  try {
-    const result = await signInWithPopup(auth, provider);
-    const user = result.user;
-    // ✅ Redirect to homepage
-    window.location.href = "/index.html";
-  } catch (error) {
-    console.error("Google Sign-In Error:", error);
-    alert("Google Sign-In failed. Please try again.");
-  }
+loginform.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const loginemail = emailinput.value;
+  const loginpassword = passwordinput.value;
+
+  signInWithEmailAndPassword(auth, loginemail, loginpassword)
+    .then((userCredential) => {
+      const user = userCredential.user;
+
+      //FUNCTION FOR LOGIN 
+      window.location.href = "dashboard.html";
+      emailinput.value = "";
+      passwordinput.value = "";
+      console.log("Logged in as:", user.email);
+      alert("Signed-in")
+    })
+    .catch((error) => {
+      
+    });
 });
 
