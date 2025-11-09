@@ -1,5 +1,5 @@
-
-
+import {onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+ 
 // SIDEBAR RESPONSIVE
 const sidebar = document.getElementById('sidebar')
 
@@ -19,5 +19,24 @@ sidebarLinks.forEach(link => {
     });
 });
 
+const accountdetails = document.getElementById('profile-pic');
 
-
+accountdetails?.addEventListener('click', e => {
+    e.preventDefault();
+    accountModal.classList.add('show');
+});
+modals.forEach(modal => {
+    modal.addEventListener('click', e => {
+        if (e.target === modal) {
+            modal.classList.remove('show');
+        }
+    });
+});
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+        closeAllModals();
+    }
+});
+function closeAllModals() {
+    modals.forEach(modal => modal.classList.remove('show'));
+}

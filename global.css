@@ -13,23 +13,23 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-right: 30px;
+    
 }
 .profile {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 11px;
-    position: absolute;
+    position: relative;
     z-index: 1;
-    top: 21px;
-    left: 83em;
+
 }
 #profile-pic {
-    width: 34px;
-    height: 34px;
+    width: 28px;
+    height: 28px;
     border-radius: 100%;
     background: var(--base-clr);
+    cursor: pointer;
 }
 .profile button {
     background: none;
@@ -54,7 +54,9 @@ nav {
 }
 .notif-btn {
     cursor: pointer;
+    padding-top: 2.5px;
 }
+
 @media (max-width: 800px) {
     body {
         grid-template-columns: 1fr;
@@ -77,6 +79,9 @@ nav {
             border-radius: 0.5em;
             background: white;
         }
+    }
+    .profile {
+        display: none;
     }
 }
 
