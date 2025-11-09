@@ -1,4 +1,5 @@
-import { auth } from "../shared/scripts/firebaseConfig.js";
+import { auth } from "./shared/scripts/firebaseConfig.js";
+import { signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
 // SIDEBAR RESPONSIVE
 const sidebar = document.getElementById('sidebar')
@@ -26,7 +27,7 @@ const modals = [accountModal];
 
 accountdetails.addEventListener('click', e => {
     e.preventDefault();
-    console.log("pepe");
+
     accountModal.classList.add('show');
 
 });
@@ -46,17 +47,13 @@ function closeAllModals() {
     modals.forEach(modal => modal.classList.remove('show'));
 }
 
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        getItems(user.uid);
 
-        const accountDetailsBox = document.querySelector(".account-details");
-        if (accountDetailsBox) {
-            const accountEmail = document.createElement("h4");
-            accountEmail.innerText = `Email: ${user.email}`;
-            accountDetailsBox.appendChild(accountEmail);
-        }
-    } else {
-        todoListUL.innerHTML = "";
+onAuthStateChanged(auth, user => {
+    const box = document.querySelector(".account-details");
+    if (box) {
+        box.innerHTML = "";
+        const emailEl = document.createElement("h4");
+        emailEl.textContent = `Email: ${user.email}`;
+        box.appendChild(emailEl);
     }
 });
