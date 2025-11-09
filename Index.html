@@ -39,7 +39,7 @@
                     </g>
                 </svg>
             </button>
-            <div id="profile-pic"></div>
+            <button id="profile-pic"></button>
             <button class="dropdown-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
                     <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -48,17 +48,30 @@
             </button>
         </div>
     </nav>
-    
+
+    <!-- =======================================  MODALS -->
+
     <!-- ACCOUNT MODAL -->
     <div id="modal-account" class="modal">
         <div class="modal-content">
-            <h4>Account details</h4><br/>
+            <h4>Account details</h4><br />
             <div class="account-details">
-                
             </div>
         </div>
     </div>
-    
+
+    <!-- NOTIFICATION MODAL -->
+    <div id="modal-notif" class="modal">
+        <div class="modal-content">
+            <h4>Account details</h4><br />
+            <div class="account-details">
+            </div>
+        </div>
+    </div>
+
+
+
+
 
     <!-- SIDEBAR -->
     <aside id="sidebar">
@@ -136,10 +149,10 @@
     </main>
 
     <!-- FOOTER -->
-    <footer>Footer</footer>
+ 
 
-    <script type="text/javascript" src="shared/scripts/router.js" defer></script>
-    <script type="text/javascript" src="main.js" defer></script>
+    <script type="module" src="shared/scripts/router.js" defer></script>
+    <script type="module" src="main.js" defer></script>
 </body>
 
 </html>

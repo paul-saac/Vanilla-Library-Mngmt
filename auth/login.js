@@ -16,6 +16,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+export { app, auth };
+
 // LOGIN
 const emailinput = document.getElementById('email');
 const passwordinput = document.getElementById('password');

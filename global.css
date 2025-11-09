@@ -173,9 +173,50 @@ main p {
     font-size: 20px;
 }
 
-
-
-
+/*======= MODALS ==================*/
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    color: rgb(58, 57, 57);
+    position: relative;
+}
+.modal.show {
+    display: flex;
+}
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.modal-content form input{
+    border-radius: 3px;
+    height: 30px;
+    border: none;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.modal-content form label{
+    margin-bottom: 5px;
+}
+.modal-content button{
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    margin-top: 10px;
+    cursor: pointer;
+}
 
 
 /*======= FOOTER ==================*/
