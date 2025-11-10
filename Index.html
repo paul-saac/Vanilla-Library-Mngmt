@@ -39,12 +39,20 @@
                 </svg>
             </button>
             <button id="profile-pic"></button>
-            <button class="dropdown-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
-                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                        stroke-width="2" d="m7 10l5 5m0 0l5-5" />
-                </svg>
-            </button>
+
+            <!-- DROP-DOWN FUNCTION -->
+            <div class="dropdown">
+                <button id="dropdown-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
+                        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" d="m7 10l5 5m0 0l5-5" />
+                    </svg>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <li><button class="dropdown-item" type="button">Account Settings</button></li>
+                    <li><button class="dropdown-item" type="button">Log Out</button></li>
+                </ul>
+            </div>
         </div>
     </nav>
 
@@ -55,7 +63,7 @@
         <div class="modal-content">
             <h4>Account details</h4><br />
             <div class="account-details">
-                
+
             </div>
         </div>
     </div>

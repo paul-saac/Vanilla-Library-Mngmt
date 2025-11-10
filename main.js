@@ -46,8 +46,6 @@ document.addEventListener('keydown', e => {
 function closeAllModals() {
     modals.forEach(modal => modal.classList.remove('show'));
 }
-
-
 onAuthStateChanged(auth, user => {
     const box = document.querySelector(".account-details");
     if (box) {
@@ -57,3 +55,16 @@ onAuthStateChanged(auth, user => {
         box.appendChild(emailEl);
     }
 });
+
+// DROP DOWN
+// ...existing code...
+const dropbtn = document.getElementById('dropdown-btn');
+const dropdownMenu = document.querySelector('.dropdown-menu');
+
+if (dropbtn && dropdownMenu) {
+  dropbtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    dropdownMenu.classList.toggle('show');
+    dropbtn.classList.toggle('rotated');
+  });
+}

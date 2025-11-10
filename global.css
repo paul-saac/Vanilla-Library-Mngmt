@@ -9,12 +9,14 @@ nav {
     padding: 1.5em;
     border-bottom: 1px solid var(--border-clr);
 }
+
 nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
+
 }
+
 .profile {
     display: flex;
     justify-content: center;
@@ -24,6 +26,7 @@ nav {
     z-index: 1;
 
 }
+
 #profile-pic {
     width: 28px;
     height: 28px;
@@ -31,30 +34,115 @@ nav {
     background: var(--base-clr);
     cursor: pointer;
 }
+
 .profile button {
     background: none;
     border: none;
 }
+
 .dropdown-btn {
     cursor: pointer;
 }
-.nav-header span{
+
+.nav-header span {
     font-weight: 600;
     font-size: 24px;
     color: var(--base-clr);
 }
+
 .profile span {
     font-size: 12px;
     color: var(--base-clr);
 }
+
+/* =================================== DROP-DOWN STYLE */
 .dropdown {
-    cursor: pointer;
+  position: relative;
+  display: inline-block;
 }
+
+/* Button */
+#dropdown-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  padding: 6px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background .15s;
+}
+
+#dropdown-btn svg {
+  transition: transform .25s ease;
+}
+
+#dropdown-btn.rotated svg {
+  transform: rotate(180deg);
+}
+/* Menu (hidden by default) */
+.dropdown-menu {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  min-width: 180px;
+  background: #fff;
+  border: 1px solid var(--border-clr);
+  border-radius: 8px;
+  box-shadow: 0 6px 14px rgba(0,0,0,.12);
+  padding: 6px 0;
+  margin: 0;
+  list-style: none;
+  display: none;
+  z-index: 60;
+  animation: fadeOut .12s linear;
+}
+
+/* Visible state (add with JS) */
+.dropdown-menu.show {
+  display: block;
+  animation: fadeIn .15s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity:0; transform: translateY(-4px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+  from { opacity:1; }
+  to   { opacity:0; }
+}
+
+/* Items */
+.dropdown-item {
+  width: 100%;
+  background: none;
+  border: 0;
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  color: var(--base-clr);
+  transition: background .15s;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background: var(--hover-clr);
+  outline: none;
+}
+
+
+
+
+
 .sidebar-btn {
     border: none;
     background: none;
     cursor: pointer;
 }
+
 .notif-btn {
     cursor: pointer;
     padding-top: 2.5px;
@@ -63,26 +151,31 @@ nav {
 @media (max-width: 800px) {
     body {
         grid-template-columns: 1fr;
-        grid-template-areas: 
-        "navbar"
-        "main"
-        "footer"; 
+        grid-template-areas:
+            "navbar"
+            "main"
+            "footer";
     }
+
     aside {
         width: 350px;
         display: none;
     }
+
     .dropdown {
         display: none;
     }
+
     .show {
         position: fixed;
         display: block;
+
         a {
             border-radius: 0.5em;
             background: white;
         }
     }
+
     .profile {
         display: none;
     }
@@ -97,47 +190,55 @@ aside {
     grid-area: sidebar;
     background: white;
     padding: 1.5em;
-    border-right: 1px solid var(--border-clr);  
+    border-right: 1px solid var(--border-clr);
 }
 
 @media (min-width: 800px) {
     body:has(aside:hover) {
         grid-template-columns: 250px auto;
-        grid-template-rows: auto 1fr auto;  
+        grid-template-rows: auto 1fr auto;
     }
+
     body:has(aside:hover) .active a {
         border-radius: 0.5em;
-        background: var(--base-clr);    
+        background: var(--base-clr);
         color: whiteS;
     }
+
     /* SET BORDER RADIUS TO ALL*/
     body:has(aside:hover) aside a {
         border-radius: 0.5em;
     }
+
     .sidebar-btn {
         display: none;
     }
 }
+
 aside ul li {
     list-style-type: none;
-}  
+}
+
 aside ul li a:hover {
     background: var(--hover-clr);
 }
+
 aside ul li a {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 0.5em; 
+    gap: 0.5em;
     padding: 15px;
     text-decoration: none;
     color: var(--base-clr);
     border-radius: 50em;
 }
-aside a span{
+
+aside a span {
     font-size: 13px;
     overflow: hidden;
 }
+
 aside ul li a svg {
     flex-shrink: 0;
 }
@@ -145,7 +246,8 @@ aside ul li a svg {
 .active a {
     background: var(--base-clr);
     color: white;
-    svg{
+
+    svg {
         fill: white;
     }
 }
@@ -153,24 +255,28 @@ aside ul li a svg {
 
 .settings {
     position: absolute;
-    bottom: 1.5em; /* Match bottom padding of aside */
+    bottom: 1.5em;
+    /* Match bottom padding of aside */
     left: 1.5em;
     right: 1.5em
 }
 
 
 /*======= MAIN ==================*/
-main { 
+main {
     background: #F9F9F9;
     grid-area: main;
     padding: 66px;
-    height: 100vh;           /* Or use a calculated height if you have a header/footer */
+    height: 100vh;
+    /* Or use a calculated height if you have a header/footer */
     overflow-y: auto;
 }
+
 main h3 {
     font-weight: 450;
     font-size: 17px;
 }
+
 main p {
     font-weight: 600;
     font-size: 20px;
@@ -180,12 +286,16 @@ main p {
 .modal {
     display: none;
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background-color: rgba(0, 0, 0, 0.2);
     justify-content: center;
     align-items: center;
     z-index: 1000;
 }
+
 .modal-content {
     background-color: white;
     padding: 30px;
@@ -195,25 +305,30 @@ main p {
     color: rgb(58, 57, 57);
     position: relative;
 }
+
 .modal.show {
     display: flex;
 }
+
 .modal-content form {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
-.modal-content form input{
+
+.modal-content form input {
     border-radius: 3px;
     height: 30px;
     border: none;
     padding: 10px;
     box-sizing: border-box;
 }
-.modal-content form label{
+
+.modal-content form label {
     margin-bottom: 5px;
 }
-.modal-content button{
+
+.modal-content button {
     padding: 10px;
     border: none;
     border-radius: 3px;
