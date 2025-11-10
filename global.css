@@ -35,6 +35,9 @@ nav {
     background: none;
     border: none;
 }
+.dropdown-btn {
+    cursor: pointer;
+}
 .nav-header span{
     font-weight: 600;
     font-size: 24px;
@@ -99,7 +102,7 @@ aside {
 
 @media (min-width: 800px) {
     body:has(aside:hover) {
-        grid-template-columns: 250px 90em;
+        grid-template-columns: 250px auto;
         grid-template-rows: auto 1fr auto;  
     }
     body:has(aside:hover) .active a {
