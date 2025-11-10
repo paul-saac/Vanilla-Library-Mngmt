@@ -62,9 +62,22 @@ const dropbtn = document.getElementById('dropdown-btn');
 const dropdownMenu = document.querySelector('.dropdown-menu');
 
 if (dropbtn && dropdownMenu) {
-  dropbtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    dropdownMenu.classList.toggle('show');
-    dropbtn.classList.toggle('rotated');
-  });
+    dropbtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        dropdownMenu.classList.toggle('show');
+        dropbtn.classList.toggle('rotated');
+    });
 }
+
+// LOG OUT
+const logoutBtn = document.getElementById("logout-btn");
+
+logoutBtn.addEventListener("click", () => {
+  signOut(auth)
+    .then(() => {
+      window.location.href = "./auth/login.html"
+    })
+    .catch((error) => {
+      console.error("Error signing out:", error);
+    });
+});

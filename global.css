@@ -60,23 +60,19 @@ nav {
   position: relative;
   display: inline-block;
 }
-
-/* Button */
 #dropdown-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   background: none;
-  padding: 6px 8px;
+  padding: 4px 0 0 0;
   border-radius: 6px;
   cursor: pointer;
   transition: background .15s;
 }
-
 #dropdown-btn svg {
   transition: transform .25s ease;
 }
-
 #dropdown-btn.rotated svg {
   transform: rotate(180deg);
 }
@@ -97,24 +93,19 @@ nav {
   z-index: 60;
   animation: fadeOut .12s linear;
 }
-
 /* Visible state (add with JS) */
 .dropdown-menu.show {
   display: block;
   animation: fadeIn .15s ease-out;
 }
-
 @keyframes fadeIn {
   from { opacity:0; transform: translateY(-4px); }
   to   { opacity:1; transform: translateY(0); }
 }
-
 @keyframes fadeOut {
   from { opacity:1; }
   to   { opacity:0; }
 }
-
-/* Items */
 .dropdown-item {
   width: 100%;
   background: none;
@@ -126,7 +117,6 @@ nav {
   color: var(--base-clr);
   transition: background .15s;
 }
-
 .dropdown-item:hover,
 .dropdown-item:focus {
   background: var(--hover-clr);
