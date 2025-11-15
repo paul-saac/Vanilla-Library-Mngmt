@@ -64,6 +64,7 @@ if (notifbtn && notifmenu) {
     notifbtn.addEventListener('click', (e) => {
         e.preventDefault();
         notifmenu.classList.toggle('show');
+        notifbtn.classList.toggle('highlight')
     });
 }
 

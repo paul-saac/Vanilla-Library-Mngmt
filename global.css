@@ -26,12 +26,13 @@ nav {
   border-radius: 6px;
   cursor: pointer;
   transition: background .15s;
+  color: var(--base-clr);
 }
 #notif-btn svg {
   transition: transform .25s ease;
 }
-#notif-btn.rotated svg {
-  transform: rotate(180deg);
+#notif-btn:hover svg path{
+    fill: #515157;
 }
 .notification-content {
   position: absolute;
@@ -52,6 +53,7 @@ nav {
 }
 .notification-content span {
     font-weight: 600;
+
 }
 .notification-content.show {
   display: block;
