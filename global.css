@@ -44,15 +44,15 @@ nav {
   border: 1px solid var(--border-clr);
   border-radius: 8px;
   box-shadow: 0 6px 14px rgba(0,0,0,.05);
-  padding: 15px;
+  padding: 25px;
   margin: 0;
   list-style: none;
   display: none;
   z-index: 60;
   animation: fadeOut .12s linear;
 }
-.notification-content span {
-    font-weight: 600;
+.notification-content h4 {
+    color: var(--base-clr);
 
 }
 .notification-content.show {
