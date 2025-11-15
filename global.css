@@ -16,6 +16,48 @@ nav {
     justify-content: space-between;
 
 }
+/* NOTIFICATION */
+#notif-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  padding: 4px 0 0 0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background .15s;
+}
+#notif-btn svg {
+  transition: transform .25s ease;
+}
+#notif-btn.rotated svg {
+  transform: rotate(180deg);
+}
+.notification-content {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  min-width: 380px;
+  min-height: 400px;
+  background: #fff;
+  border: 1px solid var(--border-clr);
+  border-radius: 8px;
+  box-shadow: 0 6px 14px rgba(0,0,0,.05);
+  padding: 15px;
+  margin: 0;
+  list-style: none;
+  display: none;
+  z-index: 60;
+  animation: fadeOut .12s linear;
+}
+.notification-content span {
+    font-weight: 600;
+}
+.notification-content.show {
+  display: block;
+  animation: fadeIn .15s ease-out;
+}
+
 
 .profile {
     display: flex;
@@ -26,7 +68,6 @@ nav {
     z-index: 1;
 
 }
-
 #profile-pic {
     width: 28px;
     height: 28px;
@@ -85,7 +126,7 @@ nav {
   background: #fff;
   border: 1px solid var(--border-clr);
   border-radius: 8px;
-  box-shadow: 0 6px 14px rgba(0,0,0,.12);
+  box-shadow: 0 6px 14px rgba(0,0,0,.05);
   padding: 6px 0;
   margin: 0;
   list-style: none;
