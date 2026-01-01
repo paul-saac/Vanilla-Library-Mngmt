@@ -1,5 +1,9 @@
+.book-nav {
+  display: flex;
+  flex-direction: row;
+}
 .search {
-  position: absolute;
+  position: relative;
   display: flex;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
   align-items: center;
@@ -18,4 +22,30 @@
   outline: #cdcdd8;
   border: none;
   border-radius: 5px 5px 5px 5px;
+}
+
+.bookButtons {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  
+}
+
+.deleteBtn {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid var(--border-clr);
+  padding: 5px;
+  position: flex;
+  border-radius: 5px;
+}
+.addBtn {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid var(--border-clr);
+  padding: 5px;
+  position: flex;
+  border-radius: 5px;
 }
