@@ -25,7 +25,7 @@ function displayBooks(books) {
                 <td>${book.Publisher || 'N/A'}</td>
                 <td>${book.Date || 'N/A'}</td>
                 <td>${book.Price || 'N/A'}</td>
-                <td>${book.Status || 'Available'}</td>
+                <td>${book.Status || 'N/A'}</td>
             </tr>
         `;
         tableBody.innerHTML += row;

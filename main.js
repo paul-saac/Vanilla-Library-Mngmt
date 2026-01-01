@@ -22,6 +22,26 @@ sidebarLinks.forEach(link => {
     });
 });
 
+// Set active link based on current hash/route
+function setActiveLink() {
+    const currentHash = window.location.hash || '#/';
+    
+    sidebarLinks.forEach(link => {
+        const linkHash = link.getAttribute('href');
+        link.parentElement.classList.remove('active');
+        
+        if (linkHash === currentHash) {
+            link.parentElement.classList.add('active');
+        }
+    });
+}
+// Call on page load
+setActiveLink();
+// Call whenever hash changes
+window.addEventListener('hashchange', setActiveLink);
+
+
+
 // ACCOUNT PRFILE
 const accountModal = document.querySelector('#modal-account');
 const accountdetails = document.getElementById('profile-pic');
