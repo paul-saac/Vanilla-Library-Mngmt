@@ -1,6 +1,7 @@
 .book-nav {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 .search {
   position: relative;
@@ -26,8 +27,8 @@
 
 .bookButtons {
   display: flex;
-  justify-content: flex-end;
   position: relative;
+  gap: 10px;
   
 }
 
@@ -36,16 +37,28 @@
   align-items: center;
   cursor: pointer;
   border: 1px solid var(--border-clr);
-  padding: 5px;
+  padding: 10px;
   position: flex;
   border-radius: 5px;
 }
+.deleteBtn i {
+  color: red;
+  font-size: 20px;
+}
+
+
+
 .addBtn {
   display: flex;
   align-items: center;
   cursor: pointer;
   border: 1px solid var(--border-clr);
-  padding: 5px;
+  padding: 10px;
   position: flex;
   border-radius: 5px;
+}
+.addBtn i {
+  color: var(--base-clr);
+  font-size: 25;
+
 }
