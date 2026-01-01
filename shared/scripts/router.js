@@ -1,4 +1,4 @@
- const routes = {
+const routes = {
   "/": "pages/dashboard/dashboard.html",
   "/books": "pages/books/books.html",
   "/members": "pages/members/members.html",
@@ -17,28 +17,28 @@ function router() {
 function Navtitle(path) {
   const navtitle = document.getElementById('nav-title');
 
-  switch(path) {
+  switch (path) {
     case "/":
-        navtitle.textContent = "Dashboard";
+      navtitle.textContent = "Dashboard";
       break;
     case "/books":
-        navtitle.textContent = "Books";
+      navtitle.textContent = "Books";
       break;
     case "/members":
-        navtitle.textContent = "Members";
+      navtitle.textContent = "Members";
       break;
     case "/issue":
-        navtitle.textContent = "Issue Books";
+      navtitle.textContent = "Issue Books";
       break;
     case "/logbook":
-        navtitle.textContent = "Log Book";
+      navtitle.textContent = "Log Book";
       break;
     case "/settings":
-        navtitle.textContent = "Settings";
-      break;      
+      navtitle.textContent = "Settings";
+      break;
 
     default:
-      // code block
+    // code block
   }
 }
 
@@ -61,10 +61,10 @@ function loadContent(path) {
     MEANING IF ABOUT.HTML FILE HAS ALL DOCTYPE AND SHITS IT WILL RETURN THE WHOLE AS A STRING
     "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <title>About</title>\n</head>\n<body>\n  <h2>About Page</h2>\n  <p>This is the About section.</p>\n</body>\n</html>"
     */
-   
+
     .then(html => { // THE .TEXT() RETURNS BECOMES THE HTML WHICH IS NOW WILL STORE IN INNERHTML OF ELEMENT OF APP
-        document.getElementById("app").innerHTML = html;
-        loadAssets(path);
+      document.getElementById("app").innerHTML = html;
+      loadAssets(path);
     });
 }
 
@@ -85,15 +85,18 @@ function loadAssets(path) {
     document.head.appendChild(css);
   }
 
-
   // Load per-page JS
   const jsId = `${section}-js`;
-  if (!document.getElementById(jsId)) {
-    const js = document.createElement("script");
-    js.id = jsId;
-    js.src = `${basePath}${section}.js`;
-    document.body.appendChild(js);
+  const existingScript = document.getElementById(jsId);
+  if (existingScript) {
+    existingScript.remove(); // Remove old script to allow re-execution
   }
+
+  const js = document.createElement("script");
+  js.id = jsId;
+  js.type = "module"; // Add this line to enable ES6 imports
+  js.src = `${basePath}${section}.js`;
+  document.body.appendChild(js);
 }
 
 

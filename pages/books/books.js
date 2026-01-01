@@ -1,25 +1,37 @@
-import { db } from "./shared/scripts/firebaseConfig.js";
-import { collection, addDoc, onSnapshot, deleteDoc, doc, updateDoc, serverTimestamp, query, orderBy, setDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+import { db } from "../../shared/scripts/firebaseConfig.js";
+import { collection, getDocs, addDoc, onSnapshot, deleteDoc, doc, updateDoc, serverTimestamp, query, orderBy, setDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-const tableBody = document.querySelector("#booksTable tbody");
-async function loadBooks() {
-  const querySnapshot = await getDocs(collection(db, "Books"));
-
-  querySnapshot.forEach((doc) => {
-    const book = doc.data();
-
-    const row = `
-      <tr>
-        <td>${book.Tile}</td>
-        <td>${book.Publisher}</td>
-        <td>${book.Date}</td>
-        <td>${book.Price}</td>
-        <td>${book.Status}</td>
-      </tr>
-    `;
-
-    tableBody.innerHTML += row;
-  });
+// Fetch and display books
+async function fetchBooks() {
+    try {
+        const booksCollection = collection(db, 'Books');
+        const booksSnapshot = await getDocs(booksCollection);
+        const booksList = booksSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        
+        displayBooks(booksList);
+    } catch (error) {
+        console.error("Error fetching books:", error);
+    }
 }
 
-loadBooks();
+function displayBooks(books) {
+    const tableBody = document.querySelector('tbody');
+    tableBody.innerHTML = ''; // Clear existing rows
+    
+    books.forEach(book => {
+        const row = `
+            <tr>
+                <td>${book.Title || 'N/A'}</td>
+                <td>${book.Publisher || 'N/A'}</td>
+                <td>${book.Date || 'N/A'}</td>
+                <td>${book.Price || 'N/A'}</td>
+                <td>${book.Status || 'Available'}</td>
+            </tr>
+        `;
+        tableBody.innerHTML += row;
+    });
+}
+// Load books when page loads
+fetchBooks();
+
+console.log("pepepe")
