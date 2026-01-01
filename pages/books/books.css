@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding-bottom: 34px;
 }
 .search {
   position: relative;
@@ -69,4 +70,21 @@
   padding-left: 6px;
   font-size: 14px;
   text-decoration: none;
+}
+
+.books-container { 
+  display: flex;
+
+  height: 100%;
+  border: 1px solid var(--border-clr);
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
+  border-radius: 5px;
+
+}
+.books-header {
+  display: flex;
+  height: 55px;
+  width: 100%;
+  border-bottom: 1px solid var(--border-clr);
+  border-radius: 0px;
 }
