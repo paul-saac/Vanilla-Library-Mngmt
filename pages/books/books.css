@@ -6,12 +6,11 @@
   border: 1px solid var(--border-clr);
   border-radius: 5px 5px 5px 5px;
   padding-right: 10px;
+  background: white;
 }
 .search svg {
   cursor: pointer;
 }
-
-
 .searchTerm {
   padding: 10px;
   height: 20px;
@@ -19,9 +18,4 @@
   outline: #cdcdd8;
   border: none;
   border-radius: 5px 5px 5px 5px;
-}
-
-/*Resize the wrap to see the search bar change!*/
-.search-container{
- 
 }
