@@ -31,7 +31,14 @@ function displayBooks(books) {
         tableBody.innerHTML += row;
     });
 }
+
+//Refresh everytime the hashchanged
+window.addEventListener('hashchange', () => {
+    if (window.location.hash === '#/books') {
+        fetchBooks();
+    }
+});
+
+
 // Load books when page loads
 fetchBooks();
-
-console.log("pepepe")
