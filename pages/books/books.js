@@ -40,5 +40,4 @@ window.addEventListener('hashchange', () => {
 });
 
 
-// Load books when page loads
 fetchBooks();
