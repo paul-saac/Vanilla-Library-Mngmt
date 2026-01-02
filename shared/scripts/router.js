@@ -38,7 +38,7 @@ function Navtitle(path) {
       break;
 
     default:
-    // code block
+    // code bloc
   }
 }
 
