@@ -75,15 +75,17 @@ function loadAssets(path) {
   // Set base path for assets (e.g., "pages/dashboard/")
   const basePath = `pages/${section}/`;
 
+  // Remove all per-page CSS stylesheets
+  const allCssLinks = document.querySelectorAll('link[id$="-css"]');
+  allCssLinks.forEach(link => link.remove());
+
   // Load per-page CSS
   const cssId = `${section}-css`;
-  if (!document.getElementById(cssId)) {
-    const css = document.createElement("link");
-    css.id = cssId;
-    css.rel = "stylesheet";
-    css.href = `${basePath}${section}.css`;
-    document.head.appendChild(css);
-  }
+  const css = document.createElement("link");
+  css.id = cssId;
+  css.rel = "stylesheet";
+  css.href = `${basePath}${section}.css`;
+  document.head.appendChild(css);
 
   // Load per-page JS
   const jsId = `${section}-js`;

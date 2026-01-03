@@ -3,6 +3,7 @@
   flex-direction: row;
   justify-content: space-between;
   padding-bottom: 34px;
+
 }
 .search {
   position: relative;
@@ -47,9 +48,6 @@
   color: rgb(255, 124, 124);
   font-size: 20px;
 }
-
-
-
 .addBtn {
   display: flex;
   align-items: center;
