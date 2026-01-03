@@ -7,8 +7,10 @@ async function fetchBooks() {
         const booksCollection = collection(db, 'Books');
         const booksSnapshot = await getDocs(booksCollection);
         const booksList = booksSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        
-        displayBooks(booksList);
+
+        if (window.location.hash === '#/books') {
+            displayBooks(booksList);
+        }
     } catch (error) {
         console.error("Error fetching books:", error);
     }
@@ -17,7 +19,7 @@ async function fetchBooks() {
 function displayBooks(books) {
     const tableBody = document.querySelector('tbody');
     tableBody.innerHTML = ''; // Clear existing rows
-    
+
     books.forEach(book => {
         const row = `
             <tr>
