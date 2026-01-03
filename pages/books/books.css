@@ -5,6 +5,7 @@
   padding-bottom: 34px;
 
 }
+
 .search {
   position: relative;
   display: flex;
@@ -15,9 +16,11 @@
   padding-right: 10px;
   background: white;
 }
+
 .search svg {
   cursor: pointer;
 }
+
 .searchTerm {
   padding: 10px;
   height: 20px;
@@ -31,7 +34,7 @@
   display: flex;
   position: relative;
   gap: 10px;
-  
+
 }
 
 .deleteBtn {
@@ -44,10 +47,12 @@
   border-radius: 5px;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
 }
+
 .deleteBtn i {
   color: rgb(255, 124, 124);
   font-size: 20px;
 }
+
 .addBtn {
   display: flex;
   align-items: center;
@@ -59,22 +64,26 @@
   background: var(--base-clr);
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
 }
+
 .addBtn i {
   color: white;
   font-size: 15px;
 }
+
 .addBtn a {
   color: white;
   padding-left: 6px;
   font-size: 14px;
   text-decoration: none;
 }
+
 .books-wrapper {
   border: 1px solid var(--border-clr);
   border-radius: 6px;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
   overflow: hidden;
 }
+
 .books-container {
   width: 100%;
   border-collapse: collapse;
@@ -84,13 +93,11 @@
   border-radius: 0;
 }
 
-th, td{
+th, td {
   border-bottom: 1px solid var(--border-clr);
   padding: 10px 10px 10px 20px;
   text-align: left;
   font-size: 13px;
   color: #73737C;
-  
+
 }
-
-

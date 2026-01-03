@@ -30,44 +30,101 @@
 }
 
 .MembersButtons {
-  display: flex;
-  position: relative;
-  gap: 10px;
-  
+    display: flex;
+    position: relative;
+    gap: 10px;
+
 }
 
 .deleteBtn {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  border: 1px solid var(--border-clr);
-  padding: 10px;
-  position: flex;
-  border-radius: 5px;
-  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid var(--border-clr);
+    padding: 10px;
+    position: flex;
+    border-radius: 5px;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
 }
+
 .deleteBtn i {
-  color: rgb(255, 124, 124);
-  font-size: 20px;
+    color: rgb(255, 124, 124);
+    font-size: 20px;
 }
+
 .addBtn {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  border: 1px solid var(--border-clr);
-  padding: 10px 14px 10px 14px;
-  position: flex;
-  border-radius: 5px;
-  background: var(--base-clr);
-  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid var(--border-clr);
+    padding: 10px 14px 10px 14px;
+    position: flex;
+    border-radius: 5px;
+    background: var(--base-clr);
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
 }
+
 .addBtn i {
-  color: white;
-  font-size: 15px;
+    color: white;
+    font-size: 15px;
 }
+
 .addBtn a {
-  color: white;
-  padding-left: 6px;
-  font-size: 14px;
-  text-decoration: none;
+    color: white;
+    padding-left: 6px;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.whole-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.members-wrapper {
+    border: 1px solid var(--border-clr);
+    border-radius: 6px;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
+    overflow: hidden;
+}
+
+.activity-wrapper {
+    border: 1px solid var(--border-clr);
+    border-radius: 6px;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
+    overflow: hidden;
+}
+
+/* COTAINERS */
+.members-container {
+    position: relative;
+    border-collapse: collapse;
+    table-layout: fixed;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    width: 60em;
+}
+
+.activity-container {
+    position: relative;
+    border-collapse: collapse;
+    table-layout: fixed;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    width: 20em;
+}
+
+
+th,
+td {
+    border-bottom: 1px solid var(--border-clr);
+    padding: 10px 10px 10px 20px;
+    text-align: left;
+    font-size: 13px;
+    color: #73737C;
+
 }
