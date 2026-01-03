@@ -1,15 +1,15 @@
 .issue-grid {
-    display: grid;;
+    display: grid;
     grid-template-areas:
         "column1 column2"
     ;
+    grid-template-columns: 3fr 1fr;
     gap: 10px;
 }
 
 .column1 {
     display: flex;
     flex-direction: column;
-    border: 1px solid ;
 }
 
 .issue-nav {
@@ -18,10 +18,89 @@
 }
 
 .column2 {
-    border: 1px solid;
+    border: 1px solid var(--border-clr);
     flex-direction: row;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
+    height: 100%;
 }
 
 .sidebuttons {
     display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* BUTTONS */
+.bookactivitybutton {
+    border: 1px solid var(--border-clr);
+    padding: 8px 30px 8px 30px;
+    border-radius: 5px;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
+    cursor: pointer;
+}
+
+.bookactivitybutton a {
+    text-decoration: none;
+    color: var(--base-clr);
+    font-size: 13px;
+
+}
+
+.returnButton {
+    border: 1px solid var(--border-clr);
+    padding: 8px 20px 8px 20px;
+    font-size: 13px;
+    border-radius: 5px;
+    cursor: pointer;
+    background: var(--base-clr);
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
+
+
+}
+
+.issueButton {
+    border: 1px solid var(--border-clr);
+    padding: 8px 20px 8px 20px;
+    border-radius: 5px;
+    font-size: 13px;
+    cursor: pointer;
+    background: var(--base-clr);
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
+}
+
+.sidebuttons a {
+    text-decoration: none;
+    color: white;
+}
+
+.sidebuttons i {
+    text-decoration: none;
+    color: white;
+}
+
+.issue-wrapper {
+    border: 1px solid var(--border-clr);
+    margin-top: 20px;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
+}
+
+.issue-container {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+th,
+td {
+    border-bottom: 1px solid var(--border-clr);
+    padding: 10px 10px 10px 20px;
+    text-align: left;
+    font-size: 13px;
+    color: #73737C;
+
 }
