@@ -1,7 +1,7 @@
 const routes = {
   "/": "pages/dashboard/dashboard.html",
   "/books": "pages/books/books.html",
-  "/members": "pages/members/members.html",
+  "/students": "pages/students/students.html",
   "/issue": "pages/issue/issue.html",
   "/logbook": "pages/logbook/logbook.html",
   "/settings": "pages/settings/settings.html"
@@ -24,8 +24,8 @@ function Navtitle(path) {
     case "/books":
       navtitle.textContent = "Books";
       break;
-    case "/members":
-      navtitle.textContent = "Members";
+    case "/students":
+      navtitle.textContent = "Students";
       break;
     case "/issue":
       navtitle.textContent = "Issue Books";

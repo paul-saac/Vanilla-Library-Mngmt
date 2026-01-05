@@ -23,11 +23,11 @@ function displayBooks(books) {
     books.forEach(book => {
         const row = `
             <tr>
-                <td>${book.Title || 'N/A'}</td>
-                <td>${book.Publisher || 'N/A'}</td>
-                <td>${book.Date || 'N/A'}</td>
-                <td>${book.Price || 'N/A'}</td>
-                <td>${book.Status || 'N/A'}</td>
+                <td>${book.bookName || 'N/A'}</td>
+                <td>${book.publisher || 'N/A'}</td>
+                <td>${book.publishDate || 'N/A'}</td>
+                <td>${book.price || 'N/A'}</td>
+                <td>${book.status || 'N/A'}</td>
             </tr>
         `;
         tableBody.innerHTML += row;
