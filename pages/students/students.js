@@ -8,7 +8,9 @@ async function fetchStudents() {
         const studentsSnapshot = await getDocs(studentsCollection);
         const studentsList = studentsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
-        displayStudents(studentsList);
+        if (window.location.hash === '#/students') {
+            displayStudents(studentsList);
+        }
     } catch (error) {
         console.error("Error fetching students:", error);
     }
