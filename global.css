@@ -16,48 +16,54 @@ nav {
     justify-content: space-between;
 
 }
+
 /* NOTIFICATION */
 #notif-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  padding: 4px 0 0 0;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background .15s;
-  color: var(--base-clr);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    padding: 4px 0 0 0;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background .15s;
+    color: var(--base-clr);
 }
+
 #notif-btn svg {
-  transition: transform .25s ease;
+    transition: transform .25s ease;
 }
-#notif-btn:hover svg path{
+
+#notif-btn:hover svg path {
     fill: #515157;
 }
+
 .notification-content {
-  position: absolute;
-  top: 110%;
-  right: 0;
-  min-width: 380px;
-  min-height: 400px;
-  background: #fff;
-  border: 1px solid var(--border-clr);
-  border-radius: 8px;
-  box-shadow: 0 6px 14px rgba(0,0,0,.05);
-  padding: 25px;
-  margin: 0;
-  list-style: none;
-  display: none;
-  z-index: 60;
-  animation: fadeOut .12s linear;
+    position: absolute;
+    top: 110%;
+    right: 0;
+    min-width: 380px;
+    min-height: 400px;
+    background: #fff;
+    border: 1px solid var(--border-clr);
+    border-radius: 8px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, .05);
+    padding: 25px;
+    margin: 0;
+    list-style: none;
+    display: none;
+    z-index: 60;
+    animation: fadeOut .12s linear;
 }
+
 .notification-content h4 {
     color: var(--base-clr);
 
 }
+
 .notification-content.show {
-  display: block;
-  animation: fadeIn .15s ease-out;
+    display: block;
+    animation: fadeIn .15s ease-out;
 }
 
 
@@ -70,6 +76,7 @@ nav {
     z-index: 1;
 
 }
+
 #profile-pic {
     width: 28px;
     height: 28px;
@@ -98,74 +105,83 @@ nav {
     color: var(--base-clr);
 }
 
-/* =================================== DROP-DOWN STYLE */
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-#dropdown-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  padding: 4px 0 0 0;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background .15s;
-}
-#dropdown-btn svg {
-  transition: transform .25s ease;
-}
-#dropdown-btn.rotated svg {
-  transform: rotate(180deg);
-}
-/* Menu (hidden by default) */
-.dropdown-menu {
-  position: absolute;
-  top: 110%;
-  right: 0;
-  min-width: 180px;
-  background: #fff;
-  border: 1px solid var(--border-clr);
-  border-radius: 8px;
-  box-shadow: 0 6px 14px rgba(0,0,0,.05);
-  padding: 6px 0;
-  margin: 0;
-  list-style: none;
-  display: none;
-  z-index: 60;
-  animation: fadeOut .12s linear;
-}
-/* Visible state (add with JS) */
-.dropdown-menu.show {
-  display: block;
-  animation: fadeIn .15s ease-out;
-}
-@keyframes fadeIn {
-  from { opacity:0; transform: translateY(-4px); }
-  to   { opacity:1; transform: translateY(0); }
-}
-@keyframes fadeOut {
-  from { opacity:1; }
-  to   { opacity:0; }
-}
-.dropdown-item {
-  width: 100%;
-  background: none;
-  border: 0;
-  text-align: left;
-  padding: 10px 14px;
-  font-size: 14px;
-  cursor: pointer;
-  color: var(--base-clr);
-  transition: background .15s;
-}
-.dropdown-item:hover,
-.dropdown-item:focus {
-  background: var(--hover-clr);
-  outline: none;
+/* ============================================DROP DOWN */
+.account-container {
+    display: flex;
+    align-items: center;
+    padding: 2px 13px 2px 15px;
+    border: 1px solid var(--border-clr);
+    border-radius: 7px;
+    font-size: 13px;
+    color: #363743;
+    font-weight: var(--base-clr);
+    gap: 18px;
+    position: relative; /* anchor dropdown */
 }
 
+/* dropdown inside account container */
+.account-dropdown { position: static; }
+
+#dropdown-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    padding: 6px 0 0 0;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background .15s;
+    border: none;
+}
+
+#dropdown-btn svg { transition: transform .25s ease; }
+#dropdown-btn.rotated svg { transform: rotate(180deg); }
+
+/* match menu width to account-container */
+.account-dropdown .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    width: auto;
+    min-width: 0;
+    background: #fff;
+    border: 1px solid var(--border-clr);
+    border-radius: 7px;
+    box-shadow: 0 6px 14px rgba(0,0,0,.05);
+    padding: 2px 13px 2px 0px;
+    margin: 0;
+    list-style: none;
+    display: none;
+    z-index: 60;
+    animation: fadeOut .12s linear;
+}
+
+.account-dropdown .dropdown-menu.show {
+    display: block;
+    animation: fadeIn .15s ease-out;
+}
+
+.dropdown-item {
+    width: 100%;
+    background: none;
+    border: 0;
+    text-align: left;
+    padding: 11px 14px;
+    font-size: 13px;
+    cursor: pointer;
+    color: var(--base-clr);
+    transition: background .15s;
+}
+
+.dropdown-menu:hover,
+.dropdown-menu:focus {
+    background: var(--hover-clr);
+
+}
+
+
+/* =================================== DROP-DOWN STYLE */
 
 
 

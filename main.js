@@ -25,11 +25,11 @@ sidebarLinks.forEach(link => {
 // Set active link based on current hash/route
 function setActiveLink() {
     const currentHash = window.location.hash || '#/';
-    
+
     sidebarLinks.forEach(link => {
         const linkHash = link.getAttribute('href');
         link.parentElement.classList.remove('active');
-        
+
         if (linkHash === currentHash) {
             link.parentElement.classList.add('active');
         }
@@ -42,40 +42,43 @@ window.addEventListener('hashchange', setActiveLink);
 
 
 
-// ACCOUNT PRFILE
-const accountModal = document.querySelector('#modal-account');
-const accountdetails = document.getElementById('profile-pic');
-const modals = [accountModal];
-accountdetails.addEventListener('click', e => {
-    e.preventDefault();
+// // ACCOUNT PRFILE
+// const accountModal = document.querySelector('#modal-account');
+// const accountdetails = document.getElementById('profile-pic');
+// const modals = [accountModal];
+// accountdetails.addEventListener('click', e => {
+//     e.preventDefault();
 
-    accountModal.classList.add('show');
+//     accountModal.classList.add('show');
 
-});
-modals.forEach(modal => {
-    modal.addEventListener('click', e => {
-        if (e.target === modal) {
-            modal.classList.remove('show');
-        }
-    });
-});
-document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') {
-        closeAllModals();
-    }
-});
-function closeAllModals() {
-    modals.forEach(modal => modal.classList.remove('show'));
-}
-onAuthStateChanged(auth, user => {
-    const box = document.querySelector(".account-details");
-    if (box) {
-        box.innerHTML = "";
-        const emailEl = document.createElement("h4");
-        emailEl.textContent = `Email: ${user.email}`;
-        box.appendChild(emailEl);
-    }
-});
+// });
+// modals.forEach(modal => {
+//     modal.addEventListener('click', e => {
+//         if (e.target === modal) {
+//             modal.classList.remove('show');
+//         }
+//     });
+// });
+// document.addEventListener('keydown', e => {
+//     if (e.key === 'Escape') {
+//         closeAllModals();
+//     }
+// });
+// function closeAllModals() {
+//     modals.forEach(modal => modal.classList.remove('show'));
+// }
+// onAuthStateChanged(auth, user => {
+//     const box = document.querySelector(".account-details");
+//     if (box) {
+//         box.innerHTML = "";
+//         const emailEl = document.createElement("h4");
+//         emailEl.textContent = `Email: ${user.email}`;
+//         box.appendChild(emailEl);
+//     }
+// });
+
+
+
 // NOTIFICATION
 const notifbtn = document.getElementById('notif-btn');
 const notifmenu = document.querySelector('.notification-content');
@@ -90,16 +93,60 @@ if (notifbtn && notifmenu) {
 
 // DROP DOWN
 // ...existing code...
-const dropbtn = document.getElementById('dropdown-btn');
+const dropdownBtn = document.getElementById('dropdown-btn');
 const dropdownMenu = document.querySelector('.dropdown-menu');
 
-if (dropbtn && dropdownMenu) {
-    dropbtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        dropdownMenu.classList.toggle('show');
-        dropbtn.classList.toggle('rotated');
-    });
+let onDocClick = null;
+let onKeyDown = null;
+
+function openDropdown() {
+    if (!dropdownBtn || !dropdownMenu) return;
+    dropdownMenu.classList.add('show');
+    dropdownBtn.classList.add('rotated');
+    dropdownBtn.setAttribute('aria-expanded', 'true');
+
+    onDocClick = (e) => {
+        const inside = e.target.closest('.dropdown');
+        if (!inside) closeDropdown();
+    };
+    onKeyDown = (e) => {
+        if (e.key === 'Escape') closeDropdown();
+    };
+    document.addEventListener('click', onDocClick);
+    document.addEventListener('keydown', onKeyDown);
 }
+
+function closeDropdown() {
+    if (!dropdownBtn || !dropdownMenu) return;
+    dropdownMenu.classList.remove('show');
+    dropdownBtn.classList.remove('rotated');
+    dropdownBtn.setAttribute('aria-expanded', 'false');
+
+    if (onDocClick) { document.removeEventListener('click', onDocClick); onDocClick = null; }
+    if (onKeyDown) { document.removeEventListener('keydown', onKeyDown); onKeyDown = null; }
+}
+
+if (dropdownBtn && dropdownMenu) {
+    dropdownBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (dropdownMenu.classList.contains('show')) {
+            closeDropdown();
+        } else {
+            openDropdown();
+        }
+    });
+    // prevent clicks inside the menu from closing it
+    dropdownMenu.addEventListener('click', (e) => e.stopPropagation());
+}
+
+
+// auth email -> account label
+const accountEmailEl = document.getElementById('account-email');
+onAuthStateChanged(auth, user => {
+    if (accountEmailEl) {
+        accountEmailEl.textContent = user?.email || '';
+    }
+});
 
 // LOG OUT
 const logoutBtn = document.getElementById("logout-btn");
@@ -113,5 +160,3 @@ logoutBtn.addEventListener("click", () => {
       console.error("Error signing out:", error);
     });
 });
-
-

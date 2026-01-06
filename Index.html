@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vanilla Library</title>
+
     <link rel="stylesheet" href="/global.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,38 +41,36 @@
                     </svg>
                 </button>
                 <div class="notification-content">
-                  <h4>Notification</h4>
+                    <h4>Notification</h4>
 
                 </div>
             </div>
 
-            <button id="profile-pic"></button>
-            <!-- DROP-DOWN FUNCTION -->
-            <div class="dropdown">
-                <button id="dropdown-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
-                        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                            stroke-width="2" d="m7 10l5 5m0 0l5-5" />
-                    </svg>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <li><button class="dropdown-item" type="button">Account Settings</button></li>
-                    <li><button id="logout-btn" class="dropdown-item" type="button">Log Out</button></li>
-                </ul>
+
+            <div class="account-container">
+                <p id="account-email"></p>
+                <div class="account-dropdown">
+                    <button id="dropdown-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
+                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="m7 10l5 5m0 0l5-5" />
+                        </svg>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <li><button id="logout-btn" class="dropdown-item" type="button">Log Out</button></li>
+                    </ul>
+                </div>
             </div>
+
+            <!-- DROP-DOWN FUNCTION -->
+
         </div>
     </nav>
 
     <!-- =======================================  MODALS -->
-    <!-- ACCOUNT MODAL --> 
-    <div id="modal-account" class="modal">
-        <div class="modal-content">
-            <h4>Account details</h4><br />
-            <div class="account-details">
+    <!-- ACCOUNT MODAL -->
 
-            </div>
-        </div>
-    </div>
+
 
 
     <!-- SIDEBAR -->

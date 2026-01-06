@@ -79,8 +79,8 @@
 .whole-wrapper {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     gap: 15px;
+    justify-content: space-between;
 }
 
 .members-wrapper {
@@ -88,6 +88,7 @@
     border-radius: 6px;
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
     overflow: hidden;
+    width: 100%;
 }
 
 .activity-wrapper {
@@ -95,6 +96,7 @@
     border-radius: 6px;
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
     overflow: hidden;
+    
 }
 
 /* COTAINERS */
@@ -105,7 +107,7 @@
     border: none;
     box-shadow: none;
     border-radius: 0;
-    width: 60em;
+    width: 100%;
 }
 
 .activity-container {
