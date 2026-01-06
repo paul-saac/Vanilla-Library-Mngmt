@@ -5,7 +5,10 @@
   padding-bottom: 34px;
 
 }
-
+.search-container {
+  display: flex;
+  gap: 10px;
+}
 .search {
   position: relative;
   display: flex;
@@ -17,14 +20,32 @@
   background: white;
 }
 
-.search svg {
+.filter-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px var(--border-clr);
+  height: auto;
+  width: 43px;
+  border-radius: 5px;
+  background: white;
   cursor: pointer;
 }
+
+.search img {
+  cursor: pointer;
+  padding-right: 3px;
+}
+
+.search input::placeholder {
+  color: rgb(180, 177, 182);
+}
+
 
 .searchTerm {
   padding: 10px;
   height: 20px;
-  width: 250px;
+  width: 450px;
   outline: #cdcdd8;
   border: none;
   border-radius: 5px 5px 5px 5px;
@@ -93,7 +114,8 @@
   border-radius: 0;
 }
 
-th, td {
+th,
+td {
   border-bottom: 1px solid var(--border-clr);
   padding: 10px 10px 10px 20px;
   text-align: left;

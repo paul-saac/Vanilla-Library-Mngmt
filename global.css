@@ -23,11 +23,13 @@ nav {
     align-items: center;
     justify-content: center;
     background: none;
-    padding: 4px 0 0 0;
+    padding: 12px 13px 12px 13px;
     border-radius: 6px;
     cursor: pointer;
     transition: background .15s;
     color: var(--base-clr);
+    border: 1px solid var(--border-clr);
+
 }
 
 #notif-btn svg {
@@ -315,7 +317,7 @@ aside ul li a svg {
 main {
     background: #F9F9F9;
     grid-area: main;
-    padding: 66px;
+    padding: 50px;
     height: 100vh;
     /* Or use a calculated height if you have a header/footer */
     overflow-y: auto;

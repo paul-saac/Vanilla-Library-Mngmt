@@ -43,53 +43,26 @@ window.addEventListener('hashchange', setActiveLink);
 
 
 // // ACCOUNT PRFILE
-// const accountModal = document.querySelector('#modal-account');
-// const accountdetails = document.getElementById('profile-pic');
-// const modals = [accountModal];
-// accountdetails.addEventListener('click', e => {
-//     e.preventDefault();
-
-//     accountModal.classList.add('show');
-
-// });
-// modals.forEach(modal => {
-//     modal.addEventListener('click', e => {
-//         if (e.target === modal) {
-//             modal.classList.remove('show');
-//         }
-//     });
-// });
-// document.addEventListener('keydown', e => {
-//     if (e.key === 'Escape') {
-//         closeAllModals();
-//     }
-// });
-// function closeAllModals() {
-//     modals.forEach(modal => modal.classList.remove('show'));
-// }
-// onAuthStateChanged(auth, user => {
-//     const box = document.querySelector(".account-details");
-//     if (box) {
-//         box.innerHTML = "";
-//         const emailEl = document.createElement("h4");
-//         emailEl.textContent = `Email: ${user.email}`;
-//         box.appendChild(emailEl);
-//     }
-// });
+const accountEmailEl = document.getElementById('account-email');
+onAuthStateChanged(auth, user => {
+    if (accountEmailEl) {
+        accountEmailEl.textContent = user?.email || '';
+    }
+});
 
 
 
 // NOTIFICATION
-const notifbtn = document.getElementById('notif-btn');
-const notifmenu = document.querySelector('.notification-content');
+// const notifbtn = document.getElementById('notif-btn');
+// const notifmenu = document.querySelector('.notification-content');
 
-if (notifbtn && notifmenu) {
-    notifbtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        notifmenu.classList.toggle('show');
-        notifbtn.classList.toggle('highlight')
-    });
-}
+// if (notifbtn && notifmenu) {
+//     notifbtn.addEventListener('click', (e) => {
+//         e.preventDefault();
+//         notifmenu.classList.toggle('show');
+//         notifbtn.classList.toggle('highlight')
+//     });
+// }
 
 // DROP DOWN
 // ...existing code...
@@ -140,13 +113,6 @@ if (dropdownBtn && dropdownMenu) {
 }
 
 
-// auth email -> account label
-const accountEmailEl = document.getElementById('account-email');
-onAuthStateChanged(auth, user => {
-    if (accountEmailEl) {
-        accountEmailEl.textContent = user?.email || '';
-    }
-});
 
 // LOG OUT
 const logoutBtn = document.getElementById("logout-btn");
