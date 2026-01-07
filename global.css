@@ -253,7 +253,7 @@ aside {
     body:has(aside:hover) .active a {
         border-radius: 0.5em;
         background: var(--base-clr);
-        color: whiteS;
+        color: white;
     }
 
     /* SET BORDER RADIUS TO ALL*/
@@ -264,6 +264,7 @@ aside {
     .sidebar-btn {
         display: none;
     }
+
 }
 
 aside ul li {
@@ -283,6 +284,7 @@ aside ul li a {
     text-decoration: none;
     color: var(--base-clr);
     border-radius: 50em;
+    
 }
 
 aside a span {
