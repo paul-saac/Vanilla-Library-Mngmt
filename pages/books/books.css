@@ -100,6 +100,9 @@
   text-decoration: none;
 }
 
+
+
+/* =============BOOOKSS */
 .books-wrapper {
   display: grid;    
   grid-template-columns: 650px 650px;
@@ -129,27 +132,30 @@
 
 .details {
   padding-left: 18px;
+  width: 492px;
 }
 
-.details h3 {
+.book-title {
   font-weight: bold;
 }
 
 .book-header {
   display: flex;
-  gap: 270px;
+  justify-content: space-between;
+
+
 }
 
 
 .details p {
   font-size: 13px;
-  font-weight: 200;
+  font-weight: 450;
+  color: rgb(156, 151, 160);
 }
 
 .book-id {
 
 }
-
 
 
 .book-footer {
@@ -162,18 +168,27 @@
 .avail-light {
   border: 1px solid var(--border-clr);
   border-radius: 6px;
-  padding: 1px 7px 1px 7px;
+  padding: 2px 10px 2px 10px;
   background: var(--base-clr);
   color: white;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
 }
+.unavail {
+  border-radius: 6px;
+  padding: 2px 10px 2px 10px;
+  background: #EFEFEF;
+  color: var(--base-clr);
+  font-size: 11px;
+  font-weight: 600;
+}
+
 .book-availability {
   display: flex;
   flex-direction: row;
   align-items: baseline;
   margin-top: 10px;
-  gap: 5px;
+  gap: 11px;
 }
 
 .book-actions {
