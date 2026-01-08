@@ -136,8 +136,8 @@
 }
 
 .book-title {
-  font-weight: bold;
-  color: #545663;
+  font-weight: bolder;
+  color: #676775;
 }
 
 .book-header {
@@ -155,7 +155,8 @@
 }
 
 .book-id {
-  color: #545663;
+  color: #848496;
+  font-weight: bolder;
 }
 
 

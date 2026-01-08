@@ -1,48 +1,99 @@
 .students-navs {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding-bottom: 34px;
-
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 34px;
+    align-items: center;
 }
 
 .search-container {
-  display: flex;
-  gap: 10px;
+    display: flex;
+    gap: 10px;
 }
 
 .search {
-  position: relative;
-  display: flex;
-  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
-  align-items: center;
-  border: 1px solid var(--border-clr);
-  border-radius: 5px 5px 5px 5px;
-  padding-right: 10px;
-  background: white;
+    position: relative;
+    display: flex;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
+    align-items: center;
+    border: 1px solid var(--border-clr);
+    border-radius: 5px 5px 5px 5px;
+    padding-right: 10px;
+    background: white;
 }
 
 .search img {
-  cursor: pointer;
-  padding-right: 3px;
+    cursor: pointer;
+    padding-right: 3px;
 }
 
 .search input::placeholder {
-  color: rgb(180, 177, 182);
+    color: rgb(180, 177, 182);
 }
 
 .searchTerm {
-  padding: 10px;
-  height: 20px;
-  width: 450px;
-  outline: #cdcdd8;
-  border: none;
-  border-radius: 5px 5px 5px 5px;
+    padding: 10px;
+    height: 20px;
+    width: 300px;
+    outline: #cdcdd8;
+    border: none;
+    border-radius: 5px 5px 5px 5px;
 }
+
+.students-filter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.filter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-clr);
+    border-radius: 5px;
+    width: auto;
+    height: 22px;
+    padding: 1px 13px 1px 13px;
+    font-size: 10px;
+    color: #818399;
+    cursor: pointer;
+    background: white;
+
+}
+
+.filter-yr {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-clr);
+    border-radius: 5px;
+    width: 40px;
+    height: 22px;
+    padding: 1px 10px 1px 10px;
+    font-size: 10px;
+    color: #818399;
+    cursor: pointer;
+    background: white;
+
+}
+
+.filter-course {
+    display: flex;
+    gap: 7px;
+}
+
+.filter-year {
+    display: flex;
+    gap: 7px;
+}
+
+
+
 
 .MembersButtons {
     display: flex;
-    position: relative;
     gap: 10px;
 
 }
@@ -107,7 +158,7 @@
     border-radius: 6px;
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
     overflow: hidden;
-    
+
 }
 
 /* COTAINERS */
@@ -138,6 +189,51 @@ td {
     padding: 10px 10px 10px 20px;
     text-align: left;
     font-size: 12px;
-    color: #73737C;
+    color: #676775;
 
+}
+.th-name,
+.td-name{
+    width: 280px;
+}
+
+
+.table-head {
+    background: #f8f8fa;
+}
+
+.student-data td{
+    color: #7e7e91;
+    font-weight: 500;
+}
+tr {
+    background: white;
+    font-weight: bolder;
+}
+
+.student-actions {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.edit-student,
+.delete-student {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border: 1px solid var(--border-clr);
+    border-radius: 4px;
+    background: white;
+    cursor: pointer;
+    transition: all .15s;
+}
+
+.student-email {
+    font-size: 12px;
+    color: #818399;
+    /* Optional: make it a lighter color */
+    font-weight: 250;
 }

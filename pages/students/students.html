@@ -3,19 +3,35 @@
 <div class="students-navs">
     <div class="search-container">
         <div class="search">
-            <input type="text" class="searchTerm" placeholder="Search books by title, author, ID, or genre.....">
+            <input type="text" class="searchTerm" placeholder="Search students by name, id...">
             <img src="/shared/styles/icons/Search.svg" alt="" width="20" height="20">
         </div>
         <div class="">
-            
+
+        </div>
+    </div>
+
+    <div class="students-filter">
+        <div class="filter-all">
+            <div class="filter">All</div>
+        </div>
+
+        <div class="filter-course">
+            <div class="filter">BSCS</div>
+            <div class="filter">BSIT</div>
+            <div class="filter">BSTM</div>
+            <div class="filter">BSHM</div>
+        </div>
+
+        <div class="filter-year">
+            <div class="filter-yr">1st yr</div>
+            <div class="filter-yr">2nd yr</div>
+            <div class="filter-yr">3rd yr</div>
+            <div class="filter-yr">4th yr</div>
         </div>
     </div>
 
     <div class="MembersButtons">
-        <div class="deleteBtn">
-            <i class="bi bi-trash3-fill"></i>
-        </div>
-
         <div class="addBtn">
             <i class="bi bi-plus-square"></i>
             <a href="#">Add Member</a>
@@ -27,26 +43,13 @@
     <div class="members-wrapper">
         <table class="members-container">
             <thead>
-                <tr>
-                    <th>Student ID</th>
-                    <th>Last Name</th>
-                    <th>First Name</th>
-                    <th>Email</th>
+                <tr class="table-head">
+                    <th class="th-name">Full Name</th>
+                    <th>Student No.</th>
+                    <th>Phone No.</th>
                     <th>Department</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!--  -->
-            </tbody>
-        </table>
-    </div>
-
-    <div class="activity-wrapper">
-        <table class="activity-container">
-            <thead>
-                <tr>
-                    <th>Student Activity</th>
-
+                    <th>Year</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -54,5 +57,4 @@
             </tbody>
         </table>
     </div>
-
 </div>

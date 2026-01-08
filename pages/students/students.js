@@ -22,12 +22,25 @@ function displayStudents(students) {
 
     students.forEach(student => {
         const row = `
-            <tr>
+            <tr class="student-data">
+                <td class="td-name">${student.lastName|| 'N/A'}, ${student.firstName || 'N/A'} <br> 
+                    <span class="student-email">${student.email || 'N/A'}</span>
+                </td>
                 <td>${student.id || 'N/A'}</td>
-                <td>${student.lastName || 'N/A'}</td>
-                <td>${student.firstName || 'N/A'}</td>
-                <td>${student.email || 'N/A'}</td>
+                <td>${student.phone || 'N/A'}</td>
                 <td>${student.department || 'N/A'}</td>
+                <td>${student.year || 'N/A'}</td>
+                <td> 
+                    <div class="student-actions">
+                        <div class="edit-student">
+                            <img src="/shared/styles/icons/editstudent.svg" alt="" width="13px" height="13px">
+                        </div>
+                        <div class="delete-student">
+                            <img src="/shared/styles/icons/deletestudent.svg" alt="" width="13px" height="13px">
+                        </div>
+                    </div>
+                
+                </td>
             </tr>
         `;
         tableBody.innerHTML += row;
