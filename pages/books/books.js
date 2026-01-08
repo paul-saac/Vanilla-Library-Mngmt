@@ -87,10 +87,10 @@ function createBookCard(book) {
 
           <div class="book-actions">
             <div class="edit-book">
-              <img src="/pages/books/icons/Edit.svg" alt="Edit" width="13" height="13">
+              <img src="/shared/styles/icons/Edit.svg" alt="Edit" width="13" height="13">
             </div>
             <div class="delete-book">
-              <img src="/pages/books/icons/Delete.svg" alt="Delete" width="13" height="13">
+              <img src="/shared/styles/icons/Delete.svg" alt="Delete" width="13" height="13">
             </div>
           </div>
 
