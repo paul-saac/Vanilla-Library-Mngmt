@@ -1,32 +1,43 @@
-.MembersHeader {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding-bottom: 34px;
+.students-navs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-bottom: 34px;
+
+}
+
+.search-container {
+  display: flex;
+  gap: 10px;
 }
 
 .search {
-    position: relative;
-    display: flex;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
-    align-items: center;
-    border: 1px solid var(--border-clr);
-    border-radius: 5px 5px 5px 5px;
-    padding-right: 10px;
-    background: white;
+  position: relative;
+  display: flex;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
+  align-items: center;
+  border: 1px solid var(--border-clr);
+  border-radius: 5px 5px 5px 5px;
+  padding-right: 10px;
+  background: white;
 }
 
-.search svg {
-    cursor: pointer;
+.search img {
+  cursor: pointer;
+  padding-right: 3px;
+}
+
+.search input::placeholder {
+  color: rgb(180, 177, 182);
 }
 
 .searchTerm {
-    padding: 10px;
-    height: 20px;
-    width: 250px;
-    outline: #cdcdd8;
-    border: none;
-    border-radius: 5px 5px 5px 5px;
+  padding: 10px;
+  height: 20px;
+  width: 450px;
+  outline: #cdcdd8;
+  border: none;
+  border-radius: 5px 5px 5px 5px;
 }
 
 .MembersButtons {
