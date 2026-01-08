@@ -23,7 +23,7 @@ function displayStudents(students) {
     students.forEach(student => {
         const row = `
             <tr class="student-data">
-                <td class="td-name">${student.lastName|| 'N/A'}, ${student.firstName || 'N/A'} <br> 
+                <td class="td-name">${student.lastName || 'N/A'}, ${student.firstName || 'N/A'} <br> 
                     <span class="student-email">${student.email || 'N/A'}</span>
                 </td>
                 <td>${student.id || 'N/A'}</td>
@@ -55,3 +55,41 @@ window.addEventListener('hashchange', () => {
 });
 
 fetchStudents();
+
+// CLICKING ON FILTERS
+const allFilterBtn = document.querySelector('.filter-all .filter');
+const courseFilters = document.querySelectorAll('.filter-course .filter');
+const yearFilters = document.querySelectorAll('.filter-year .filter');
+
+// Handle "All" button click
+allFilterBtn.addEventListener('click', function (e) {
+    // Remove 'filter-active' from all course and year filters
+    courseFilters.forEach(f => f.classList.remove('filter-active'));
+    yearFilters.forEach(f => f.classList.remove('filter-active'));
+    // Keep 'filter-active' on the "All" button
+    this.classList.add('filter-active');
+});
+
+// Handle course filter clicks
+courseFilters.forEach(filter => {
+    filter.addEventListener('click', function (e) {
+        // Remove 'filter-active' from "All" button only
+        allFilterBtn.classList.remove('filter-active');
+        // Remove 'filter-active' from other course filters only
+        courseFilters.forEach(f => f.classList.remove('filter-active'));
+        // Add 'filter-active' to the clicked one
+        this.classList.add('filter-active');
+    });
+});
+
+// Handle year filter clicks
+yearFilters.forEach(filter => {
+    filter.addEventListener('click', function (e) {
+        // Remove 'filter-active' from "All" button only
+        allFilterBtn.classList.remove('filter-active');
+        // Remove 'filter-active' from other year filters only
+        yearFilters.forEach(f => f.classList.remove('filter-active'));
+        // Add 'filter-active' to the clicked one
+        this.classList.add('filter-active');
+    });
+});

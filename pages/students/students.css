@@ -60,22 +60,7 @@
     color: #818399;
     cursor: pointer;
     background: white;
-
-}
-
-.filter-yr {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--border-clr);
-    border-radius: 5px;
-    width: 40px;
-    height: 22px;
-    padding: 1px 10px 1px 10px;
-    font-size: 10px;
-    color: #818399;
-    cursor: pointer;
-    background: white;
+    font-weight: 500;
 
 }
 
@@ -88,6 +73,33 @@
     display: flex;
     gap: 7px;
 }
+
+/* FILTER FUNCTION */
+.filter-active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-clr);
+    border-radius: 5px;
+    width: auto;
+    height: 22px;
+    padding: 1px 13px 1px 13px;
+    font-size: 10px;
+    color: #ffffff;
+    cursor: pointer;
+    background: var(--base-clr);
+    font-weight: 650;
+}
+
+.filter:hover,
+.filter-yr:hover {
+    background: #f3f3f3;
+}
+
+.filter-active:hover {
+    background: var(--base-clr);
+}
+
 
 
 
@@ -192,8 +204,9 @@ td {
     color: #676775;
 
 }
+
 .th-name,
-.td-name{
+.td-name {
     width: 280px;
 }
 
@@ -202,10 +215,11 @@ td {
     background: #f8f8fa;
 }
 
-.student-data td{
+.student-data td {
     color: #7e7e91;
     font-weight: 500;
 }
+
 tr {
     background: white;
     font-weight: bolder;
