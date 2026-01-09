@@ -47,6 +47,31 @@ function displayStudents(students) {
     });
 }
 
+document.addEventListener('click', (e) => {
+
+    const allBtn = e.target.closest('.filter-all .filter');
+    const courseBtn = e.target.closest('.filter-course .filter');
+    const yearBtn = e.target.closest('.filter-year .filter');
+
+    const allFilterBtn = document.querySelector('.filter-all .filter');
+    const courseFilters = document.querySelectorAll('.filter-course .filter');
+    const yearFilters = document.querySelectorAll('.filter-year .filter');
+
+    if (allBtn) {
+        courseFilters.forEach(f => f.classList.remove('filter-active'));
+        yearFilters.forEach(f => f.classList.remove('filter-active'));
+        allFilterBtn.classList.add('filter-active');
+    }
+    if (courseBtn) {
+        allFilterBtn.classList.remove('filter-active');
+        courseFilters.forEach(f => f.classList.toggle('filter-active', f === courseBtn));
+    }
+    if (yearBtn) {
+        allFilterBtn.classList.remove('filter-active');
+        yearFilters.forEach(f => f.classList.toggle('filter-active', f === yearBtn));
+    }
+});
+
 //Refresh everytime the hashchanged
 window.addEventListener('hashchange', () => {
     if (window.location.hash === '#/students') {
@@ -54,42 +79,4 @@ window.addEventListener('hashchange', () => {
     }
 });
 
-fetchStudents();
-
-// CLICKING ON FILTERS
-const allFilterBtn = document.querySelector('.filter-all .filter');
-const courseFilters = document.querySelectorAll('.filter-course .filter');
-const yearFilters = document.querySelectorAll('.filter-year .filter');
-
-// Handle "All" button click
-allFilterBtn.addEventListener('click', function (e) {
-    // Remove 'filter-active' from all course and year filters
-    courseFilters.forEach(f => f.classList.remove('filter-active'));
-    yearFilters.forEach(f => f.classList.remove('filter-active'));
-    // Keep 'filter-active' on the "All" button
-    this.classList.add('filter-active');
-});
-
-// Handle course filter clicks
-courseFilters.forEach(filter => {
-    filter.addEventListener('click', function (e) {
-        // Remove 'filter-active' from "All" button only
-        allFilterBtn.classList.remove('filter-active');
-        // Remove 'filter-active' from other course filters only
-        courseFilters.forEach(f => f.classList.remove('filter-active'));
-        // Add 'filter-active' to the clicked one
-        this.classList.add('filter-active');
-    });
-});
-
-// Handle year filter clicks
-yearFilters.forEach(filter => {
-    filter.addEventListener('click', function (e) {
-        // Remove 'filter-active' from "All" button only
-        allFilterBtn.classList.remove('filter-active');
-        // Remove 'filter-active' from other year filters only
-        yearFilters.forEach(f => f.classList.remove('filter-active'));
-        // Add 'filter-active' to the clicked one
-        this.classList.add('filter-active');
-    });
-});
+attachFilterListeners()
