@@ -35,7 +35,7 @@
 
 .searchTerm {
     padding: 10px;
-    height: 25px;
+    height: 24px;
     width: 300px;
     outline: #cdcdd8;
     border: none;
@@ -149,12 +149,6 @@
     text-decoration: none;
 }
 
-.whole-wrapper {
-    display: flex;
-    flex-direction: row;
-    gap: 15px;
-    justify-content: space-between;
-}
 
 .members-wrapper {
     border: 1px solid var(--border-clr);
@@ -164,13 +158,6 @@
     width: 100%;
 }
 
-.activity-wrapper {
-    border: 1px solid var(--border-clr);
-    border-radius: 6px;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
-    overflow: hidden;
-
-}
 
 /* COTAINERS */
 .members-container {
@@ -182,17 +169,6 @@
     border-radius: 0;
     width: 100%;
 }
-
-.activity-container {
-    position: relative;
-    border-collapse: collapse;
-    table-layout: fixed;
-    border: none;
-    box-shadow: none;
-    border-radius: 0;
-    width: 20em;
-}
-
 
 th,
 td {
@@ -212,11 +188,6 @@ td {
 
 .table-head {
     background: #f8f8fa;
-}
-
-.student-data td {
-    color: #7e7e91;
-    font-weight: 500;
 }
 
 tr {

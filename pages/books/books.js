@@ -47,20 +47,19 @@ function setupRealtimeListener() {
 }
 
 function renderBooks(books) {
-  const booksWrapper = document.querySelector(".books-wrapper");
-  if (booksWrapper) {
-    booksWrapper.innerHTML = books.map((book) => createBookCard(book)).join("");
-  }
+  const tbody = document.querySelector(".books-container tbody");
+  if (!tbody) return;
+
+  tbody.innerHTML = books.map((book) => createBookRow(book)).join("");
 }
 
-function createBookCard(book) {
+function createBookRow(book) {
   const {
     id = "",
     bookName = "Untitled",
     author = "Unknown Author",
-    publisher = "",
     bookGenre = "N/A",
-    publishDate = "N/A",
+    isbn = "",
     status = "Unavailable",
     copies = 0,
     availableCopies,
@@ -68,49 +67,30 @@ function createBookCard(book) {
 
   const available = availableCopies ?? copies ?? 0;
   const total = copies ?? 0;
-  const statusClass = status?.toLowerCase() === "available" ? "avail-light" : "unavail";
+
+  const normalizedStatus = (status || "").toLowerCase();
+  const statusClass = normalizedStatus === "available" ? "avail-light" : "unavail";
+  const isbnOrId = isbn || id || "N/A";
 
   return `
-    <div class="book">
-      <div class="book-cover">
-        
-      </div>
-      
-      <div class="details">
-        <div class="book-header">
-
-          <div class="title-header">
-            <h3 class="book-title">${bookName}</h3>
-            <p class="book-author">by ${author || publisher || "Unknown Author"}</p>
-            <h5 class="book-id">ISBN: ${id}</h5>
+    <tr class="book-row" data-id="${id}" data-isbn="${isbn}">
+      <td class="td-title">${bookName}</td>
+      <td>${author}</td>
+      <td>${bookGenre}</td>
+      <td>${isbnOrId}</td>
+      <td> <span class="${statusClass}"> ${status}</span> </td>
+      <td>${available}/${total}</td>
+      <td class="td-actions">
+        <div class="books-actions">
+          <div class="edit-book" data-action="edit" data-id="${id}">
+            <img src="/shared/styles/icons/editstudent.svg" alt="Edit" width="13" height="13">
           </div>
-
-          <div class="book-actions">
-            <div class="edit-book">
-              <img src="/shared/styles/icons/editstudent.svg" alt="Edit" width="13" height="13">
-            </div>
-            <div class="delete-book">
-              <img src="/shared/styles/icons/deletestudent.svg" alt="Delete" width="13" height="13">
-            </div>
+          <div class="delete-book" data-action="delete" data-id="${id}">
+            <img src="/shared/styles/icons/deletestudent.svg" alt="Delete" width="13" height="13">
           </div>
-
         </div>
-
-        <div class="book-footer">
-
-          <div class="book-availability">
-            <a class="${statusClass}">${status}</a>
-            <p class="copies">${available}/${total}</p>
-          </div>
-
-          <div class="footer-container">
-            <p>Genre: ${bookGenre}</p>
-            <p>Publish Date: ${publishDate}</p>
-          </div>
-
-        </div>
-      </div>
-    </div>
+      </td>
+    </tr>
   `;
 }
 
@@ -150,9 +130,107 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
+const modalEl = document.getElementById("addbook-modal");
+const submitBtn = document.getElementById("addbook-submit");
+const cancelBtn = document.getElementById("addbook-cancel");
 
+const inputBookName = document.getElementById("bookname");
+const inputAuthor = document.getElementById("bookauthor");
+const inputIsbn = document.getElementById("bookisbn");
+const inputGenre = document.getElementById("bookgenre");
+const inputDate = document.getElementById("bookdate"); // <-- fix: was accidentally "Date = ..."
+const inputCopies = document.getElementById("bookcopies");
 
-document.addEventListener('click', (e) => {
+function openAddBookModal() {
+  modalEl?.classList.add("show");
+  inputBookName?.focus();
+}
 
-  
-})
+function closeAddBookModal() {
+  modalEl?.classList.remove("show");
+}
+
+function resetAddBookForm() {
+  if (inputBookName) inputBookName.value = "";
+  if (inputAuthor) inputAuthor.value = "";
+  if (inputIsbn) inputIsbn.value = "";
+  if (inputGenre) inputGenre.value = "";
+  if (inputDate) inputDate.value = "";
+  if (inputCopies) inputCopies.value = "";
+}
+
+document.addEventListener("click", (e) => {
+  if (e.target.closest("#addbookBtn")) openAddBookModal();
+  if (e.target.closest(".modal-close")) closeAddBookModal();
+
+  if (modalEl && e.target === modalEl) closeAddBookModal();
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeAddBookModal();
+});
+
+cancelBtn?.addEventListener("click", () => {
+  closeAddBookModal();
+  resetAddBookForm();
+});
+
+async function handleAddBook() {
+  if (!inputBookName || !inputIsbn || !inputCopies) {
+    alert("Add Book form inputs are missing in books.html (ISBN/Copies/etc).");
+    return;
+  }
+
+  const bookName = (inputBookName.value || "").trim();
+  const isbn = (inputIsbn.value || "").trim().replace(/\s+/g, "");
+  const copies = Number.parseInt((inputCopies.value || "").trim(), 10);
+
+  // Optional fields => store "N/A" when empty
+  const author = (inputAuthor?.value || "").trim() || "N/A";
+  const bookGenre = (inputGenre?.value || "").trim() || "N/A";
+  const publishDate = (inputDate?.value || "").trim() || "N/A";
+
+  if (!bookName) return alert("Please enter a Title.");
+  if (!isbn) return alert("Please enter an ISBN.");
+  if (isbn.includes("/")) return alert("ISBN cannot contain '/'.");
+  if (!Number.isFinite(copies) || copies < 0) return alert("Copies must be a valid number (0 or more).");
+
+  const status = copies > 0 ? "Available" : "Unavailable";
+
+  try {
+    if (submitBtn) submitBtn.disabled = true;
+
+    const bookRef = doc(db, "Books", isbn);
+
+    await setDoc(
+      bookRef,
+      {
+        isbn,
+        bookName,
+        author,
+        bookGenre,
+        publishDate,
+        copies,
+        availableCopies: copies,
+        status,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+      },
+      { merge: true }
+    );
+
+    // Close modal AFTER successful submit
+    closeAddBookModal();
+    resetAddBookForm();
+  } catch (err) {
+    console.error("Error adding book:", err);
+    alert("Failed to add book. Check console for details.");
+  } finally {
+    if (submitBtn) submitBtn.disabled = false;
+  }
+}
+
+submitBtn?.addEventListener("click", (e) => {
+  e.preventDefault();
+  handleAddBook();
+});

@@ -61,62 +61,35 @@
                 </span>
                 <span class="addbook-input">
                     <p>Copies</p>
-                    <input id="bookcopies" type="text" placeholder="">
+                    <input id="bookcopies" type="text" placeholder="0">
                 </span>
             </div>
             <div class="addbook-buttons">
                 <button id="addbook-cancel">Cancel</button>
-                <button id="addbook-submit" >Add Book</button>
+                <button id="addbook-submit">Add Book</button>
             </div>
         </div>
     </div>
 
 
     <div class="books-wrapper">
-        <!-- <div class="book">
-            <div class="book-cover">
-                
-            </div>
-            <div class="details">
-                <div class="book-header">
-                    <div class="title-header">
-                        <h3 class="book-title">
-                            Noli Me Tangere
-                        </h3>
-                        <p class="book-author">
-                            by Jose Rizal
-                        </p>
-                        <h5 class="book-id">
-                            ID:
-                        </h5>
-                    </div>
+        <table class="books-container">
+            <thead>
+                <tr class="table-head">
+                    <th class="th-title">Title</th>
+                    <th>Author</th>
+                    <th>Category</th>
+                    <th>ISBN</th>
+                    <th>Status</th>
+                    <th>Copies</th>
+                    <th class="th-actions">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
 
-                    <div class="book-actions">
-                        <div class="edit-book">
-                            <img src="/pages/books/icons/Edit.svg" alt="" width="13px" height="13px">
-                        </div>
-                        <div class="delete-book">
-                            <img src="/pages/books/icons/Delete.svg" alt="" width="13px" height="13px">
-                        </div>
-                    </div>
-
-                </div>
-
-
-
-                <div class="book-footer">
-                    <div class="book-availability">
-                        <a class="avail-light">Available</a>
-                        <p class="copies"> 1/3</p>
-                    </div>
-
-                    <div class="footer-container">
-                        <p>Genre: Fiction</p>
-                        <p>Publish Date: 1/1/2025</p>
-                    </div>
-                </div>
-            </div>
-        </div> -->
+            </tbody>
+        </table>
     </div>
+
 
 </body>
