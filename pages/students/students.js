@@ -57,20 +57,37 @@ document.addEventListener('click', (e) => {
     const courseFilters = document.querySelectorAll('.filter-course .filter');
     const yearFilters = document.querySelectorAll('.filter-year .filter');
 
+    if (!allFilterBtn) return;
+
     if (allBtn) {
         courseFilters.forEach(f => f.classList.remove('filter-active'));
         yearFilters.forEach(f => f.classList.remove('filter-active'));
         allFilterBtn.classList.add('filter-active');
     }
+
     if (courseBtn) {
         allFilterBtn.classList.remove('filter-active');
-        courseFilters.forEach(f => f.classList.toggle('filter-active', f === courseBtn));
+
+        if (courseBtn.classList.contains('filter-active')) {
+            courseBtn.classList.remove('filter-active');
+            return;
+        }
+        courseBtn.classList.add('filter-active');
     }
+
     if (yearBtn) {
         allFilterBtn.classList.remove('filter-active');
-        yearFilters.forEach(f => f.classList.toggle('filter-active', f === yearBtn));
+        
+        if (yearBtn.classList.contains('filter-active')) {
+            yearBtn.classList.remove('filter-active');
+            return;
+        }
+
+        yearBtn.classList.add('filter-active');
     }
 });
+
+
 
 //Refresh everytime the hashchanged
 window.addEventListener('hashchange', () => {
@@ -79,4 +96,3 @@ window.addEventListener('hashchange', () => {
     }
 });
 
-attachFilterListeners()
