@@ -31,14 +31,46 @@
 
 
     <div id="addbook-modal" class="modal">
-        <div class="modal-content">
-            <button id="modal-close">
-
-            </button>
+        <div class="modal-content" id="addbookform">
+            <div class="modal-header">
+                <h3>Add New Book</h3>
+                <button class="modal-close">
+                    <img src="/shared/styles/icons/Close.svg" alt="" width="13" height="13">
+                </button>
+            </div>
+            <div class="addbook-form">
+                <span class="addbook-input">
+                    <p>Title</p>
+                    <input id="bookname" type="text" placeholder="Enter book Title/Name">
+                </span>
+                <span class="addbook-input">
+                    <p>Author</p>
+                    <input id="bookauthor" type="text" placeholder="Enter author name">
+                </span>
+                <span class="addbook-input">
+                    <p>ISBN</p>
+                    <input id="bookisbn" type="text" placeholder="Enter ISBN">
+                </span>
+                <span class="addbook-input">
+                    <p>Genre</p>
+                    <input id="bookgenre" type="text" placeholder="Enter genre">
+                </span>
+                <span class="addbook-input">
+                    <p>Published Date</p>
+                    <input id="bookdate" type="text" placeholder="00 / 00 / 00">
+                </span>
+                <span class="addbook-input">
+                    <p>Copies</p>
+                    <input id="bookcopies" type="text" placeholder="">
+                </span>
+            </div>
+            <div class="addbook-buttons">
+                <button id="addbook-cancel">Cancel</button>
+                <button id="addbook-submit" >Add Book</button>
+            </div>
         </div>
-
     </div>
-    
+
 
     <div class="books-wrapper">
         <!-- <div class="book">

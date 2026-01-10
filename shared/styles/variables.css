@@ -4,6 +4,7 @@
     --line-clr: #D9D9D9;
     --border-clr: #D4D4D4;
     --hover-clr: #EAEAEA;
+    --placeholder-clr: rgb(201, 201, 207);
     
     /* Spacing */
     --spacing-sm: 8px;

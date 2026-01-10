@@ -82,7 +82,7 @@ function createBookCard(book) {
           <div class="title-header">
             <h3 class="book-title">${bookName}</h3>
             <p class="book-author">by ${author || publisher || "Unknown Author"}</p>
-            <h5 class="book-id">ID: ${id}</h5>
+            <h5 class="book-id">ISBN: ${id}</h5>
           </div>
 
           <div class="book-actions">
@@ -129,7 +129,6 @@ window.addEventListener('hashchange', () => {
 // Kick off fetch
 fetchBooks();
 
-
 document.addEventListener('click', (e) => {
   if (e.target.closest('#addbookBtn')) {
     const modal = document.getElementById('addbook-modal');
@@ -138,7 +137,7 @@ document.addEventListener('click', (e) => {
 });
 
 document.addEventListener('click', (e) => {
-  if (e.target.closest('#modal-close')) {
+  if (e.target.closest('.modal-close')) {
     const modal = document.getElementById('addbook-modal');
     modal?.classList.remove('show');
   }
@@ -151,3 +150,9 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
+
+
+document.addEventListener('click', (e) => {
+
+  
+})
