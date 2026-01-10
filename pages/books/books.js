@@ -117,8 +117,6 @@ function createBookCard(book) {
 window.addEventListener('hashchange', () => {
   if (window.location.hash === '#/books' || window.location.hash === '') {
     fetchBooks();
-    addBook();
-
   } else {
     // Clean up listener when leaving page
     if (unsubscribe) {
@@ -132,23 +130,24 @@ window.addEventListener('hashchange', () => {
 fetchBooks();
 
 
-function addBook() {
-  const AddBookModal = document.getElementById('addbook-modal');
-  const AddBookBtn = document.getElementById('addbookBtn');
-  const CloseModal = document.getElementById('modal-close');
+document.addEventListener('click', (e) => {
+  if (e.target.closest('#addbookBtn')) {
+    const modal = document.getElementById('addbook-modal');
+    modal?.classList.add('show');
+  }
+});
 
-  AddBookBtn.addEventListener('click', () => {
-    AddBookModal.classList.add('show');
+document.addEventListener('click', (e) => {
+  if (e.target.closest('#modal-close')) {
+    const modal = document.getElementById('addbook-modal');
+    modal?.classList.remove('show');
+  }
+});
 
-  });
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    const modal = document.getElementById('addbook-modal');
+    modal?.classList.remove('show');
+  }
+});
 
-  CloseModal.addEventListener('click', () => {
-    AddBookModal.classList.remove('show');
-  });
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') {
-      AddBookModal.classList.remove('show');
-    }
-  });
-}

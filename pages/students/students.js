@@ -57,8 +57,6 @@ document.addEventListener('click', (e) => {
     const courseFilters = document.querySelectorAll('.filter-course .filter');
     const yearFilters = document.querySelectorAll('.filter-year .filter');
 
-    if (!allFilterBtn) return;
-
     if (allBtn) {
         courseFilters.forEach(f => f.classList.remove('filter-active'));
         yearFilters.forEach(f => f.classList.remove('filter-active'));
