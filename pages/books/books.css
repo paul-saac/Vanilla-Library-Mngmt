@@ -142,22 +142,31 @@ tr {
   background: #f8f8fa;
 }
 
-.avail-light {
+.td-genre {
   border-radius: 6px;
-  padding: 5px 10px 5px 10px;
-  background: rgb(219, 247, 219);
-  color: rgb(36, 143, 45);
+  padding: 2px 9px 2px 9px;
+  background: rgb(238, 238, 238);
+  color: var(--base-clr);
+  font-weight: 500;
   font-size: 11px;
-  font-weight: 600;
+}
+
+.avail-light {
+  border-radius: 7px;
+  padding: 5px 10px 5px 10px;
+  background: rgb(233, 250, 233);
+  color: rgb(7, 151, 19);
+  font-size: 10px;
+  font-weight: 700;
 }
 
 .unavail {
-  border-radius: 6px;
+  border-radius: 7px;
   padding: 5px 10px 5px 10px;
-  background: rgb(255, 197, 197);
-  color: rgb(221, 35, 35);
-  font-size: 11px;
-  font-weight: 600;
+  background: rgb(252, 230, 230);
+  color: rgb(235, 26, 26);
+  font-size: 10px;
+  font-weight: 700;
 }
 
 /* CELL SIZING */

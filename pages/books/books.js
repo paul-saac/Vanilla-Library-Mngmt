@@ -76,9 +76,13 @@ function createBookRow(book) {
     <tr class="book-row" data-id="${id}" data-isbn="${isbn}">
       <td class="td-title">${bookName}</td>
       <td>${author}</td>
-      <td>${bookGenre}</td>
+      <td>
+        <span class="td-genre"> ${bookGenre}</span>
+      </td>
       <td>${isbnOrId}</td>
-      <td> <span class="${statusClass}"> ${status}</span> </td>
+      <td> 
+        <span class="${statusClass}"> ${status}</span> 
+      </td>
       <td>${available}/${total}</td>
       <td class="td-actions">
         <div class="books-actions">
