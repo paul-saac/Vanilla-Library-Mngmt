@@ -91,7 +91,7 @@
     font-weight: 650;
 }
 
-.filter:hover{
+.filter:hover {
     background: #f3f3f3;
 }
 
@@ -185,6 +185,10 @@ td {
     width: 280px;
 }
 
+.td-name {
+    font-weight: bolder;
+}
+
 
 .table-head {
     background: #f8f8fa;
@@ -192,7 +196,6 @@ td {
 
 tr {
     background: white;
-    font-weight: bolder;
 }
 
 .student-actions {

@@ -110,6 +110,10 @@
   border-radius: 6px;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
   overflow: hidden;
+
+  max-height: calc(100vh - 220px);
+  overflow-y: auto;
+  scrollbar-width: none;
 }
 
 .books-container {
@@ -123,10 +127,17 @@
 
 }
 
+.table-head th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #f8f8fa;
+}
+
 th,
 td {
   border-bottom: 1px solid var(--border-clr);
-  padding: 10px 10px 10px 20px;
+  padding: 13px 10px 13px 20px;
   text-align: left;
   font-size: 12px;
   color: #676775;
@@ -220,7 +231,6 @@ tr {
   visibility: hidden;
   pointer-events: none;
 
-  transition: opacity 180ms ease, visibility 0ms linear 180ms;
 }
 
 .modal-content {
@@ -248,16 +258,17 @@ tr {
 
 
 
-
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.modal-header h3 {
+.modal-header span {
   color: #676775;
-  font-weight: 600;
+  font-weight: 500;
+  font-size: 20px;
+
 }
 
 .modal-close {
@@ -281,7 +292,7 @@ tr {
 .addbook-form p {
   font-size: 13px;
   font-weight: 480;
-  color: #818399;
+  color: #717280;
 }
 
 .addbook-form input {
@@ -293,10 +304,11 @@ tr {
   padding: 8px 10px 8px 10px;
   margin-top: 5px;
   box-sizing: border-box;
+  background: rgb(247, 247, 247);
 }
 
 .addbook-form input::placeholder {
-  color: var(--placeholder-clr);
+  color: rgb(179, 176, 176);
 }
 
 .addbook-buttons {

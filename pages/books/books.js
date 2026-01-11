@@ -3,55 +3,43 @@ import { collection, getDocs, addDoc, onSnapshot, deleteDoc, doc, updateDoc, ser
 
 let unsubscribe = null;
 
-async function fetchBooks() {
-  try {
-    // First, fetch data immediately with getDocs
-    const booksCol = collection(db, "Books");
-    const q = query(booksCol, orderBy("bookName"));
-    const booksSnapshot = await getDocs(q);
-    const booksList = booksSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+function enterBooksPage() {
+  if (unsubscribe) return; // already listening
 
-    if (window.location.hash === '#/books' || window.location.hash === '') {
-      renderBooks(booksList);
-    }
-
-    // Then set up real-time listener for future changes
-    setupRealtimeListener();
-  } catch (error) {
-    console.error("Error fetching books:", error);
-  }
-}
-
-function setupRealtimeListener() {
-  // Clean up old listener if exists
-  if (unsubscribe) {
-    unsubscribe();
-    unsubscribe = null;
-  }
-
-  const booksCol = collection(db, "Books");
-  const q = query(booksCol, orderBy("bookName"));
+  const q = query(collection(db, "Books"), orderBy("bookName", "asc"));
 
   unsubscribe = onSnapshot(
     q,
     (snapshot) => {
-      const books = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
-
-      // Only render if on books page
-      if (window.location.hash === '#/books' || window.location.hash === '') {
-        renderBooks(books);
-      }
+      const books = snapshot.docs.map(d => ({
+        id: d.id,
+        ...d.data()
+      }));
+      renderBooks(books);
     },
-    (err) => console.error("Error setting up listener:", err)
+    (err) => console.error(err)
   );
+}
+
+function leaveBooksPage() {
+  if (unsubscribe) {
+    unsubscribe();
+    unsubscribe = null;
+  }
 }
 
 function renderBooks(books) {
   const tbody = document.querySelector(".books-container tbody");
-  if (!tbody) return;
 
-  tbody.innerHTML = books.map((book) => createBookRow(book)).join("");
+  if (!tbody) {
+    // Try again on next frame
+    requestAnimationFrame(() => renderBooks(books));
+    return;
+  }
+  
+  tbody.innerHTML = books.map(createBookRow).join("");
 }
+
 
 function createBookRow(book) {
   const {
@@ -98,20 +86,22 @@ function createBookRow(book) {
   `;
 }
 
-window.addEventListener('hashchange', () => {
-  if (window.location.hash === '#/books' || window.location.hash === '') {
-    fetchBooks();
+window.addEventListener("hashchange", () => {
+  if (location.hash === "#/books" || location.hash === "") {
+    enterBooksPage();
   } else {
-    // Clean up listener when leaving page
-    if (unsubscribe) {
-      unsubscribe();
-      unsubscribe = null;
-    }
+    leaveBooksPage();
   }
 });
+// MAIN KICK BACK
+enterBooksPage();
 
-// Kick off fetch
-fetchBooks();
+
+
+
+
+
+
 
 document.addEventListener('click', (e) => {
   if (e.target.closest('#addbookBtn')) {
