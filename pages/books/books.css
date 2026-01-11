@@ -205,7 +205,7 @@ tr {
 
 /* === ADD BOOK MODAL */
 .modal {
-  display: none;
+  display: flex;
   position: fixed;
   top: 0;
   left: 0;
@@ -215,6 +215,12 @@ tr {
   justify-content: center;
   align-items: center;
   z-index: 1000;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition: opacity 180ms ease, visibility 0ms linear 180ms;
 }
 
 .modal-content {
@@ -228,8 +234,19 @@ tr {
 }
 
 .modal.show {
-  display: flex;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity 180ms ease;
 }
+
+.modal.show .modal-content {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+
+
 
 
 .modal-header {
