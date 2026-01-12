@@ -100,8 +100,6 @@ window.addEventListener("hashchange", () => {
 enterBooksPage();
 
 
-
-
 document.addEventListener('click', (e) => {
   if (e.target.closest('#addbookBtn')) {
     const modal = document.getElementById('addbook-modal');
@@ -124,29 +122,20 @@ document.addEventListener('keydown', (e) => {
 });
 
 
-document.addEventListener('click', (e) => {
-  if (e.target.closest('#addbook-submit')) {
-    handleAddBook();
-  }
-})
-
-document.addEventListener('click', (e) => {
-  if (e.target.closest('#addbook-cancel')) {
-    const modal = document.getElementById('addbook-modal');
-    modal?.classList.remove('show');
-  }
-})
-
-
-const inputBookName = document.getElementById("bookname");
-const inputAuthor = document.getElementById("bookauthor");
-const inputIsbn = document.getElementById("bookisbn");
-const inputGenre = document.getElementById("bookgenre");
-const inputDate = document.getElementById("bookdate"); // <-- fix: was accidentally "Date = ..."
-const inputCopies = document.getElementById("bookcopies");
-
+function getInputs() {
+  return {
+    inputBookName: document.getElementById("bookname"),
+    inputAuthor: document.getElementById("bookauthor"),
+    inputIsbn: document.getElementById("bookisbn"),
+    inputGenre: document.getElementById("bookgenre"),
+    inputDate: document.getElementById("bookdate"),
+    inputCopies: document.getElementById("bookcopies"),
+  };
+}
 
 function resetAddBookForm() {
+  const { inputBookName, inputAuthor, inputIsbn, inputGenre, inputDate, inputCopies } = getInputs();
+
   if (inputBookName) inputBookName.value = "";
   if (inputAuthor) inputAuthor.value = "";
   if (inputIsbn) inputIsbn.value = "";
@@ -156,6 +145,8 @@ function resetAddBookForm() {
 }
 
 async function handleAddBook() {
+  const { inputBookName, inputAuthor, inputIsbn, inputGenre, inputDate, inputCopies } = getInputs();
+
   if (!inputBookName || !inputIsbn || !inputCopies) {
     alert("Add Book form inputs are missing in books.html (ISBN/Copies/etc).");
     return;
@@ -165,7 +156,6 @@ async function handleAddBook() {
   const isbn = (inputIsbn.value || "").trim().replace(/\s+/g, "");
   const copies = Number.parseInt((inputCopies.value || "").trim(), 10);
 
-  // Optional fields => store "N/A" when empty
   const author = (inputAuthor?.value || "").trim() || "N/A";
   const bookGenre = (inputGenre?.value || "").trim() || "N/A";
   const publishDate = (inputDate?.value || "").trim() || "N/A";
@@ -173,30 +163,48 @@ async function handleAddBook() {
   if (!bookName) return alert("Please enter a Title.");
   if (!isbn) return alert("Please enter an ISBN.");
   if (isbn.includes("/")) return alert("ISBN cannot contain '/'.");
-  if (!Number.isFinite(copies) || copies < 0) return alert("Copies must be a valid number (0 or more).");
+  if (!Number.isFinite(copies) || copies < 0) {
+    return alert("Copies must be a valid number (0 or more).");
+  }
 
   const status = copies > 0 ? "Available" : "Unavailable";
-
   const bookRef = doc(db, "Books", isbn);
 
-  await setDoc(
-    bookRef,
-    {
-      isbn,
-      bookName,
-      author,
-      bookGenre,
-      publishDate,
-      copies,
-      availableCopies: copies,
-      status,
-      createdAt: serverTimestamp(),
-      updatedAt: serverTimestamp(),
-    },
-    { merge: true }
-  );
+  try {
+    // keep createdAt stable on edits
+    const snap = await getDoc(bookRef);
+    const createdAt = snap.exists() ? (snap.data()?.createdAt ?? serverTimestamp()) : serverTimestamp();
 
-  // Close modal AFTER successful submit
-  resetAddBookForm();
+    await setDoc(
+      bookRef,
+      {
+        isbn,
+        bookName,
+        author,
+        bookGenre,
+        publishDate,
+        copies,
+        availableCopies: copies,
+        status,
+        createdAt,
+        updatedAt: serverTimestamp(),
+      },
+      { merge: true }
+    );
+
+    resetAddBookForm();
+    closeModal();
+  } catch (err) {
+    console.error(err);
+    alert("Failed to add book. Check console for details.");
+  }
 }
+
+// Replace ONLY the submit + cancel listeners with these simpler ones:
+document.addEventListener("click", (e) => {
+  if (e.target.closest("#addbook-submit")) handleAddBook();
+
+});
+
+
 
