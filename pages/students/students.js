@@ -1,51 +1,96 @@
 import { db } from "../../shared/scripts/firebaseConfig.js";
 import { collection, getDocs, addDoc, onSnapshot, deleteDoc, doc, updateDoc, serverTimestamp, query, orderBy, setDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-// Fetch and display Students
-async function fetchStudents() {
-    try {
-        const studentsCollection = collection(db, 'Students');
-        const studentsSnapshot = await getDocs(studentsCollection);
-        const studentsList = studentsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+let unsubscribe = null;
 
-        if (window.location.hash === '#/students') {
-            displayStudents(studentsList);
-        }
-    } catch (error) {
-        console.error("Error fetching students:", error);
+function enterStudentsPage() {
+    if (unsubscribe) return; // already listening
+
+    const q = query(collection(db, "Students"), orderBy("firstName", "asc"));
+
+    unsubscribe = onSnapshot(
+        q,
+        (snapshot) => {
+            const students = snapshot.docs.map(d => ({
+                id: d.id,
+                ...d.data()
+            }));
+            renderStudents(students);
+        },
+        (err) => console.error(err)
+    );
+}
+
+function leaveStudentsPage() {
+    if (unsubscribe) {
+        unsubscribe();
+        unsubscribe = null;
     }
 }
 
-function displayStudents(students) {
-    const tableBody = document.querySelector('tbody');
-    tableBody.innerHTML = ''; // Clear existing rows
+function renderStudents(students) {
+    const tbody = document.querySelector(".members-container tbody");
 
-    students.forEach(student => {
-        const row = `
-            <tr class="student-data">
-                <td class="td-name">${student.lastName || 'N/A'}, ${student.firstName || 'N/A'} <br> 
-                    <span class="student-email">${student.email || 'N/A'}</span>
-                </td>
-                <td>${student.id || 'N/A'}</td>
-                <td>${student.phone || 'N/A'}</td>
-                <td>${student.department || 'N/A'}</td>
-                <td>${student.year || 'N/A'}</td>
-                <td> 
-                    <div class="student-actions">
-                        <div class="edit-student">
-                            <img src="/shared/styles/icons/editstudent.svg" alt="" width="13px" height="13px">
-                        </div>
-                        <div class="delete-student">
-                            <img src="/shared/styles/icons/deletestudent.svg" alt="" width="13px" height="13px">
-                        </div>
-                    </div>
-                
-                </td>
-            </tr>
-        `;
-        tableBody.innerHTML += row;
-    });
+    if (!tbody) {
+        // Try again on next frame
+        requestAnimationFrame(() => renderStudents(students));
+        return;
+    }
+
+    tbody.innerHTML = students.map(createStudentsRow).join("");
 }
+
+
+function createStudentsRow(student) {
+    const {
+        id = "",
+        firstName = "Untitled",
+        lastName = "Unknown Author",
+        phone = "N/A",
+        year = "",
+        department = "Unavailable",
+        email = "N/A"
+    } = student;
+
+
+    return `
+        <tr class="student-data">
+            <td class="td-name">${lastName || 'N/A'}, ${firstName || 'N/A'} <br> 
+                <span class="student-email">${email || 'N/A'}</span>
+            </td>
+            <td>${id || 'N/A'}</td>
+            <td>${phone || 'N/A'}</td>
+            <td>${department || 'N/A'}</td>
+            <td>${year || 'N/A'}</td>
+            <td> 
+                <div class="student-actions">
+                    <div class="edit-student">
+                        <img src="/shared/styles/icons/editstudent.svg" alt="" width="13px" height="13px">
+                    </div>
+                    <div class="delete-student">
+                        <img src="/shared/styles/icons/deletestudent.svg" alt="" width="13px" height="13px">
+                    </div>
+                </div>
+            
+            </td>
+        </tr>
+    `;
+
+}
+
+window.addEventListener("hashchange", () => {
+    if (location.hash === "#/students" || location.hash === "") {
+        enterStudentsPage();
+    } else {
+        leaveStudentsPage();
+    }
+});
+// MAIN INVOKE
+enterStudentsPage();
+
+
+
+
 
 document.addEventListener('click', (e) => {
 
@@ -75,22 +120,13 @@ document.addEventListener('click', (e) => {
 
     if (yearBtn) {
         allFilterBtn.classList.remove('filter-active');
-        
+
         if (yearBtn.classList.contains('filter-active')) {
             yearBtn.classList.remove('filter-active');
             return;
         }
 
         yearBtn.classList.add('filter-active');
-    }
-});
-
-
-
-//Refresh everytime the hashchanged
-window.addEventListener('hashchange', () => {
-    if (window.location.hash === '#/students') {
-        fetchStudents();
     }
 });
 

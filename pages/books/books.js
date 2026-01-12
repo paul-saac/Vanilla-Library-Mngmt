@@ -36,7 +36,7 @@ function renderBooks(books) {
     requestAnimationFrame(() => renderBooks(books));
     return;
   }
-  
+
   tbody.innerHTML = books.map(createBookRow).join("");
 }
 
@@ -62,12 +62,15 @@ function createBookRow(book) {
 
   return `
     <tr class="book-row" data-id="${id}" data-isbn="${isbn}">
-      <td class="td-title">${bookName}</td>
+      <td class="cell-bookTitle">
+          <span class="td-title">${bookName}</span> <br>
+          <span class="td-isbn"> ISBN: ${isbnOrId}</span>
+      </td>
+      
       <td>${author}</td>
       <td>
         <span class="td-genre"> ${bookGenre}</span>
       </td>
-      <td>${isbnOrId}</td>
       <td> 
         <span class="${statusClass}"> ${status}</span> 
       </td>
@@ -93,12 +96,8 @@ window.addEventListener("hashchange", () => {
     leaveBooksPage();
   }
 });
-// MAIN KICK BACK
+// MAIN Invoke
 enterBooksPage();
-
-
-
-
 
 
 
@@ -124,9 +123,20 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-const modalEl = document.getElementById("addbook-modal");
-const submitBtn = document.getElementById("addbook-submit");
-const cancelBtn = document.getElementById("addbook-cancel");
+
+document.addEventListener('click', (e) => {
+  if (e.target.closest('#addbook-submit')) {
+    handleAddBook();
+  }
+})
+
+document.addEventListener('click', (e) => {
+  if (e.target.closest('#addbook-cancel')) {
+    const modal = document.getElementById('addbook-modal');
+    modal?.classList.remove('show');
+  }
+})
+
 
 const inputBookName = document.getElementById("bookname");
 const inputAuthor = document.getElementById("bookauthor");
@@ -135,14 +145,6 @@ const inputGenre = document.getElementById("bookgenre");
 const inputDate = document.getElementById("bookdate"); // <-- fix: was accidentally "Date = ..."
 const inputCopies = document.getElementById("bookcopies");
 
-function openAddBookModal() {
-  modalEl?.classList.add("show");
-  inputBookName?.focus();
-}
-
-function closeAddBookModal() {
-  modalEl?.classList.remove("show");
-}
 
 function resetAddBookForm() {
   if (inputBookName) inputBookName.value = "";
@@ -152,22 +154,6 @@ function resetAddBookForm() {
   if (inputDate) inputDate.value = "";
   if (inputCopies) inputCopies.value = "";
 }
-
-document.addEventListener("click", (e) => {
-  if (e.target.closest("#addbookBtn")) openAddBookModal();
-  if (e.target.closest(".modal-close")) closeAddBookModal();
-
-  if (modalEl && e.target === modalEl) closeAddBookModal();
-});
-
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") closeAddBookModal();
-});
-
-cancelBtn?.addEventListener("click", () => {
-  closeAddBookModal();
-  resetAddBookForm();
-});
 
 async function handleAddBook() {
   if (!inputBookName || !inputIsbn || !inputCopies) {
@@ -191,40 +177,26 @@ async function handleAddBook() {
 
   const status = copies > 0 ? "Available" : "Unavailable";
 
-  try {
-    if (submitBtn) submitBtn.disabled = true;
+  const bookRef = doc(db, "Books", isbn);
 
-    const bookRef = doc(db, "Books", isbn);
+  await setDoc(
+    bookRef,
+    {
+      isbn,
+      bookName,
+      author,
+      bookGenre,
+      publishDate,
+      copies,
+      availableCopies: copies,
+      status,
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+    },
+    { merge: true }
+  );
 
-    await setDoc(
-      bookRef,
-      {
-        isbn,
-        bookName,
-        author,
-        bookGenre,
-        publishDate,
-        copies,
-        availableCopies: copies,
-        status,
-        createdAt: serverTimestamp(),
-        updatedAt: serverTimestamp(),
-      },
-      { merge: true }
-    );
-
-    // Close modal AFTER successful submit
-    closeAddBookModal();
-    resetAddBookForm();
-  } catch (err) {
-    console.error("Error adding book:", err);
-    alert("Failed to add book. Check console for details.");
-  } finally {
-    if (submitBtn) submitBtn.disabled = false;
-  }
+  // Close modal AFTER successful submit
+  resetAddBookForm();
 }
 
-submitBtn?.addEventListener("click", (e) => {
-  e.preventDefault();
-  handleAddBook();
-});
