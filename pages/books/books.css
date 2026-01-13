@@ -276,9 +276,6 @@ tr {
   opacity: 1;
 }
 
-
-
-
 .modal-header {
   display: flex;
   justify-content: space-between;
@@ -289,7 +286,6 @@ tr {
   color: #676775;
   font-weight: 500;
   font-size: 20px;
-
 }
 
 .modal-close {
@@ -364,4 +360,91 @@ tr {
   padding: 9px 15px 9px 15px;
   background: none;
   cursor: pointer;
+}
+
+/* EDITBOOK MODAL */
+.editbook-form {
+  display: grid;
+  grid-template-columns: 239px 239px;
+  gap: 19px;
+  margin-top: 18px;
+  margin-bottom: 35px;
+}
+
+.editbook-form p {
+  font-size: 13px;
+  font-weight: 480;
+  color: #717280;
+}
+
+.editbook-form input {
+  font-size: 13px;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border-clr);
+  border-radius: 5px;
+  padding: 8px 10px 8px 10px;
+  margin-top: 5px;
+  box-sizing: border-box;
+  background: rgb(247, 247, 247);
+}
+
+.editbook-form input::placeholder {
+  color: rgb(179, 176, 176);
+}
+
+.editbook-buttons {
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+
+}
+
+#editbook-submit {
+  display: flex;
+  align-items: center;
+  border: none;
+  width: auto;
+  height: auto;
+  border: 1px solid var(--border-clr);
+  border-radius: 5px;
+  padding: 9px 15px 9px 15px;
+  background: var(--base-clr);
+  color: white;
+  cursor: pointer;
+}
+
+#editbook-cancel {
+  display: flex;
+  align-items: center;
+  border: none;
+  width: auto;
+  height: auto;
+  border: 1px solid var(--border-clr);
+  border-radius: 5px;
+  padding: 9px 15px 9px 15px;
+  background: none;
+  cursor: pointer;
+}
+
+.confirmation-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 400px;
+  height: 50px;
+  color: rgb(58, 57, 57);
+  position: relative;
+}
+
+.confirmation-buttons {
+  display: flex;
+  gap: 5px;
+  
+}
+
+#confirmation-yes, 
+#confirmation-no {
+  padding: 8px;
+  font: 15px;
 }

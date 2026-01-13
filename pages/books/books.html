@@ -71,6 +71,62 @@
         </div>
     </div>
 
+    <div id="editbook-modal" class="modal">
+        <div class="modal-content" id="editbookform">
+            <div class="modal-header">
+                <span>Edit Book</span>
+                <button class="modal-close">
+                    <img src="/shared/styles/icons/Close.svg" alt="" width="13" height="13">
+                </button>
+            </div>
+            <div class="editbook-form">
+                <span class="editbook-input">
+                    <p>Title</p>
+                    <input id="data-bookname" type="text" placeholder="Enter book Title/Name">
+                </span>
+                <span class="editbook-input">
+                    <p>Author</p>
+                    <input id="data-bookauthor" type="text" placeholder="Enter author name">
+                </span>
+                <span class="editbook-input">
+                    <p>ISBN</p>
+                    <input id="data-bookisbn" type="text" placeholder="Enter ISBN">
+                </span>
+                <span class="editbook-input">
+                    <p>Genre</p>
+                    <input id="data-bookgenre" type="text" placeholder="Enter genre">
+                </span>
+                <span class="editbook-input">
+                    <p>Published Date</p>
+                    <input id="data-bookdate" type="text" placeholder="00 / 00 / 00">
+                </span>
+                <span class="editbook-input">
+                    <p>Copies</p>
+                    <input id="data-bookcopies" type="text" placeholder="0">
+                </span>
+            </div>
+            <div class="editbook-buttons">
+                <button id="editbook-cancel">Cancel</button>
+                <button id="editbook-submit">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="confirmation-modal" class="modal">
+        <div class="confirmation-content" id="confirmationform">
+            <div class="conformation-header">
+                <span>Are you sure you want to delete this book?</span>
+            </div>
+           
+            <div class="confirmation-buttons">
+                <button id="confirmation-yes">Yes</button>
+                <button id="confirmation-no">No</button>
+            </div>
+        </div>
+    </div>
+
+
+
     <div class="books-wrapper">
         <table class="books-container">
             <thead>
