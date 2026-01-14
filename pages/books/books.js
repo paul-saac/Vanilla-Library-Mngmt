@@ -380,10 +380,8 @@ async function BookDetails(bookId) {
     published.textContent = data.publishDate;
     isbn.textContent = data.isbn;
     category.textContent = data.bookGenre;
-    availability.textContent = data.status;
+    availability.textContent =  `${data.copies} of ${data.availableCopies} copies available`
     description.textContent = data.description;
-
-
 
 
     openDetailsModal();
