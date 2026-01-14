@@ -70,6 +70,9 @@ function enterBooksPage() {
       }));
 
       // IMPORTANT: store snapshot, then render based on current search text
+      // allBooks = books;
+      // applySearchAndRender();
+
       renderBooks(books);
     },
     (err) => console.error(err)
@@ -187,6 +190,8 @@ function openModal(modalId) {
   modal?.classList.add("show");
 }
 
+
+// MODALS OPEN/CLOSE FUNCTIONS
 function closeAddBookModal() {
   closeModal("addbook-modal");
   resetAddBookForm();
@@ -203,6 +208,16 @@ function closeEditBookModal() {
 function openEditBookModal() {
   openModal("editbook-modal");
 }
+
+function openDetailsModal() {
+  openModal("details-modal");
+}
+function closeDetailsModal() {
+  closeModal("details-modal");
+}
+
+
+
 
 function confirmationModal() {
   const confrm = document.getElementById("confirmation-modal")
@@ -283,6 +298,7 @@ function AddBookInputs() {
     genre: document.getElementById("bookgenre"),
     publishDate: document.getElementById("bookdate"),
     copies: document.getElementById("bookcopies"),
+    description: document.getElementById("book-description")
   };
 }
 
@@ -294,6 +310,7 @@ function EditBookInputs() {
     genre: document.getElementById("data-bookgenre"),
     publishDate: document.getElementById("data-bookdate"),
     copies: document.getElementById("data-bookcopies"),
+    description: document.getElementById("data-description")
   };
 }
 
@@ -315,15 +332,65 @@ let editingBookId = null;
 
 // Row action buttons: Edit/Delete
 document.addEventListener("click", (e) => {
+  const row = e.target.closest(".book-row");
+  if (!row) return;
+
+  const bookId = row.dataset.id;
+
   const actionEl = e.target.closest("[data-action]");
-  if (!actionEl) return;
 
-  const { action, id: bookId } = actionEl.dataset;
-  if (!bookId) return;
+  // 🔹 Button click
+  if (actionEl) {
+    const { action } = actionEl.dataset;
 
-  if (action === "delete") deleteBook(bookId);
-  if (action === "edit") openEditBook(bookId);
+    if (action === "delete") deleteBook(bookId);
+    if (action === "edit") openEditBook(bookId);
+
+    return;
+  }
+
+  // 🔹 Row click
+  BookDetails(bookId);
 });
+
+// document.addEventListener("click", (e) => {
+//   const details = e.target.closest(".book-row");
+
+//   const bookId = details.dataset.id
+//   BookDetails(bookId);
+// });
+
+
+async function BookDetails(bookId) {
+  try {
+    const snap = await getDoc(doc(db, "Books", bookId));
+    const data = snap.data();
+
+    const title = document.querySelector(".details-title span");
+    const author = document.querySelector(".details-author span");
+    const published = document.querySelector(".details-publishdate span")
+    const isbn = document.querySelector(".details-isbn span");
+    const category = document.querySelector(".details-category span");
+    const availability = document.querySelector(".details-availability span")
+    const description = document.querySelector(".details-description span")
+
+
+    author.textContent = data.author;
+    title.textContent = data.bookName;
+    published.textContent = data.publishDate;
+    isbn.textContent = data.isbn;
+    category.textContent = data.bookGenre;
+    availability.textContent = data.status;
+    description.textContent = data.description;
+
+
+
+
+    openDetailsModal();
+  } catch (err) {
+    alert(err)
+  }
+}
 
 
 
@@ -342,6 +409,7 @@ async function openEditBook(bookId) {
     f.genre.value = data.bookGenre ?? "";
     f.publishDate.value = data.publishDate ?? "";
     f.copies.value = data.copies ?? 0;
+    f.description.value = data.description ?? "";
 
     // prevent changing doc id during edit
     f.isbn.disabled = true;
@@ -364,6 +432,7 @@ async function handleAddBook() {
   const author = f.author?.value.trim() || "N/A";
   const bookGenre = f.genre?.value.trim() || "N/A";
   const publishDate = f.publishDate?.value.trim() || "N/A";
+  const description = f.description?.value.trim() || "N/A";
 
   if (!bookName) return alert("Please enter a Title.");
   if (!isbnRaw) return alert("Please enter an ISBN.");
@@ -384,6 +453,7 @@ async function handleAddBook() {
       bookGenre,
       publishDate,
       copies,
+      description,
       availableCopies: copies,
       status: copies > 0 ? "Available" : "Unavailable",
       createdAt: serverTimestamp(),
@@ -409,6 +479,7 @@ async function handleEditBook() {
   const author = f.author?.value.trim() || "N/A";
   const bookGenre = f.genre?.value.trim() || "N/A";
   const publishDate = f.publishDate?.value.trim() || "N/A";
+  const description = f.description?.value.trim() || "N/A";
 
   if (!bookName) return alert("Please enter a Title.");
   if (!Number.isFinite(copies) || copies < 0) return alert("Copies must be 0 or more.");
@@ -439,6 +510,7 @@ async function handleEditBook() {
         copies,
         availableCopies,
         status,
+        description,
         createdAt: prev.createdAt ?? serverTimestamp(),
         updatedAt: serverTimestamp(),
       },

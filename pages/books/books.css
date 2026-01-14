@@ -172,7 +172,6 @@ tr {
   border-radius: 4px;
   padding: 8px 10px 8px 10px;
   background: oklch(.982 .018 155.826);
-  ;
   color: oklch(.527 .154 150.069);
   font-size: 11px;
   font-weight: 500;
@@ -180,11 +179,9 @@ tr {
 
 .unavail {
   border: 1px solid oklch(.901 .076 70.697);
-  ;
   border-radius: 4px;
   padding: 8px 10px 8px 10px;
   background: oklch(.98 .016 73.684);
-  ;
   color: oklch(.553 .195 38.402);
   font-size: 11px;
   font-weight: 500;
@@ -259,7 +256,7 @@ tr {
   padding: 30px;
   border-radius: 10px;
   width: 500px;
-  height: 340px;
+  height: 430px;
   color: rgb(58, 57, 57);
   position: relative;
 }
@@ -285,7 +282,7 @@ tr {
 .modal-header span {
   color: #676775;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 17px;
 }
 
 .modal-close {
@@ -303,7 +300,21 @@ tr {
   grid-template-columns: 239px 239px;
   gap: 19px;
   margin-top: 18px;
-  margin-bottom: 35px;
+  margin-bottom: 25px;
+}
+
+.addbook-form .addbook-description {
+  grid-column: 1 / -1;
+}
+
+#book-description {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgb(247, 247, 247);
+  height: 55px;
+  padding-bottom: 25px;
+
+
 }
 
 .addbook-form p {
@@ -313,7 +324,7 @@ tr {
 }
 
 .addbook-form input {
-  font-size: 13px;
+  font-size: 12px;
   width: 100%;
   height: auto;
   border: 1px solid var(--border-clr);
@@ -362,13 +373,30 @@ tr {
   cursor: pointer;
 }
 
+
+
+
+
 /* EDITBOOK MODAL */
 .editbook-form {
   display: grid;
   grid-template-columns: 239px 239px;
   gap: 19px;
   margin-top: 18px;
-  margin-bottom: 35px;
+  margin-bottom: 25px;
+}
+
+.editbook-form .editbook-description {
+  grid-column: 1 / -1;
+}
+
+#data-description {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgb(247, 247, 247);
+  height: 55px;
+  padding-bottom: 25px;
+
 }
 
 .editbook-form p {
@@ -378,7 +406,7 @@ tr {
 }
 
 .editbook-form input {
-  font-size: 13px;
+  font-size: 12px;
   width: 100%;
   height: auto;
   border: 1px solid var(--border-clr);
@@ -399,6 +427,7 @@ tr {
   gap: 10px;
 
 }
+
 
 #editbook-submit {
   display: flex;
@@ -427,6 +456,8 @@ tr {
   cursor: pointer;
 }
 
+
+/* CONFIRMATION MODAL */
 .confirmation-content {
   display: flex;
   flex-direction: column;
@@ -473,4 +504,79 @@ tr {
   padding: 9px 15px 9px 15px;
   background: none;
   cursor: pointer;
+}
+
+/* DETAILS MODAL */
+.book-row:hover {
+  background: #f8f8fa;
+}
+
+.details-content {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 30px 30px 30px 30px;
+  border-radius: 10px;
+  color: rgb(58, 57, 57);
+  position: relative;
+  justify-content: center;
+}
+
+.details-data {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 15px;
+  width: 330px;
+}
+
+.details-data span {
+  font-size: 13px;
+  color: rgb(185, 183, 183);
+  font-weight: 400;
+}
+
+
+.details-data p {
+  font-size: 13px;
+  color: rgb(185, 183, 183);
+  font-weight: 400;
+}
+
+.details-title span {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--base-clr);
+}
+
+.details-author {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.details-publishdate {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.details-isbn {
+  display: flex;
+  justify-content: start;
+  gap: 8px;
+}
+.details-category {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.details-availability {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.details-description {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
 }

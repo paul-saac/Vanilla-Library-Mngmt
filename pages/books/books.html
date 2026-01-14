@@ -63,6 +63,12 @@
                     <p>Copies</p>
                     <input id="bookcopies" type="text" placeholder="0">
                 </span>
+
+                <span class="addbook-description">
+                    <p>Description</p>
+                    <input id="book-description" type="text" placeholder="Add a descriptions...">
+                </span>
+
             </div>
             <div class="addbook-buttons">
                 <button id="addbook-cancel">Cancel</button>
@@ -82,27 +88,33 @@
             <div class="editbook-form">
                 <span class="editbook-input">
                     <p>Title</p>
-                    <input id="data-bookname" type="text" placeholder="Enter book Title/Name">
+                    <input id="data-bookname" type="text" placeholder="">
                 </span>
                 <span class="editbook-input">
                     <p>Author</p>
-                    <input id="data-bookauthor" type="text" placeholder="Enter author name">
+                    <input id="data-bookauthor" type="text" placeholder="">
                 </span>
                 <span class="editbook-input">
                     <p>ISBN</p>
-                    <input id="data-bookisbn" type="text" placeholder="Enter ISBN">
+                    <input id="data-bookisbn" type="text" placeholder="">
                 </span>
                 <span class="editbook-input">
                     <p>Genre</p>
-                    <input id="data-bookgenre" type="text" placeholder="Enter genre">
+                    <input id="data-bookgenre" type="text" placeholder="">
                 </span>
                 <span class="editbook-input">
                     <p>Published Date</p>
-                    <input id="data-bookdate" type="text" placeholder="00 / 00 / 00">
+                    <input id="data-bookdate" type="text" placeholder="">
                 </span>
                 <span class="editbook-input">
                     <p>Copies</p>
-                    <input id="data-bookcopies" type="text" placeholder="0">
+                    <input id="data-bookcopies" type="text" placeholder="">
+                </span>
+
+
+                <span class="editbook-description">
+                    <p>Description</p>
+                    <input id="data-description" type="text" placeholder="">
                 </span>
             </div>
             <div class="editbook-buttons">
@@ -125,6 +137,56 @@
         </div>
     </div>
 
+    <div id="details-modal" class="modal">
+        <div class="details-content" id="details">
+            <div class="modal-header">
+                <span>Book Details</span>
+                <button class="modal-close">
+                    <img src="/shared/styles/icons/Close.svg" alt="" width="13" height="13">
+                </button>
+            </div>
+
+
+            <div class="details-data">
+                <div class="details-title">
+                    <span></span>
+                </div>
+
+                <div class="details-author">
+                    <img src="/shared/styles/icons/Profile.svg" alt="" width="19" height="19"> <p>Author: </p>
+                    <span></span>
+                </div>
+
+                <div class="details-publishdate">
+                    <img src="/shared/styles/icons/Calendar.svg" alt="" width="19" height="19"> <p>Published: </p>
+                    <span></span>
+                </div>
+
+                <div class="details-isbn">
+                    <img src="/shared/styles/icons/Hash.svg" alt="" width="20" height="21">  <p>ISBN: </p>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <div class="details-category">
+                    <img src="/shared/styles/icons/Tag.svg" alt="" width="19=" height="19">  <p>Category: </p>
+                    <span></span>
+                </div>
+
+                <div class="details-availability">
+                    <img src="/shared/styles/icons/avail.svg" alt="" width="19" height="19">  <p>Availability: </p>
+                    <span></span>
+                </div>
+
+                <div class="details-description">
+                    <h3>Description</h3>
+                    <span></span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 
 
     <div class="books-wrapper">
@@ -140,7 +202,6 @@
                 </tr>
             </thead>
             <tbody>
-
             </tbody>
         </table>
     </div>
