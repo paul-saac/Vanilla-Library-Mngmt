@@ -4,56 +4,56 @@ import { collection, getDoc, getDocs, addDoc, onSnapshot, deleteDoc, doc, update
 let unsubscribe = null;
 
 // Cache + search state
-let allBooks = [];
-let searchText = "";
-let searchDebounceTimer = null;
+// let allBooks = [];
+// let searchText = "";
+// let searchDebounceTimer = null;
 
-function normalize(v) {
-  return (v ?? "").toString().toLowerCase().trim();
-}
+// function normalize(v) {
+//   return (v ?? "").toString().toLowerCase().trim();
+// }
 
-function applySearchAndRender() {
-  const q = normalize(searchText);
+// function applySearchAndRender() {
+//   const q = normalize(searchText);
 
-  if (!q) {
-    renderBooks(allBooks);
-    return;
-  }
+//   if (!q) {
+//     renderBooks(allBooks);
+//     return;
+//   }
 
-  const filtered = allBooks.filter((b) => {
-    const id = normalize(b.id);
-    const title = normalize(b.bookName);
-    const author = normalize(b.author);
-    const isbn = normalize(b.isbn);
-    const genre = normalize(b.bookGenre);
-    const status = normalize(b.status);
-    const date = normalize(b.publishDate);
+//   const filtered = allBooks.filter((b) => {
+//     const id = normalize(b.id);
+//     const title = normalize(b.bookName);
+//     const author = normalize(b.author);
+//     const isbn = normalize(b.isbn);
+//     const genre = normalize(b.bookGenre);
+//     const status = normalize(b.status);
+//     const date = normalize(b.publishDate);
 
-    return (
-      title.includes(q) ||
-      author.includes(q) ||
-      isbn.includes(q) ||
-      id.includes(q) ||
-      genre.includes(q) ||
-      status.includes(q) ||
-      date.includes(q)
-    );
-  });
+//     return (
+//       title.includes(q) ||
+//       author.includes(q) ||
+//       isbn.includes(q) ||
+//       id.includes(q) ||
+//       genre.includes(q) ||
+//       status.includes(q) ||
+//       date.includes(q)
+//     );
+//   });
 
-  renderBooks(filtered);
-}
+//   renderBooks(filtered);
+// }
 
-document.addEventListener("input", (e) => {
-  const input = e.target.closest(".searchTerm");
-  if (!input) return;
+// document.addEventListener("input", (e) => {
+//   const input = e.target.closest(".searchTerm");
+//   if (!input) return;
 
-  // Debounce so we don't rerender on every single keystroke instantly
-  window.clearTimeout(searchDebounceTimer);
-  searchDebounceTimer = window.setTimeout(() => {
-    searchText = input.value;
-    applySearchAndRender();
-  }, 120);
-});
+//   // Debounce so we don't rerender on every single keystroke instantly
+//   window.clearTimeout(searchDebounceTimer);
+//   searchDebounceTimer = window.setTimeout(() => {
+//     searchText = input.value;
+//     applySearchAndRender();
+//   }, 120);
+// });
 
 
 function enterBooksPage() {
@@ -70,8 +70,7 @@ function enterBooksPage() {
       }));
 
       // IMPORTANT: store snapshot, then render based on current search text
-      allBooks = books;
-      applySearchAndRender();
+      renderBooks(books);
     },
     (err) => console.error(err)
   );
