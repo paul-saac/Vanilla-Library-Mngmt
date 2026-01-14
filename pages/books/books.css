@@ -428,23 +428,49 @@ tr {
 }
 
 .confirmation-content {
+  display: flex;
+  flex-direction: column;
   background-color: white;
-  padding: 30px;
+  padding: 30px 30px 30px 30px;
   border-radius: 10px;
-  width: 400px;
-  height: 50px;
   color: rgb(58, 57, 57);
   position: relative;
+  justify-content: center;
+
 }
 
 .confirmation-buttons {
   display: flex;
-  gap: 5px;
-  
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+
 }
 
-#confirmation-yes, 
+#confirmation-yes {
+  display: flex;
+  align-items: center;
+  border: none;
+  width: auto;
+  height: auto;
+  border: 1px solid var(--border-clr);
+  border-radius: 5px;
+  padding: 9px 15px 9px 15px;
+  background: var(--base-clr);
+  color: white;
+  cursor: pointer;
+}
+
+
 #confirmation-no {
-  padding: 8px;
-  font: 15px;
+  display: flex;
+  align-items: center;
+  border: none;
+  width: auto;
+  height: auto;
+  border: 1px solid var(--border-clr);
+  border-radius: 5px;
+  padding: 9px 15px 9px 15px;
+  background: none;
+  cursor: pointer;
 }

@@ -3,6 +3,59 @@ import { collection, getDoc, getDocs, addDoc, onSnapshot, deleteDoc, doc, update
 
 let unsubscribe = null;
 
+// Cache + search state
+let allBooks = [];
+let searchText = "";
+let searchDebounceTimer = null;
+
+function normalize(v) {
+  return (v ?? "").toString().toLowerCase().trim();
+}
+
+function applySearchAndRender() {
+  const q = normalize(searchText);
+
+  if (!q) {
+    renderBooks(allBooks);
+    return;
+  }
+
+  const filtered = allBooks.filter((b) => {
+    const id = normalize(b.id);
+    const title = normalize(b.bookName);
+    const author = normalize(b.author);
+    const isbn = normalize(b.isbn);
+    const genre = normalize(b.bookGenre);
+    const status = normalize(b.status);
+    const date = normalize(b.publishDate);
+
+    return (
+      title.includes(q) ||
+      author.includes(q) ||
+      isbn.includes(q) ||
+      id.includes(q) ||
+      genre.includes(q) ||
+      status.includes(q) ||
+      date.includes(q)
+    );
+  });
+
+  renderBooks(filtered);
+}
+
+document.addEventListener("input", (e) => {
+  const input = e.target.closest(".searchTerm");
+  if (!input) return;
+
+  // Debounce so we don't rerender on every single keystroke instantly
+  window.clearTimeout(searchDebounceTimer);
+  searchDebounceTimer = window.setTimeout(() => {
+    searchText = input.value;
+    applySearchAndRender();
+  }, 120);
+});
+
+
 function enterBooksPage() {
   if (unsubscribe) return; // already listening
 
@@ -11,11 +64,14 @@ function enterBooksPage() {
   unsubscribe = onSnapshot(
     q,
     (snapshot) => {
-      const books = snapshot.docs.map(d => ({
+      const books = snapshot.docs.map((d) => ({
         id: d.id,
-        ...d.data()
+        ...d.data(),
       }));
-      renderBooks(books);
+
+      // IMPORTANT: store snapshot, then render based on current search text
+      allBooks = books;
+      applySearchAndRender();
     },
     (err) => console.error(err)
   );
