@@ -1,5 +1,5 @@
 import { db } from "../../shared/scripts/firebaseConfig.js";
-import { collection, getDocs, addDoc, onSnapshot, deleteDoc, doc, updateDoc, serverTimestamp, query, orderBy, setDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+import { collection, getDoc, getDocs, addDoc, onSnapshot, deleteDoc, doc, updateDoc, serverTimestamp, query, orderBy, setDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 let unsubscribe = null;
 
@@ -88,10 +88,6 @@ window.addEventListener("hashchange", () => {
 // MAIN INVOKE
 enterStudentsPage();
 
-
-
-
-
 document.addEventListener('click', (e) => {
 
     const allBtn = e.target.closest('.filter-all .filter');
@@ -130,3 +126,99 @@ document.addEventListener('click', (e) => {
     }
 });
 
+// MODAL FUNCTIONALITIES
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    modal?.classList.remove("show");
+}
+
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    modal?.classList.add("show");
+}
+
+function openAddStudentModal() {
+    openModal("addstudent-modal");
+}
+
+function closeAddStudentModal() {
+    closeModal("addstudent-modal");
+}
+
+
+// ADD STUDENT MODAL
+function AddStudentInputs() {
+    return {
+        studentnum: document.getElementById("studentnum"),
+        firstname: document.getElementById("firstname"),
+        lastname: document.getElementById("lastname"),
+        year: document.getElementById("year"),
+        program: document.getElementById("program"),
+        email: document.getElementById("email"),
+        phone: document.getElementById("phone")
+    };
+}
+
+async function handleAddStudent() {
+    const f = AddStudentInputs();
+
+    const studentnum = f.studentnum?.value.trim() ?? "";
+    const firstname = f.firstname?.value.trim() ?? "";
+    const lastname = f.lastname?.value.trim() ?? "";
+
+    const year = f.year?.value.trim() || "N/A";
+    const program = f.program?.value.trim() || "N/A";
+    const email = f.email?.value.trim() || "N/A";
+    const phone = f.phone?.value.trim() || "N/A";
+
+    if (!studentnum) return alert("Please enter a student number.");
+    if (!firstname) return alert("Please enter a first name.");
+    if (!lastname) return alert("Please enter a last name.");
+    if (!phone) return alert("Please enter a phone number.");
+
+    const bookRef = doc(db, "Students", studentnum);
+
+    try {
+        const existing = await getDoc(bookRef);
+        if (existing.exists()) {
+            return alert("A book with this ISBN already exists. Use Edit instead.");
+        }
+
+        await setDoc(bookRef, {
+            id: studentnum,
+            firstName: firstname,
+            lastName: lastname,
+            year,
+            department: program,
+            email,
+            phone,
+            Membersince: serverTimestamp(),
+            updatedAt: serverTimestamp(),
+        });
+        // resetAddstudentModal();
+        closeAddStudentModal(); // already calls resetAddBookForm() in your code
+    } catch (err) {
+        console.error(err);
+        alert("Failed to add student.");
+    }
+}
+// DOM EVENT DELEGATION
+//ADDSTUDENT BUTTON
+document.addEventListener("click", (e) => {
+  if (e.target.closest("#addStudentBtn")) {
+    openAddStudentModal();
+  }
+});
+
+// CANCEL BUTTON
+document.addEventListener("click", (e) => {
+  if (!e.target.closest("#addstudent-cancel")) return;
+//   resetAddBookForm();
+  closeAddStudentModal();
+});
+
+// Add modal buttons
+document.addEventListener("click", (e) => {
+  if (e.target.closest("#addstudent-cancel")) closeAddStudentModal();
+  if (e.target.closest("#addstudent-submit")) handleAddStudent(); // keep your existing add logic
+});

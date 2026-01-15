@@ -235,7 +235,7 @@ tr {
 
 
 
-/* === ADD BOOK MODAL */
+/* GENERAL MODALS CLASSES */
 .modal {
   display: flex;
   position: fixed;
@@ -259,7 +259,7 @@ tr {
   padding: 30px;
   border-radius: 10px;
   width: 500px;
-  height: 430px;
+  height: auto;
   color: rgb(58, 57, 57);
   position: relative;
 }
@@ -301,7 +301,7 @@ tr {
 .addbook-form {
   display: grid;
   grid-template-columns: 239px 239px;
-  gap: 19px;
+  gap: 15px;
   margin-top: 18px;
   margin-bottom: 25px;
 }
@@ -384,7 +384,7 @@ tr {
 .editbook-form {
   display: grid;
   grid-template-columns: 239px 239px;
-  gap: 19px;
+  gap: 15px;
   margin-top: 18px;
   margin-bottom: 25px;
 }

@@ -350,12 +350,6 @@ document.addEventListener("click", (e) => {
   BookDetails(bookId);
 });
 
-// document.addEventListener("click", (e) => {
-//   const details = e.target.closest(".book-row");
-
-//   const bookId = details.dataset.id
-//   BookDetails(bookId);
-// });
 
 
 async function BookDetails(bookId) {
@@ -377,7 +371,7 @@ async function BookDetails(bookId) {
     published.textContent = data.publishDate;
     isbn.textContent = data.isbn;
     category.textContent = data.bookGenre;
-    availability.textContent =  `${data.copies} of ${data.availableCopies} copies available`
+    availability.textContent = `${data.copies} of ${data.availableCopies} copies available`
     description.textContent = data.description;
 
 

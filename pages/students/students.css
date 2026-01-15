@@ -242,3 +242,134 @@ tr {
     /* Optional: make it a lighter color */
     font-weight: 250;
 }
+
+/* GENERAL MODALS CLASSES */
+.modal {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+}
+
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 500px;
+    height: auto;
+    color: rgb(58, 57, 57);
+    position: relative;
+}
+
+.modal.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity 180ms ease;
+}
+
+.modal.show .modal-content {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header span {
+    color: #676775;
+    font-weight: 500;
+    font-size: 17px;
+}
+
+.modal-close {
+    border: none;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    position: relative;
+}
+
+
+
+/* ADD STUDENT MODAL */
+.addstudent-form {
+    display: grid;
+    grid-template-columns: 239px 239px;
+    gap: 15px;
+    margin-top: 18px;
+    margin-bottom: 25px;
+}
+
+.addstudent-form p {
+    font-size: 13px;
+    font-weight: 480;
+    color: #717280;
+}
+
+.addstudent-form input {
+    font-size: 12px;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border-clr);
+    border-radius: 5px;
+    padding: 8px 10px 8px 10px;
+    margin-top: 4px;
+    box-sizing: border-box;
+    background: rgb(247, 247, 247);
+}
+
+.addstudent-form input::placeholder {
+    color: rgb(179, 176, 176);
+}
+
+.addstudent-buttons {
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+
+}
+/* ADDSTUDENT-BUTTONS */
+#addstudent-submit {
+  display: flex;
+  align-items: center;
+  border: none;
+  width: auto;
+  height: auto;
+  border: 1px solid var(--border-clr);
+  border-radius: 5px;
+  padding: 9px 15px 9px 15px;
+  background: var(--base-clr);
+  color: white;
+  cursor: pointer;
+}
+#addstudent-cancel {
+  display: flex;
+  align-items: center;
+  border: none;
+  width: auto;
+  height: auto;
+  border: 1px solid var(--border-clr);
+  border-radius: 5px;
+  padding: 9px 15px 9px 15px;
+  background: none;
+  cursor: pointer;
+}
+
+.addstudent-form .studentnum-input {
+  grid-column: 1 / -1;
+}

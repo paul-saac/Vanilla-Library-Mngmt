@@ -33,12 +33,67 @@
     </div>
 
     <div class="MembersButtons">
-        <div class="addBtn">
+        <div class="addBtn" id="addStudentBtn">
             <img src="/shared/styles/icons/Add.svg" alt="" width="11" height="11">
-            <a href="#">Add Member</a>
+            <a>Add Member</a>
         </div>
     </div>
 </div>
+
+
+<div id="addstudent-modal" class="modal">
+    <div class="modal-content" id="addstudentform">
+        <div class="modal-header">
+            <span>Add New Student</span>
+            <button class="modal-close">
+                <img src="/shared/styles/icons/Close.svg" alt="" width="13" height="13">
+            </button>
+        </div>
+        <div class="addstudent-form">
+            <span class="studentnum-input">
+                <p>Student Number</p>
+                <input id="studentnum" type="text" placeholder="Enter student number">
+            </span>
+
+            <span class="student-input">
+                <p>First Name</p>
+                <input id="firstname" type="text" placeholder="Enter first name">
+            </span>
+
+            <span class="student-input">
+                <p>Last Name</p>
+                <input id="lastname" type="text" placeholder="Enter last name">
+            </span>
+
+            <span class="student-input">
+                <p>Year</p>
+                <input id="year" type="text" placeholder="Enter year level">
+            </span>
+
+            <span class="student-input">
+                <p>Program</p>
+                <input id="program" type="text" placeholder="Enter Program">
+            </span>
+
+            <span class="student-input">
+                <p>Email</p>
+                <input id="email" type="text" placeholder="Enter email">
+            </span>
+
+            <span class="student-input">
+                <p>Phone</p>
+                <input id="phone" type="text" placeholder="00-0000-0000">
+            </span>
+
+        </div>
+        <div class="addstudent-buttons">
+            <button id="addstudent-cancel">Cancel</button>
+            <button id="addstudent-submit">Add Student</button>
+        </div>
+    </div>
+</div>
+
+
 
 
 <div class="members-wrapper">
