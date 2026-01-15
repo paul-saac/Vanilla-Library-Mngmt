@@ -19,9 +19,12 @@
   align-items: center;
   border: 1px solid var(--border-clr);
   border-radius: 5px 5px 5px 5px;
-  padding-right: 10px;
   background: white;
+  justify-content: space-between;
+  padding: 0px 10px 0px 7px;
+  box-sizing: border-box;
 }
+
 
 .filter-search {
   display: flex;

@@ -20,8 +20,10 @@
     align-items: center;
     border: 1px solid var(--border-clr);
     border-radius: 5px 5px 5px 5px;
-    padding-right: 10px;
     background: white;
+    justify-content: space-between;
+    padding: 0px 10px 0px 7px;
+    box-sizing: border-box;
 }
 
 .search img {
@@ -139,13 +141,13 @@
 
 .addBtn i {
     color: white;
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .addBtn a {
     color: white;
     padding-left: 6px;
-    font-size: 14px;
+    font-size: 13px;
     text-decoration: none;
 }
 
@@ -155,7 +157,9 @@
     border-radius: 6px;
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
     overflow: hidden;
-    width: 100%;
+    max-height: calc(100vh - 220px);
+    overflow-y: auto;
+    scrollbar-width: none;
 }
 
 
@@ -169,6 +173,14 @@
     border-radius: 0;
     width: 100%;
 }
+
+.table-head th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: #f8f8fa;
+}
+
 
 th,
 td {
@@ -221,7 +233,7 @@ tr {
 
 .edit-student:hover,
 .delete-student:hover {
-  background: rgb(243, 243, 243);
+    background: rgb(243, 243, 243);
 }
 
 .student-email {
