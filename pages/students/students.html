@@ -11,22 +11,22 @@
         </div>
 
         <div class="students-filter">
-            <div class="filter-all">
+            <div class="filter-all" id="ALL">
                 <div class="filter filter-active">All</div>
             </div>
 
             <div class="filter-course">
-                <div class="filter">BSCS</div>
-                <div class="filter">BSIT</div>
-                <div class="filter">BSTM</div>
-                <div class="filter">BSHM</div>
+                <div class="filter" id="BSCS">BSCS</div>
+                <div class="filter" id="BSIT">BSIT</div>
+                <div class="filter" id="BSTM">BSTM</div>
+                <div class="filter" id="BSHM">BSHM</div>
             </div>
 
             <div class="filter-year">
-                <div class="filter">1st yr</div>
-                <div class="filter">2nd yr</div>
-                <div class="filter">3rd yr</div>
-                <div class="filter">4th yr</div>
+                <div class="filter" id="1st">1st yr</div>
+                <div class="filter" id="2nd">2nd yr</div>
+                <div class="filter" id="3rd">3rd yr</div>
+                <div class="filter" id="4th">4th yr</div>
             </div>
         </div>
 
@@ -89,6 +89,64 @@
         <div class="addstudent-buttons">
             <button id="addstudent-cancel">Cancel</button>
             <button id="addstudent-submit">Add Student</button>
+        </div>
+    </div>
+</div>
+
+<div id="editstudent-modal" class="modal">
+    <div class="modal-content" id="editstudentform">
+        <div class="modal-header">
+            <span>Edit Book</span>
+            <button class="modal-close">
+                <img src="/shared/styles/icons/Close.svg" alt="" width="13" height="13">
+            </button>
+        </div>
+        <div class="editstudent-form">
+            <span class="editstudentnum-input">
+                <p>Student Number</p>
+                <input id="data-studentnum" type="text" placeholder="">
+            </span>
+            <span class="editbook-input">
+                <p>First Name</p>
+                <input id="data-firstname" type="text" placeholder="">
+            </span>
+            <span class="editbook-input">
+                <p>Last Name</p>
+                <input id="data-lastname" type="text" placeholder="">
+            </span>
+            <span class="editbook-input">
+                <p>Year</p>
+                <input id="data-year" type="text" placeholder="">
+            </span>
+            <span class="editbook-input">
+                <p>Program</p>
+                <input id="data-program" type="text" placeholder="">
+            </span>
+            <span class="editbook-input">
+                <p>Email</p>
+                <input id="data-email" type="text" placeholder="">
+            </span>
+            <span class="editbook-input">
+                <p>Phone</p>
+                <input id="data-phone" type="text" placeholder="">
+            </span>
+        </div>
+        <div class="editstudent-buttons">
+            <button id="editstudent-cancel">Cancel</button>
+            <button id="editstudent-submit">Save</button>
+        </div>
+    </div>
+</div>
+
+<div id="deletestudent-modal" class="modal">
+    <div class="confirmation-content" id="confirmationform">
+        <div class="conformation-header">
+            <span>Are you sure you want to delete this student?</span>
+        </div>
+
+        <div class="confirmation-buttons">
+            <button id="confirmation-no">No</button>
+            <button id="confirmation-yes">Yes</button>
         </div>
     </div>
 </div>

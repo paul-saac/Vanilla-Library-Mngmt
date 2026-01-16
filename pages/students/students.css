@@ -199,7 +199,7 @@ td {
 
 .td-name {
     font-weight: bolder;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 
@@ -209,6 +209,10 @@ td {
 
 tr {
     background: white;
+}
+
+.student-row:hover {
+    background: #f8f8fa;
 }
 
 .student-actions {
@@ -255,7 +259,7 @@ tr {
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    
+
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -343,8 +347,130 @@ tr {
     gap: 10px;
 
 }
+
 /* ADDSTUDENT-BUTTONS */
 #addstudent-submit {
+    display: flex;
+    align-items: center;
+    border: none;
+    width: auto;
+    height: auto;
+    border: 1px solid var(--border-clr);
+    border-radius: 5px;
+    padding: 9px 15px 9px 15px;
+    background: var(--base-clr);
+    color: white;
+    cursor: pointer;
+}
+
+#addstudent-cancel {
+    display: flex;
+    align-items: center;
+    border: none;
+    width: auto;
+    height: auto;
+    border: 1px solid var(--border-clr);
+    border-radius: 5px;
+    padding: 9px 15px 9px 15px;
+    background: none;
+    cursor: pointer;
+}
+
+.addstudent-form .studentnum-input {
+    grid-column: 1 / -1;
+}
+
+
+/* EDIT STUDENT MODAL */
+.editstudent-form {
+    display: grid;
+    grid-template-columns: 239px 239px;
+    gap: 15px;
+    margin-top: 18px;
+    margin-bottom: 25px;
+}
+
+.editstudent-form p {
+    font-size: 13px;
+    font-weight: 480;
+    color: #717280;
+}
+
+.editstudentnum-input {
+    grid-column: 1 / -1;
+}
+.editstudent-form input {
+    font-size: 12px;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border-clr);
+    border-radius: 5px;
+    padding: 8px 10px 8px 10px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    background: rgb(247, 247, 247);
+}
+
+.editstudent-form input::placeholder {
+    color: rgb(179, 176, 176);
+}
+
+.editstudent-buttons {
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+
+}
+
+#editstudent-submit {
+    display: flex;
+    align-items: center;
+    border: none;
+    width: auto;
+    height: auto;
+    border: 1px solid var(--border-clr);
+    border-radius: 5px;
+    padding: 9px 15px 9px 15px;
+    background: var(--base-clr);
+    color: white;
+    cursor: pointer;
+}
+
+#editstudent-cancel {
+    display: flex;
+    align-items: center;
+    border: none;
+    width: auto;
+    height: auto;
+    border: 1px solid var(--border-clr);
+    border-radius: 5px;
+    padding: 9px 15px 9px 15px;
+    background: none;
+    cursor: pointer;
+}
+
+/* DELETE CONFIRMATION MODAL */
+.confirmation-content {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 30px 30px 30px 30px;
+  border-radius: 10px;
+  color: rgb(58, 57, 57);
+  position: relative;
+  justify-content: center;
+
+}
+
+.confirmation-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+
+}
+
+#confirmation-yes {
   display: flex;
   align-items: center;
   border: none;
@@ -357,7 +483,9 @@ tr {
   color: white;
   cursor: pointer;
 }
-#addstudent-cancel {
+
+
+#confirmation-no {
   display: flex;
   align-items: center;
   border: none;
@@ -368,8 +496,4 @@ tr {
   padding: 9px 15px 9px 15px;
   background: none;
   cursor: pointer;
-}
-
-.addstudent-form .studentnum-input {
-  grid-column: 1 / -1;
 }

@@ -371,7 +371,7 @@ async function BookDetails(bookId) {
     published.textContent = data.publishDate;
     isbn.textContent = data.isbn;
     category.textContent = data.bookGenre;
-    availability.textContent = `${data.copies} of ${data.availableCopies} copies available`
+    availability.textContent =  `${data.copies} of ${data.availableCopies} copies available`
     description.textContent = data.description;
 
 
@@ -506,7 +506,6 @@ async function handleEditBook() {
       { merge: true }
     );
 
-    editingBookId = null;
     closeEditBookModal();
   } catch (err) {
     console.error(err);
