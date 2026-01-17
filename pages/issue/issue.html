@@ -1,62 +1,36 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
-<div class="issue-grid">
-    <div class="column1">
-        <div class="issue-nav">
-            <div class="bookactivitybutton">
-                <a href="#">Book Activity</a>
-            </div>
-
-            <div class="sidebuttons">
-                <div class="returnButton">
-                    <i class="bi bi-arrow-return-left"></i>
-                    <a href="#">Return</a>
-                </div>
-
-                <div class="issueButton">
-                    <i class="bi bi-plus-square"></i>
-                    <a href="#">Issue</a>
-                </div>
-            </div>
+<div class="book-nav">
+    <div class="search-container">
+        <div class="search">
+            <input type="text" class="searchTerm" placeholder="Search books by title, author, ID, or genre.....">
+            <img src="/shared/styles/icons/Search.svg" alt="" width="20" height="20">
         </div>
-
-        <div class="issue-wrapper">
-            <table class="issue-container">
-                <thead>
-                    <tr>
-                        <th>Book ID</th>
-                        <th>Student Number</th>
-                        <th>Issue Date</th>
-                        <th>Due Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-            </table>
-        </div>
-
     </div>
 
-    <div class="column2">
-        <table class="activity-container">
-            <thead>
-                <tr>
-                    <th colspan="2">Student Details</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th>Name: </th>
-                    <td>Student Details</td>
-
-                </tr>
-                <tr>
-                    <th>Name: </th>
-                    <td>Student Details</td>
-
-                </tr>
-            </tbody>
-        </table>
+    <div class="bookButtons">
+        <div class="addBtn" id="addbookBtn">
+            <img src="/shared/styles/icons/Add.svg" alt="" width="11" height="11">
+            <a>Issue Book</a>
+        </div>
     </div>
+</div>
+
+
+<div class="issue-wrapper">
+    <table class="issue-container">
+        <thead>
+            <tr class="table-head">
+                <th class="th-studentname">Student</th>
+                <th>Book</th>
+                <th>Borrow Date</th>
+                <th>Due Date</th>
+                <th>Return Date</th>
+                <th>Status</th>
+                <th class="th-actions">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
 </div>

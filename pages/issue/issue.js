@@ -1,43 +1,99 @@
 import { db } from "../../shared/scripts/firebaseConfig.js";
 import { collection, getDocs, addDoc, onSnapshot, deleteDoc, doc, updateDoc, serverTimestamp, query, orderBy, setDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-// async function fetchBoth() {
-//     try {
-//         const bothCollection = collection(db, 'IssuedBooks');
-//         const bothSnapshot = await getDocs(studentsCollection);
-//         const bothList = studentsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+let unsubscribe = null;
+let allIssues = [];
 
-//         if (window.location.hash === '#/students') {
-//             displayStudents(studentsList);
-//         }
-//     } catch (error) {
-//         console.error("Error fetching students:", error);
-//     }
-// }
+function enterIssuePage() {
+    if (unsubscribe) return; // already listening
 
-// function displayBoth(students) {
-//     const tableBody = document.querySelector('tbody');
-//     tableBody.innerHTML = ''; // Clear existing rows
+    const q = query(collection(db, "IssuedBooks"), orderBy("firstName", "asc"));
 
-//     students.forEach(student => {
-//         const row = `
-//             <tr>
-//                 <td>${student.id || 'N/A'}</td>
-//                 <td>${student.lastName || 'N/A'}</td>
-//                 <td>${student.firstName || 'N/A'}</td>
-//                 <td>${student.email || 'N/A'}</td>
-//                 <td>${student.department || 'N/A'}</td>
-//             </tr>
-//         `;
-//         tableBody.innerHTML += row;
-//     });
-// }
+    unsubscribe = onSnapshot(
+        q,
+        (snapshot) => {
+            const issues = snapshot.docs.map(d => ({
+                id: d.id,
+                ...d.data()
+            }));
 
-// //Refresh everytime the hashchanged
-// window.addEventListener('hashchange', () => {
-//     if (window.location.hash === '#/students') {
-//         fetchStudents();
-//     }
-// });
+            allIssues = issues;
+            // applySearchAndRender();
+            renderIssue(issues);
+        },
+        (err) => console.error(err)
+    );
+}
 
-// fetchStudents();
+function leaveIssuePage() {
+    if (unsubscribe) {
+        unsubscribe();
+        unsubscribe = null;
+    }
+}
+
+function renderIssue(issues) {
+    const tbody = document.querySelector(".issue-container tbody");
+
+    if (!tbody) {
+        // Try again on next frame
+        requestAnimationFrame(() => renderIssue(issues));
+        return;
+    }
+
+    tbody.innerHTML = issues.map(createIssuesRow).join("");
+}
+
+
+function createIssuesRow(issue) {
+    const {
+        id = "",
+        studentNum = "N/A",
+        firstName = "N/A",
+        lastName = "N/A",
+        bookName = "Untitled",
+        author = "N/A",
+        borrowDate = "N/A",
+        dueDate = "N/A",
+        returnDate = "-",
+        issueStatus = "Unavailable"
+    } = issue;
+
+
+    return `
+        <tr class="issue-row" data-id="${id}">
+            <td class="td-name">${lastName}, ${firstName} <br> 
+                <span class="student-num">${studentNum}</span>
+            </td>
+            <td class="td-book">${bookName} <br> 
+                <span class="book-num">${author}</span>
+            </td>
+            <td>${borrowDate}</td>
+            <td>${dueDate}</td>
+            <td>${returnDate}</td>
+            <td>${issueStatus}</td>
+            <td> 
+                <div class="issue-actions">
+                    <div class="edit-issue" data-action="edit" data-id="${id}">
+                        <img src="/shared/styles/icons/editstudent.svg" alt="" width="13px" height="13px">
+                    </div>
+                    <div class="delete-issue" data-action="delete" data-id="${id}">
+                        <img src="/shared/styles/icons/deletestudent.svg" alt="" width="13px" height="13px">
+                    </div>
+                </div>
+            
+            </td>
+        </tr>
+    `;
+
+}
+
+window.addEventListener("hashchange", () => {
+    if (location.hash === "#/issue" || location.hash === "") {
+        enterIssuePage();
+    } else {
+        leaveIssuePage();
+    }
+});
+// MAIN INVOKE
+enterIssuePage();

@@ -64,21 +64,6 @@
 
 }
 
-.deleteBtn {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  border: 1px solid var(--border-clr);
-  padding: 10px;
-  position: flex;
-  border-radius: 5px;
-  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
-}
-
-.deleteBtn i {
-  color: rgb(255, 124, 124);
-  font-size: 20px;
-}
 
 .addBtn {
   display: flex;

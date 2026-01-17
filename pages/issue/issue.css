@@ -1,124 +1,133 @@
-.issue-grid {
-    display: grid;
-    grid-template-areas:
-        "column1 column2"
-    ;
-    grid-template-columns: 3fr 0.8fr;
-    gap: 20px;
+.book-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-bottom: 34px;
+  position: relative;
 }
 
-.column1 {
-    display: flex;
-    flex-direction: column;
+
+.search-container {
+  display: flex;
+  gap: 10px;
 }
 
-.issue-nav {
-    display: flex;
-    justify-content: space-between;
+.search {
+  position: relative;
+  display: flex;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
+  align-items: center;
+  border: 1px solid var(--border-clr);
+  border-radius: 5px 5px 5px 5px;
+  background: white;
+  justify-content: space-between;
+  padding: 0px 10px 0px 7px;
+  box-sizing: border-box;
 }
 
-.column2 {
-    border: 1px solid var(--border-clr);
-    flex-direction: row;
-    border-radius: 5px;
-    padding: 0px;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
-    height: 100%;
+.search img {
+  cursor: pointer;
+  padding-right: 3px;
 }
 
-.sidebuttons {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.search input::placeholder {
+  color: rgb(180, 177, 182);
 }
 
-/* BUTTONS */
-.bookactivitybutton {
-    border: 1px solid var(--border-clr);
-    padding: 8px 30px 8px 30px;
-    border-radius: 5px;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
-    cursor: pointer;
+
+.searchTerm {
+  padding: 10px;
+  height: 20px;
+  width: 450px;
+  outline: #cdcdd8;
+  border: none;
+  border-radius: 5px 5px 5px 5px;
 }
 
-.bookactivitybutton a {
-    text-decoration: none;
-    color: var(--base-clr);
-    font-size: 13px;
-
-}
-
-.returnButton {
-    border: 1px solid var(--border-clr);
-    padding: 8px 20px 8px 20px;
-    font-size: 13px;
-    border-radius: 5px;
-    cursor: pointer;
-    background: var(--base-clr);
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
-
+.bookButtons {
+  display: flex;
+  position: relative;
+  gap: 10px;
 
 }
 
-.issueButton {
-    border: 1px solid var(--border-clr);
-    padding: 8px 20px 8px 20px;
-    border-radius: 5px;
-    font-size: 13px;
-    cursor: pointer;
-    background: var(--base-clr);
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
+.addBtn {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid var(--border-clr);
+  padding: 10px 14px 10px 14px;
+  position: flex;
+  border-radius: 5px;
+  background: var(--base-clr);
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
 }
 
-.sidebuttons a {
-    text-decoration: none;
-    color: white;
+.addBtn i {
+  color: white;
+  font-size: 14px;
 }
 
-.sidebuttons i {
-    text-decoration: none;
-    color: white;
+.addBtn a {
+  color: white;
+  padding-left: 6px;
+  font-size: 13px;
+  text-decoration: none;
 }
+
+/* TABLE */
 
 .issue-wrapper {
-    border: 1px solid var(--border-clr);
-    margin-top: 35px;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
-    border-radius: 5px;
+  border: 1px solid var(--border-clr);
+  border-radius: 6px;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+  max-height: calc(100vh - 220px);
+  overflow-y: auto;
+  scrollbar-width: none;
 }
 
 .issue-container {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: fixed;
-    border: none;
-    box-shadow: none;
-    border-radius: 0;
+  position: relative;
+  border-collapse: collapse;
+  table-layout: fixed;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  width: 100%;
+
+
+}
+
+.table-head th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #f8f8fa;
 }
 
 th,
 td {
-    padding: 12px 12px 12px 20px;
-    text-align: left;
-    font-size: 13px;
-    color: #73737C;
-}
-
-
-.activity-container thead th {
-    font-size: 15px;
-    padding: 20px 20px 10px 25px;
-}
-
-.activity-container th {
-    padding: 5px 0px 10px 26px;
-    font-size: 13px;
-    color: #73737C;
+  border-bottom: 1px solid var(--border-clr);
+  padding: 10px 10px 10px 25px;
+  text-align: left;
+  font-size: 12px;
+  color: #676775;
 
 }
 
-.activity-container td {
-     padding: 5px 10px 10px 0px;
-    font-size: 13px;
-    color: #73737C;
+tr {
+  background: white;
+
+}
+
+.table-head {
+  background: #f8f8fa;
+}
+
+.td-isbn {
+  font-size: 12px;
+  color: #818399;
+  /* Optional: make it a lighter color */
+  font-weight: 250;
 }
