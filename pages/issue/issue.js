@@ -7,7 +7,7 @@ let allIssues = [];
 function enterIssuePage() {
     if (unsubscribe) return; // already listening
 
-    const q = query(collection(db, "IssuedBooks"), orderBy("firstName", "asc"));
+    const q = query(collection(db, "IssuedBooks"), orderBy("borrowDate", "desc"));
 
     unsubscribe = onSnapshot(
         q,
@@ -53,12 +53,11 @@ function createIssuesRow(issue) {
         lastName = "N/A",
         bookName = "Untitled",
         author = "N/A",
-        borrowDate = "N/A",
-        dueDate = "N/A",
-        returnDate = "-",
+        borrowDate = null,
+        dueDate = null,
+        returnDate = null,
         issueStatus = "Unavailable"
     } = issue;
-
 
     return `
         <tr class="issue-row" data-id="${id}">
