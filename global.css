@@ -173,7 +173,7 @@ nav {
     font-size: 13px;
     cursor: pointer;
     color: var(--base-clr);
-    transition: background .15s;
+    transition: .15s;
 }
 
 .dropdown-menu:hover,

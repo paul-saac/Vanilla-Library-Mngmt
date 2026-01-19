@@ -9,13 +9,55 @@
     </div>
 
     <div class="bookButtons">
-        <div class="addBtn" id="addbookBtn">
+        <div class="addBtn" id="addissuebtn">
             <img src="/shared/styles/icons/Add.svg" alt="" width="11" height="11">
             <a>Issue Book</a>
         </div>
     </div>
 </div>
 
+<div id="addissue-modal" class="modal">
+    <div class="modal-content" id="addstudentform">
+        <div class="modal-header">
+            <span>Issue Book to Student</span>
+            <button class="modal-close">
+                <img src="/shared/styles/icons/Close.svg" alt="" width="13" height="13">
+            </button>
+        </div>
+
+        <div class="addissue-form">
+            <div class="dropdown" id="student-dropdown">
+                <span class="student-input" id="student-input">
+                    <p>Select Student</p>
+                    <input id="studentnum" type="text" placeholder="Enter a student name/number" autocomplete="off">
+                </span>
+
+                <div class="dropdown-menu" id="student-dropdown-menu">
+                    <table class="dropdown-container">
+                        <tbody id="student-suggestions">
+                            <!-- injected -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <span class="student-input">
+                    <p>Select Book</p>
+                    <input id="book" type="text" placeholder="Enter a book title">
+                </span>
+                <div class="dropdown-menu">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="addissue-buttons">
+            <button id="addissue-cancel">Cancel</button>
+            <button id="addissue-submit">Issue Book</button>
+        </div>
+    </div>
+</div>
 
 <div class="issue-wrapper">
     <table class="issue-container">
@@ -31,7 +73,7 @@
             </tr>
         </thead>
         <tbody>
-            
+
         </tbody>
     </table>
 </div>

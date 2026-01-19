@@ -130,8 +130,6 @@ function closeConfirmationModal() {
 }
 
 
-
-
 // ADD STUDENT MODAL
 function AddStudentInputs() {
     return {
