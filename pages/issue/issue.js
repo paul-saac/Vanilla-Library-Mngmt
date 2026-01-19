@@ -44,6 +44,29 @@ function renderIssue(issues) {
     tbody.innerHTML = issues.map(createIssuesRow).join("");
 }
 
+function formatFirestoreDate(value) {
+    if (!value) return "—";
+
+    const format = (d) =>
+        d.toLocaleDateString("en-US", {
+            month: "numeric",
+            day: "numeric",
+            year: "numeric"
+        });
+
+    // Firestore Timestamp { seconds, nanoseconds, toDate() }
+    if (typeof value?.toDate === "function") return format(value.toDate());
+
+    // If it’s already a JS Date
+    if (value instanceof Date) return format(value);
+
+    // If stored as a string (optional fallback)
+    const d = new Date(value);
+    if (!Number.isNaN(d.getTime())) return format(d);
+
+    // Last resort
+    return String(value);
+}
 
 function createIssuesRow(issue) {
     const {
@@ -59,18 +82,43 @@ function createIssuesRow(issue) {
         issueStatus = "Unavailable"
     } = issue;
 
+    const normalizedStatus = issueStatus.toLowerCase();
+
+    let statusClass;
+    switch (normalizedStatus) {
+        case "available":
+            statusClass = "avail-light";
+            break;
+        case "borrowed":
+            statusClass = "borrowed";
+            break;
+        case "returned":
+            statusClass = "returned"; // make sure you have this CSS class (optional)
+            break;
+        case "overdue":
+            statusClass = "overdue"; // make sure you have this CSS class (optional)
+            break;
+        default:
+            statusClass = "unavailable"; // fallback class
+            break;
+    }
+
     return `
         <tr class="issue-row" data-id="${id}">
-            <td class="td-name">${lastName}, ${firstName} <br> 
-                <span class="student-num">${studentNum}</span>
+            <td class="th-studentname">
+                <span class="td-name">${lastName}, ${firstName}</span> <br>
+                <span class="td-next">${studentNum}</span>
             </td>
-            <td class="td-book">${bookName} <br> 
-                <span class="book-num">${author}</span>
+            <td class="th-bookname">
+                <span class="td-name">${bookName}</span> <br>
+                <span class="td-next">${author}</span>
             </td>
-            <td>${borrowDate}</td>
-            <td>${dueDate}</td>
-            <td>${returnDate}</td>
-            <td>${issueStatus}</td>
+            <td>${formatFirestoreDate(borrowDate)}</td>
+            <td>${formatFirestoreDate(dueDate)}</td>
+            <td>${formatFirestoreDate(returnDate)}</td>
+            <td>    
+                <span class="${statusClass}"> ${issueStatus}</span>
+            </td>
             <td> 
                 <div class="issue-actions">
                     <div class="edit-issue" data-action="edit" data-id="${id}">

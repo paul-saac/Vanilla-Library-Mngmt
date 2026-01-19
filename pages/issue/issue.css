@@ -106,6 +106,15 @@
   background: #f8f8fa;
 }
 
+
+.th-studentname {
+  width: 210px;
+}
+
+.th-bookname {
+  width: 210px;
+}
+
 th,
 td {
   border-bottom: 1px solid var(--border-clr);
@@ -130,4 +139,83 @@ tr {
   color: #818399;
   /* Optional: make it a lighter color */
   font-weight: 250;
+}
+
+.td-name {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.td-next {
+  font-size: 11px;
+  color: #b7b7c0;
+}
+
+.issue-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.issue-actions div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--border-clr);
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  transition: all .15s;
+}
+
+.avail-light {
+  border: 1px solid oklch(.925 .084 155.995);
+  border-radius: 4px;
+  padding: 8px 10px 8px 10px;
+  background: oklch(.982 .018 155.826);
+  color: oklch(.527 .154 150.069);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.borrowed {
+  border: 1px solid var(--border-clr);
+  border-radius: 4px;
+  padding: 8px 10px 8px 10px;
+  background: oklch(97.015% 0.00011 271.152);
+  color: #676775;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.returned {
+  border: 1px solid var(--base-clr);
+  border-radius: 4px;
+  padding: 8px 10px 8px 10px;
+  background: var(--base-clr);
+  color: #f7f7f7;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+
+.overdue {
+  border: 1px solid #ff0909;
+  border-radius: 4px;
+  padding: 8px 10px 8px 10px;
+  background: oklch(91.325% 0.04135 17.798);
+  color: #ff0909;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.edit-issue:hover,
+.delete-issue:hover {
+  background: rgb(243, 243, 243);
+}
+
+.issue-row:hover {
+  background: #f8f8fa;
 }
