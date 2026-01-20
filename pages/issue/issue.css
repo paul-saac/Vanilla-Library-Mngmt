@@ -169,6 +169,17 @@ tr {
   padding: 5px 10px 5px 10px;
   cursor: pointer;
 }
+.without-return-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  transition: all .15s;
+  padding: 5px 10px 5px 10px;
+  cursor: pointer;
+}
 
 
 .return-btn:hover{

@@ -87,18 +87,23 @@ function createIssuesRow(issue) {
     const normalizedStatus = issueStatus.toLowerCase();
 
     let statusClass;
+    let actions;
+    let actionclass;
     switch (normalizedStatus) {
-        case "available":
-            statusClass = "avail-light";
-            break;
         case "borrowed":
             statusClass = "borrowed";
+            actions = "Return";
+            actionclass = "return-btn "
             break;
         case "returned":
-            statusClass = "returned"; // make sure you have this CSS class (optional)
+            statusClass = "returned";
+            actions = "";
+            actionclass = "without-return-btn"
             break;
         case "overdue":
             statusClass = "overdue"; // make sure you have this CSS class (optional)
+            actions = "Return";
+            actionclass = "return-btn "
             break;
         default:
             statusClass = "unavailable"; // fallback class
@@ -123,8 +128,8 @@ function createIssuesRow(issue) {
             </td>
             <td> 
                 <div class="issue-actions">
-                    <div class="return-btn" data-action="return" data-id="${id}">
-                        <span>Return</span>
+                    <div class="${actionclass}" data-action="return" data-id="${id}">
+                        <span>${actions}</span>
                     </div>
                 </div>
             </td>
@@ -183,6 +188,7 @@ document.addEventListener("click", (e) => {
     if (e.target.closest("#addissue-cancel")) closeIssueModal();
     // if (e.target.closest("#addissue-submit")) handleAddStudent(); // keep your existing add logic
 });
+
 
 // ADD ISSUE MODAL
 function AddIssuesInputs() {
@@ -245,10 +251,10 @@ async function handleAddIssue() {
     }
 }
 
-// const studentDropdown = document.getElementById("student-dropdown");
-// const studentInput = document.getElementById("studentnum");
-// const studentMenu = document.getElementById("student-dropdown-menu");
-// const studentSuggestionsBody = document.getElementById("student-suggestions");
+const studentDropdown = document.getElementById("student-dropdown");
+const studentInput = document.getElementById("studentnum");
+const studentMenu = document.getElementById("student-dropdown-menu");
+const studentSuggestionsBody = document.getElementById("student-suggestions");
 
 // function openStudentDropdown() {
 //   studentMenu?.classList.add("open");
