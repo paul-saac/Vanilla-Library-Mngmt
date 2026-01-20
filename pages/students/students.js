@@ -1,13 +1,14 @@
 import { db } from "../../shared/scripts/firebaseConfig.js";
 import { collection, getDoc, getDocs, addDoc, onSnapshot, deleteDoc, doc, updateDoc, serverTimestamp, query, orderBy, setDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
+
 let unsubscribe = null;
 let editingStudentId = null;
 
 function enterStudentsPage() {
     if (unsubscribe) return; // already listening
 
-    const q = query(collection(db, "Students"), orderBy("firstName", "asc"));
+    const q = query(collection(db, "Students"), orderBy("lastName", "asc"));
 
     unsubscribe = onSnapshot(
         q,

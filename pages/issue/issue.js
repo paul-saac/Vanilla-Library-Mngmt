@@ -29,7 +29,7 @@ function enterIssuePage() {
 
 function leaveIssuePage() {
     if (unsubscribeIssues) {
-        unsubscribe();
+        unsubscribeIssues();
         unsubscribeIssues = null;
     }
 }
@@ -245,145 +245,126 @@ async function handleAddIssue() {
     }
 }
 
+// const studentDropdown = document.getElementById("student-dropdown");
+// const studentInput = document.getElementById("studentnum");
+// const studentMenu = document.getElementById("student-dropdown-menu");
+// const studentSuggestionsBody = document.getElementById("student-suggestions");
 
-let recentStudents = []; // cache (so we don't refetch every click)
+// function openStudentDropdown() {
+//   studentMenu?.classList.add("open");
+// }
 
-function $(sel) {
-  return document.querySelector(sel);
-}
+// function closeStudentDropdown() {
+//   studentMenu?.classList.remove("open");
+// }
 
-function openStudentMenu() {
-  const menu = $("#student-dropdown-menu");
-  if (menu) menu.classList.add("open");
-}
+// function clearStudentSuggestions() {
+//   studentSuggestionsBody?.replaceChildren();
+// }
 
-function closeStudentMenu() {
-  const menu = $("#student-dropdown-menu");
-  if (menu) menu.classList.remove("open");
-}
+// function renderStudentSuggestions(students) {
+//   if (!studentSuggestionsBody) return;
 
-function escapeHtml(str) {
-  return String(str ?? "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
+//   clearStudentSuggestions();
 
-function renderStudentSuggestions(students) {
-  const tbody = $("#student-suggestions");
-  if (!tbody) return;
+//   if (!students?.length) {
+//     const tr = document.createElement("tr");
+//     const td = document.createElement("td");
+//     td.textContent = "No students found";
+//     tr.appendChild(td);
+//     studentSuggestionsBody.appendChild(tr);
+//     return;
+//   }
 
-  if (!students.length) {
-    tbody.innerHTML = `<tr><td>No recent students</td></tr>`;
-    return;
-  }
+//   for (const s of students) {
+//     const id = String(s?.id ?? "N/A");
+//     const firstName = String(s?.firstName ?? "");
+//     const lastName = String(s?.lastName ?? "");
+//     const department = String(s?.department ?? "N/A");
+//     const email = String(s?.email ?? "N/A");
 
-  tbody.innerHTML = students
-    .map((s) => {
-      const id = s.id ?? "N/A"; // student number (doc id)
-      const firstName = s.firstName ?? "";
-      const lastName = s.lastName ?? "";
-      const department = s.department ?? "N/A";
-      const email = s.email ?? "N/A";
+//     const fullName = `${firstName} ${lastName}`.trim() || "N/A";
+//     const meta = `${id} · ${department}`;
 
-      const fullName = `${firstName} ${lastName}`.trim() || "N/A";
-      const meta = `${id} \u00B7 ${department}`;
+//     const tr = document.createElement("tr");
+//     tr.className = "student-suggestion";
+//     tr.dataset.id = id;
+//     tr.dataset.fullname = fullName;
+//     tr.dataset.department = department;
+//     tr.dataset.email = email;
 
-      return `
-        <tr class="student-suggestion"
-            data-id="${escapeHtml(id)}"
-            data-fullname="${escapeHtml(fullName)}"
-            data-department="${escapeHtml(department)}"
-            data-email="${escapeHtml(email)}">
-          <td>
-            <div style="display:flex;flex-direction:column;gap:2px;">
-              <div style="font-weight:600;">${escapeHtml(fullName)}</div>
-              <div style="color:#6b7280;font-size:13px;">${escapeHtml(meta)}</div>
-              <div style="color:#6b7280;font-size:13px;">${escapeHtml(email)}</div>
-            </div>
-          </td>
-        </tr>
-      `;
-    })
-    .join("");
-}
+//     const td = document.createElement("td");
+//     const wrap = document.createElement("div");
+//     wrap.style.cssText = "display:flex;flex-direction:column;gap:2px;";
 
-async function fetchRecentStudents3() {
-  // Same pattern as students.js, just different query:
-  // Students ordered by updatedAt desc, limit 3
-  const q = query(collection(db, "Students"), orderBy("updatedAt", "desc"), limit(3));
-  const snap = await getDocs(q);
+//     const nameDiv = document.createElement("div");
+//     nameDiv.style.fontWeight = "600";
+//     nameDiv.textContent = fullName;
 
-  return snap.docs.map((d) => ({
-    id: d.id,
-    ...d.data(),
-  }));
-}
+//     const metaDiv = document.createElement("div");
+//     metaDiv.style.cssText = "color:#6b7280;font-size:13px;";
+//     metaDiv.textContent = meta;
 
-async function showRecentStudentsDropdown() {
-  // make sure DOM exists (if your page loads via router)
-  const tbody = $("#student-suggestions");
-  if (!tbody) return;
+//     const emailDiv = document.createElement("div");
+//     emailDiv.style.cssText = "color:#6b7280;font-size:13px;";
+//     emailDiv.textContent = email;
 
-  openStudentMenu();
+//     wrap.append(nameDiv, metaDiv, emailDiv);
+//     td.appendChild(wrap);
+//     tr.appendChild(td);
+//     studentSuggestionsBody.appendChild(tr);
+//   }
+// }
 
-  // fetch only once per page load
-  if (recentStudents.length === 0) {
-    try {
-      recentStudents = await fetchRecentStudents3();
-    } catch (err) {
-      console.error(err);
-      renderStudentSuggestions([]);
-      return;
-    }
-  }
+// // EVENT DELEGATION
+// document.addEventListener("click", async (e) => {
+//   // select a suggestion
+//   const row = e.target.closest("#student-suggestions .student-suggestion");
+//   if (row && studentInput) {
+//     const id = row.dataset.id || "";
+//     const fullName = row.dataset.fullname || "";
+//     const dept = row.dataset.department || "";
+//     const email = row.dataset.email || "";
 
-  renderStudentSuggestions(recentStudents);
-}
+//     studentInput.value = `${fullName} (${id})`;
+//     studentInput.dataset.studentId = id;
+//     studentInput.dataset.studentName = fullName;
+//     studentInput.dataset.studentDepartment = dept;
+//     studentInput.dataset.studentEmail = email;
 
-// ====================== EVENT DELEGATION (same style as your students.js)
-document.addEventListener("click", async (e) => {
-  const studentInput = e.target.closest("#student-input");
-  const suggestionRow = e.target.closest("#student-suggestions .student-suggestion");
-  const dropdown = $("#student-dropdown");
-  const input = $("#studentnum");
+//     closeStudentDropdown();
+//     return;
+//   }
 
-  // select suggestion
-  if (suggestionRow && input) {
-    const id = suggestionRow.dataset.id || "";
-    const fullName = suggestionRow.dataset.fullname || "";
-    const dept = suggestionRow.dataset.department || "";
-    const email = suggestionRow.dataset.email || "";
+//   // open dropdown + fetch normally (no cache)
+//   if (e.target.closest("#student-input")) {
+//     openStudentDropdown();
 
-    // put something readable in the input
-    input.value = `${fullName} (${id})`;
+//     try {
+//       const q = query(
+//         collection(db, "Students"),
+//         orderBy("lastName", "desc"),
+//         limit(3)
+//       );
 
-    // store chosen student info for your "Issue Book" submit later
-    input.dataset.studentId = id;
-    input.dataset.studentName = fullName;
-    input.dataset.studentDepartment = dept;
-    input.dataset.studentEmail = email;
+//       const snap = await getDocs(q);
+//       const students = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+//       renderStudentSuggestions(students);
+//     } catch (err) {
+//       console.error(err);
+//       renderStudentSuggestions([]);
+//     }
 
-    closeStudentMenu();
-    return;
-  }
+//     studentInput?.focus();
+//     return;
+//   }
 
-  // open dropdown when clicking the input area
-  if (studentInput) {
-    await showRecentStudentsDropdown();
-    $("#studentnum")?.focus();
-    return;
-  }
+//   // click outside closes
+//   if (studentDropdown && !studentDropdown.contains(e.target)) {
+//     closeStudentDropdown();
+//   }
+// });
 
-  // close when clicking outside
-  if (dropdown && !dropdown.contains(e.target)) {
-    closeStudentMenu();
-  }
-});
-
-// optional: ESC closes the menu
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") closeStudentMenu();
-});
+// document.addEventListener("keydown", (e) => {
+//   if (e.key === "Escape") closeStudentDropdown();
+// });

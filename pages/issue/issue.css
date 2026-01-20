@@ -235,10 +235,9 @@ tr {
     align-items: center;
     z-index: 1000;
 
-    /* opacity: 0;
+    opacity: 0;
     visibility: hidden;
-    pointer-events: none; */
-
+    pointer-events: none;
 }
 
 .modal-content {
