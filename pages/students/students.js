@@ -22,7 +22,6 @@ function enterStudentsPage() {
             applySearchAndRender();
             renderStudents(students);
         },
-        (err) => console.error(err)
     );
 }
 

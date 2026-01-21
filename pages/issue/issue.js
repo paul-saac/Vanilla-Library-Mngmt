@@ -251,126 +251,53 @@ async function handleAddIssue() {
     }
 }
 
-const studentDropdown = document.getElementById("student-dropdown");
-const studentInput = document.getElementById("studentnum");
-const studentMenu = document.getElementById("student-dropdown-menu");
-const studentSuggestionsBody = document.getElementById("student-suggestions");
+// DROPDOWN SUGEESTOIN STUDENTS
+async function FetchingStudents() {
+    const q = query(
+        collection(db, "Students"),
+        orderBy("lastName", "asc"),
+        limit(3)
+    );
 
-// function openStudentDropdown() {
-//   studentMenu?.classList.add("open");
-// }
+    const snapshot = await getDocs(q);
 
-// function closeStudentDropdown() {
-//   studentMenu?.classList.remove("open");
-// }
+    const students = snapshot.docs.map((d) => ({
+        id: d.id,
+        ...d.data(),
+    }));
 
-// function clearStudentSuggestions() {
-//   studentSuggestionsBody?.replaceChildren();
-// }
+    renderStudents(students);
+    return students;
+}
 
-// function renderStudentSuggestions(students) {
-//   if (!studentSuggestionsBody) return;
+function renderStudents(students) {
+    const tbody = document.querySelector(".student-suggestions tbody");
+    if (!tbody) return;
 
-//   clearStudentSuggestions();
+    tbody.innerHTML = students.map(createStudentsRow).join("");
+}
 
-//   if (!students?.length) {
-//     const tr = document.createElement("tr");
-//     const td = document.createElement("td");
-//     td.textContent = "No students found";
-//     tr.appendChild(td);
-//     studentSuggestionsBody.appendChild(tr);
-//     return;
-//   }
+function createStudentsRow(student) {
+    const {
+        id = "",
+        firstName = "Untitled",
+        lastName = "Unknown Author",
+        phone = "N/A",
+        year = "",
+        department = "Unavailable",
+        email = "N/A",
+    } = student;
 
-//   for (const s of students) {
-//     const id = String(s?.id ?? "N/A");
-//     const firstName = String(s?.firstName ?? "");
-//     const lastName = String(s?.lastName ?? "");
-//     const department = String(s?.department ?? "N/A");
-//     const email = String(s?.email ?? "N/A");
+    return `
+        <tr class="suggestion-row" data-id="${id}">
+            <td class="td-name">${lastName || "N/A"}, ${firstName || "N/A"} <br>
+                <span class="student-email">${email || "N/A"}</span>
+            </td>
+        </tr>
+  `;
+}
 
-//     const fullName = `${firstName} ${lastName}`.trim() || "N/A";
-//     const meta = `${id} · ${department}`;
 
-//     const tr = document.createElement("tr");
-//     tr.className = "student-suggestion";
-//     tr.dataset.id = id;
-//     tr.dataset.fullname = fullName;
-//     tr.dataset.department = department;
-//     tr.dataset.email = email;
-
-//     const td = document.createElement("td");
-//     const wrap = document.createElement("div");
-//     wrap.style.cssText = "display:flex;flex-direction:column;gap:2px;";
-
-//     const nameDiv = document.createElement("div");
-//     nameDiv.style.fontWeight = "600";
-//     nameDiv.textContent = fullName;
-
-//     const metaDiv = document.createElement("div");
-//     metaDiv.style.cssText = "color:#6b7280;font-size:13px;";
-//     metaDiv.textContent = meta;
-
-//     const emailDiv = document.createElement("div");
-//     emailDiv.style.cssText = "color:#6b7280;font-size:13px;";
-//     emailDiv.textContent = email;
-
-//     wrap.append(nameDiv, metaDiv, emailDiv);
-//     td.appendChild(wrap);
-//     tr.appendChild(td);
-//     studentSuggestionsBody.appendChild(tr);
-//   }
-// }
-
-// // EVENT DELEGATION
-// document.addEventListener("click", async (e) => {
-//   // select a suggestion
-//   const row = e.target.closest("#student-suggestions .student-suggestion");
-//   if (row && studentInput) {
-//     const id = row.dataset.id || "";
-//     const fullName = row.dataset.fullname || "";
-//     const dept = row.dataset.department || "";
-//     const email = row.dataset.email || "";
-
-//     studentInput.value = `${fullName} (${id})`;
-//     studentInput.dataset.studentId = id;
-//     studentInput.dataset.studentName = fullName;
-//     studentInput.dataset.studentDepartment = dept;
-//     studentInput.dataset.studentEmail = email;
-
-//     closeStudentDropdown();
-//     return;
-//   }
-
-//   // open dropdown + fetch normally (no cache)
-//   if (e.target.closest("#student-input")) {
-//     openStudentDropdown();
-
-//     try {
-//       const q = query(
-//         collection(db, "Students"),
-//         orderBy("lastName", "desc"),
-//         limit(3)
-//       );
-
-//       const snap = await getDocs(q);
-//       const students = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
-//       renderStudentSuggestions(students);
-//     } catch (err) {
-//       console.error(err);
-//       renderStudentSuggestions([]);
-//     }
-
-//     studentInput?.focus();
-//     return;
-//   }
-
-//   // click outside closes
-//   if (studentDropdown && !studentDropdown.contains(e.target)) {
-//     closeStudentDropdown();
-//   }
-// });
-
-// document.addEventListener("keydown", (e) => {
-//   if (e.key === "Escape") closeStudentDropdown();
-// });
+document.addEventListener("focusin", (e) => {
+  if (e.target.closest("#studentnum")) FetchingStudents();
+});
