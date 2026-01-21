@@ -315,7 +315,6 @@ document.addEventListener("focusin", (e) => {
 document.addEventListener("pointerdown", (e) => {
     const input = document.querySelector("#studentnum");
     const box = document.querySelector(".student-suggestions");
-    if (!input || !box) return;
 
     const clickedInsideInput = input.contains(e.target);
     const clickedInsideBox = box.contains(e.target);
