@@ -115,8 +115,7 @@
   width: 210px;
 }
 
-th,
-td {
+.issue-row td {
   border-bottom: 1px solid var(--border-clr);
   padding: 10px 10px 10px 25px;
   text-align: left;
@@ -125,7 +124,15 @@ td {
 
 }
 
-tr {
+.table-head th {
+  border-bottom: 1px solid var(--border-clr);
+  padding: 10px 10px 10px 25px;
+  text-align: left;
+  font-size: 12px;
+  color: #676775;
+}
+
+.issue-row {
   background: white;
 
 }
@@ -169,6 +176,7 @@ tr {
   padding: 5px 10px 5px 10px;
   cursor: pointer;
 }
+
 .without-return-btn {
   display: flex;
   align-items: center;
@@ -182,7 +190,7 @@ tr {
 }
 
 
-.return-btn:hover{
+.return-btn:hover {
   background: rgb(231, 231, 231);
 }
 
@@ -235,137 +243,161 @@ tr {
 
 /* GENERAL MODALS CLASSES */
 .modal {
-    display: flex;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.2);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .modal-content {
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    width: 500px;
-    height: auto;
-    color: rgb(58, 57, 57);
-    position: relative;
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 500px;
+  height: auto;
+  color: rgb(58, 57, 57);
+  position: relative;
 }
 
 .modal.show {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transition: opacity 180ms ease;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity 180ms ease;
 }
 
 .modal.show .modal-content {
-    transform: translateY(0) scale(1);
-    opacity: 1;
+  transform: translateY(0) scale(1);
+  opacity: 1;
 }
 
 .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .modal-header span {
-    color: #676775;
-    font-weight: 500;
-    font-size: 17px;
+  color: #676775;
+  font-weight: 500;
+  font-size: 17px;
 }
 
 .modal-close {
-    border: none;
-    background: none;
-    cursor: pointer;
-    display: flex;
-    position: relative;
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  position: relative;
 }
 
 
 /* ADD STUDENT MODAL */
 .addissue-form {
-    display: grid;
-    grid-template-columns: 239px 239px;
-    gap: 15px;
-    margin-top: 18px;
-    margin-bottom: 25px;
+  display: grid;
+  grid-template-columns: 239px 239px;
+  gap: 15px;
+  margin-top: 18px;
+  margin-bottom: 25px;
 }
 
 .addissue-form p {
-    font-size: 13px;
-    font-weight: 480;
-    color: #717280;
+  font-size: 13px;
+  font-weight: 480;
+  color: #717280;
 }
 
 .addissue-form input {
-    font-size: 12px;
-    width: 100%;
-    height: auto;
-    border: 1px solid var(--border-clr);
-    border-radius: 5px;
-    padding: 8px 10px 8px 10px;
-    margin-top: 4px;
-    box-sizing: border-box;
-    background: rgb(247, 247, 247);
+  font-size: 12px;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border-clr);
+  border-radius: 5px;
+  padding: 8px 10px 8px 10px;
+  margin-top: 4px;
+  box-sizing: border-box;
+  background: rgb(247, 247, 247);
 }
 
 .addissue-form input::placeholder {
-    color: rgb(179, 176, 176);
+  color: rgb(179, 176, 176);
 }
 
 .addissue-buttons {
-    display: flex;
-    justify-content: end;
-    gap: 10px;
+  display: flex;
+  justify-content: end;
+  gap: 10px;
 
 }
+
 /* ADDSTUDENT-BUTTONS */
 #addissue-submit {
-    display: flex;
-    align-items: center;
-    border: none;
-    width: auto;
-    height: auto;
-    border: 1px solid var(--border-clr);
-    border-radius: 5px;
-    padding: 9px 15px 9px 15px;
-    background: var(--base-clr);
-    color: white;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: none;
+  width: auto;
+  height: auto;
+  border: 1px solid var(--border-clr);
+  border-radius: 5px;
+  padding: 9px 15px 9px 15px;
+  background: var(--base-clr);
+  color: white;
+  cursor: pointer;
 }
 
 #addissue-cancel {
-    display: flex;
-    align-items: center;
-    border: none;
-    width: auto;
-    height: auto;
-    border: 1px solid var(--border-clr);
-    border-radius: 5px;
-    padding: 9px 15px 9px 15px;
-    background: none;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: none;
+  width: auto;
+  height: auto;
+  border: 1px solid var(--border-clr);
+  border-radius: 5px;
+  padding: 9px 15px 9px 15px;
+  background: none;
+  cursor: pointer;
 }
+
 .dropdown {
   grid-column: 1 / -1;
 }
 
 
-.suggestion-table {
-  display: hidden;
-  border: 1px solid var(--base-clr);
+
+.student-suggestions {
+  display: none;
+  position: absolute;
+  border: 1px solid var(--border-clr);
   border-radius: 5px;
+  border-radius: 5px;
+  width: 492px;
+  margin-top: 5px;
+  background: #fff;
+  z-index: 1;
+  animation: fadeOut .12s linear;
+  
 }
 
+.suggestion-table {
+  width: 100%;
+
+}
+
+.suggestion-row td {
+  border-bottom: 1px solid var(--border-clr);
+  padding: 10px 10px 10px 20px;
+  text-align: left;
+  font-size: 12px;
+  color: #676775;
+
+}

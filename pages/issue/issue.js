@@ -274,6 +274,12 @@ function renderStudents(students) {
     const tbody = document.querySelector(".student-suggestions tbody");
     if (!tbody) return;
 
+    if (!tbody) {
+        // Try again on next frame
+        requestAnimationFrame(() => renderStudents(students));
+        return;
+    }
+
     tbody.innerHTML = students.map(createStudentsRow).join("");
 }
 
@@ -297,7 +303,24 @@ function createStudentsRow(student) {
   `;
 }
 
-
 document.addEventListener("focusin", (e) => {
-  if (e.target.closest("#studentnum")) FetchingStudents();
+    if (e.target.closest("#studentnum")) {
+        const box = document.querySelector(".student-suggestions");
+        if (box) box.style.display = "block";
+        FetchingStudents();
+    }
+});
+
+
+document.addEventListener("pointerdown", (e) => {
+    const input = document.querySelector("#studentnum");
+    const box = document.querySelector(".student-suggestions");
+    if (!input || !box) return;
+
+    const clickedInsideInput = input.contains(e.target);
+    const clickedInsideBox = box.contains(e.target);
+
+    if (!clickedInsideInput && !clickedInsideBox) {
+        box.style.display = "none";
+    }
 });
