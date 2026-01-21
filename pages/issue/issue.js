@@ -252,7 +252,14 @@ async function handleAddIssue() {
 }
 
 // DROPDOWN SUGEESTOIN STUDENTS
+let cachedStudents = null;
+
 async function FetchingStudents() {
+    if (cachedStudents) {
+        renderStudents(cachedStudents);
+        return cachedStudents;
+    }
+
     const q = query(
         collection(db, "Students"),
         orderBy("lastName", "asc"),
@@ -261,18 +268,17 @@ async function FetchingStudents() {
 
     const snapshot = await getDocs(q);
 
-    const students = snapshot.docs.map((d) => ({
+    cachedStudents = snapshot.docs.map(d => ({
         id: d.id,
-        ...d.data(),
+        ...d.data()
     }));
 
-    renderStudents(students);
-    return students;
+    renderStudents(cachedStudents);
+    return cachedStudents;
 }
 
 function renderStudents(students) {
     const tbody = document.querySelector(".student-suggestions tbody");
-    if (!tbody) return;
 
     if (!tbody) {
         // Try again on next frame
@@ -303,11 +309,13 @@ function createStudentsRow(student) {
   `;
 }
 
-document.addEventListener("focusin", (e) => {
+document.addEventListener("focusin", async (e) => {
     if (e.target.closest("#studentnum")) {
         const box = document.querySelector(".student-suggestions");
-        if (box) box.style.display = "block";
-        FetchingStudents();
+        if (!box) return;
+
+        await FetchingStudents();
+        box.style.display = "block";
     }
 });
 
@@ -315,6 +323,8 @@ document.addEventListener("focusin", (e) => {
 document.addEventListener("pointerdown", (e) => {
     const input = document.querySelector("#studentnum");
     const box = document.querySelector(".student-suggestions");
+    if (!input || !box) return;
+
 
     const clickedInsideInput = input.contains(e.target);
     const clickedInsideBox = box.contains(e.target);
