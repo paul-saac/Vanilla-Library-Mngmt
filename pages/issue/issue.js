@@ -2,7 +2,6 @@ import { db } from "../../shared/scripts/firebaseConfig.js";
 import { collection, limit, getDocs, addDoc, onSnapshot, deleteDoc, doc, updateDoc, serverTimestamp, query, orderBy, setDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 let unsubscribeIssues = null;
-let unsubscribeStudents = null;
 
 let allIssues = [];
 
@@ -143,6 +142,7 @@ window.addEventListener("hashchange", () => {
         enterIssuePage();
     } else {
         leaveIssuePage();
+        stopFetchingBooks();
     }
 });
 // MAIN INVOKE
@@ -252,29 +252,33 @@ async function handleAddIssue() {
 }
 
 // DROPDOWN SUGEESTOIN STUDENTS
-let cachedStudents = null;
+let cachedStudents = [];
+let unsubscribeStudents = null;
 
 async function FetchingStudents() {
-    if (cachedStudents) {
-        renderStudents(cachedStudents);
-        return cachedStudents;
-    }
+    if (unsubscribeStudents) return
 
     const q = query(
         collection(db, "Students"),
-        orderBy("lastName", "asc"),
-        limit(3)
+        orderBy("lastName", "asc")
     );
 
-    const snapshot = await getDocs(q);
+    unsubscribeStudents = onSnapshot(
+        q,
+        (snapshot) => {
+            cachedStudents = snapshot.docs.map((d) => ({
+                id: d.id,
+                ...d.data(),
+            }));
+            renderStudents(cachedStudents);
+        },
+    );
+}
 
-    cachedStudents = snapshot.docs.map(d => ({
-        id: d.id,
-        ...d.data()
-    }));
-
-    renderStudents(cachedStudents);
-    return cachedStudents;
+function stopFetchingStudents() {
+    if (!unsubscribeStudents) return;
+    unsubscribeStudents();
+    unsubscribeStudents = null;
 }
 
 function renderStudents(students) {
@@ -301,8 +305,9 @@ function createStudentsRow(student) {
     } = student;
 
     return `
-        <tr class="suggestion-row" data-id="${id}">
+        <tr class="student-suggestion-row" data-id="${id}" data-first-name="${firstName}" data-last-name="${lastName}">
             <td class="td-name">${lastName || "N/A"}, ${firstName || "N/A"} <br>
+                <span class="student-email">${id} • ${department}</span> <br>
                 <span class="student-email">${email || "N/A"}</span>
             </td>
         </tr>
@@ -331,5 +336,144 @@ document.addEventListener("pointerdown", (e) => {
 
     if (!clickedInsideInput && !clickedInsideBox) {
         box.style.display = "none";
+
     }
+});
+
+document.addEventListener("click", (e) => {
+    const row = e.target.closest(".student-suggestion-row");
+    if (!row) return;
+
+    const studentId = row.dataset.id;
+    const firstName = row.dataset.firstName; // from data-first-name
+    const lastName = row.dataset.lastName;   // from data-last-name
+
+    console.log(row.dataset)
+
+    const input = document.querySelector("#studentnum");
+    const box = document.querySelector(".student-suggestions");
+
+    input.value = lastName + ", " + firstName + " " + "(" + studentId + ")";
+    box.style.display = "none";
+});
+
+
+
+// DROPDOWN BOOKS
+
+let cachedBooks = [];
+let unsubscribeBooks = null;
+
+// SIMPLE: start realtime listener once, keep updating cachedBooks + UI
+function FetchingBooks() {
+    if (unsubscribeBooks) return; // already listening
+
+    const q = query(collection(db, "Books"), orderBy("createdAt", "asc"));
+
+    unsubscribeBooks = onSnapshot(
+        q,
+        (snapshot) => {
+            cachedBooks = snapshot.docs.map((d) => ({
+                id: d.id,
+                ...d.data(),
+            }));
+            renderBooks(cachedBooks);
+        },
+        (err) => console.error(err)
+    );
+}
+
+// optional cleanup (call when leaving page / closing modal if you want)
+function stopFetchingBooks() {
+    if (!unsubscribeBooks) return;
+    unsubscribeBooks();
+    unsubscribeBooks = null;
+}
+
+
+function renderBooks(books) {
+    const tbody = document.querySelector(".book-suggestions tbody");
+    if (!tbody) {
+        requestAnimationFrame(() => renderBooks(books));
+        return;
+    }
+    tbody.innerHTML = books.map(createBooksRow).join("");
+}
+
+function createBooksRow(book) {
+    const {
+        id = "",
+        bookName = "Untitled",
+        author = "Unknown Author",
+        bookGenre = "N/A",
+        isbn = "",
+        status = "Unavailable",
+        copies = 0,
+        availableCopies,
+    } = book;
+
+    const available = availableCopies ?? copies ?? 0;
+    const total = copies ?? 0;
+
+    const normalizedStatus = (status || "").toLowerCase();
+    const statusClass = normalizedStatus === "available" ? "avail-light" : "unavail";
+    const isbnOrId = isbn || id || "N/A";
+
+    return `
+    <tr class="book-suggestion-row" data-book-name="${bookName}" data-author="${author}" data-isbn="${isbnOrId}">
+        <td>
+            <span class="td-title">${bookName}</span> <br>
+            <span>${author} • ${bookGenre}</span> <br>
+            <span>ISBN: ${isbn}  ${availableCopies}/${copies}</span> <br>
+        </td>
+    </tr>
+  `;
+}
+
+document.addEventListener("focusin", async (e) => {
+    if (e.target.closest("#booknum")) {
+        const box = document.querySelector(".book-suggestions");
+        if (!box) return;
+
+        await FetchingBooks();
+        box.style.display = "block";
+    }
+});
+
+
+document.addEventListener("pointerdown", (e) => {
+    const input = document.querySelector("#booknum");
+    const box = document.querySelector(".book-suggestions");
+    if (!input || !box) return;
+
+
+    const clickedInsideInput = input.contains(e.target);
+    const clickedInsideBox = box.contains(e.target);
+
+    if (!clickedInsideInput && !clickedInsideBox) {
+        box.style.display = "none";
+        stopFetchingBooks();
+    }
+});
+
+document.addEventListener("click", (e) => {
+    const row = e.target.closest(".book-suggestion-row");
+    if (!row) return;
+
+    const bookId = row.dataset.id;
+    const bookName = row.dataset.bookName; // from data-book-name
+    const author = row.dataset.author;     // from data-author
+    const isbn = row.dataset.isbn;         // from data-isbn
+
+    const input = document.querySelector("#booknum");
+    const box = document.querySelector(".book-suggestions");
+
+    // pick whatever format you want:
+    input.value = `${bookName} — ${author} (${isbn})`;
+    // input.value = isbn; // alternative
+    // input.value = bookId; // alternative
+
+    box.style.display = "none";
+
+    console.log({ bookId, bookName, author, isbn });
 });

@@ -374,6 +374,8 @@
 
 
 
+
+/* DROPDOWN STUDENTS */
 .student-suggestions {
   display: none;
   position: absolute;
@@ -385,19 +387,72 @@
   background: #fff;
   z-index: 1;
   animation: fadeOut .12s linear;
-  
+  max-height: calc(70vh - 205px);
+  overflow: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+
+
+
 }
 
 .suggestion-table {
   width: 100%;
+  padding: 0;
 
 }
 
-.suggestion-row td {
+.student-suggestion-row td {
   border-bottom: 1px solid var(--border-clr);
   padding: 10px 10px 10px 20px;
   text-align: left;
   font-size: 12px;
   color: #676775;
+  cursor: pointer;
+}
+
+.student-suggestion-row:hover {
+  background: rgb(245, 245, 245);
+}
+
+
+.student-email {
+  font-size: 11px;
+  font-weight: 350;
+}
+
+
+
+/* DROPDOWN BOOKS */
+.book-suggestions {
+  display: none;
+  position: absolute;
+  border: 1px solid var(--border-clr);
+  border-radius: 5px;
+  border-radius: 5px;
+  width: 492px;
+  margin-top: 5px;
+  background: #fff;
+  z-index: 1;
+  animation: fadeOut .12s linear;
+  max-height: calc(70vh - 205px);
+  overflow: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
 
 }
+
+
+.book-suggestion-row td {
+  border-bottom: 1px solid var(--border-clr);
+  padding: 10px 10px 10px 20px;
+  text-align: left;
+  font-size: 12px;
+  color: #676775;
+  cursor: pointer;
+}
+
+.book-suggestion-row:hover {
+  background: rgb(245, 245, 245);
+}
+

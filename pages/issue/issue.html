@@ -42,12 +42,17 @@
             </div>
 
             <div class="dropdown">
-                <span class="student-input">
-                    <p>Select Book</p>
-                    <input id="book" type="text" placeholder="Enter a book title">
-                </span>
-                <div class="dropdown-menu">
+                <div class="books-dropdown" id="book-input">
+                    <p>Select Student</p>
+                    <input id="booknum" type="text" placeholder="Enter a student name/number" autocomplete="off">
+                </div>
 
+                <div class="book-suggestions" id="dropdown-suggestions">
+                    <table class="suggestion-table">
+                        <tbody>
+                            <!-- injected -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
