@@ -143,6 +143,7 @@ window.addEventListener("hashchange", () => {
     } else {
         leaveIssuePage();
         stopFetchingBooks();
+        stopFetchingStudents();
     }
 });
 // MAIN INVOKE
@@ -186,7 +187,7 @@ document.addEventListener("keydown", (e) => {
 document.addEventListener("click", (e) => {
     if (e.target.closest("#addissuebtn")) openIssueModal();
     if (e.target.closest("#addissue-cancel")) closeIssueModal();
-    // if (e.target.closest("#addissue-submit")) handleAddStudent(); // keep your existing add logic
+    if (e.target.closest("#addissue-submit")) handleAddIssue(); // keep your existing add logic
 });
 
 
@@ -194,64 +195,66 @@ document.addEventListener("click", (e) => {
 function AddIssuesInputs() {
     return {
         studentnum: document.getElementById("studentnum"),
-        book: document.getElementById("book"),
+        book: document.getElementById("booknum"),
     };
 }
 
 function resetAddIssue() {
-    const f = AddStudentInputs();
-
-    if (f.studentnum) f.firstname.value = "";
-    if (f.book) f.lastname.value = "";
-
+    const f = AddIssuesInputs();
+    if (f.studentnum) f.studentnum.value = "";
+    if (f.book) f.book.value = "";
 }
 
 async function handleAddIssue() {
-    const f = AddStudentInputs();
+    // Ensure user picked from dropdowns (so we have structured data)
+    if (!selectedStudent) return alert("Please select a student from the dropdown.");
+    if (!selectedBook) return alert("Please select a book from the dropdown.");
 
-    const studentnum = f.studentnum?.value.trim() ?? "";
-    const firstname = f.firstname?.value.trim() ?? "";
-    const lastname = f.lastname?.value.trim() ?? "";
-
-    const year = f.year?.value.trim() || "N/A";
-    const program = f.program?.value.trim() || "N/A";
-    const email = f.email?.value.trim() || "N/A";
-    const phone = f.phone?.value.trim() || "N/A";
-
-    if (!studentnum) return alert("Please enter a student number.");
-    if (!firstname) return alert("Please enter a first name.");
-    if (!lastname) return alert("Please enter a last name.");
-    if (!phone) return alert("Please enter a phone number.");
-
-    const bookRef = doc(db, "Students", studentnum);
+    // Example due date: 14 days from now
+    const due = new Date();
+    due.setDate(due.getDate() + 7);
 
     try {
-        const existing = await getDoc(bookRef);
-        if (existing.exists()) {
-            return alert("A book with this ISBN already exists. Use Edit instead.");
-        }
+        await addDoc(collection(db, "IssuedBooks"), {
+            studentNum: selectedStudent.studentNum,
+            firstName: selectedStudent.firstName,
+            lastName: selectedStudent.lastName,
 
-        await setDoc(bookRef, {
-            id: studentnum,
-            firstName: firstname,
-            lastName: lastname,
-            year,
-            department: program,
-            email,
-            phone,
-            Membersince: serverTimestamp(),
+            bookId: selectedBook.bookId,
+            bookName: selectedBook.bookName,
+            author: selectedBook.author,
+            isbn: selectedBook.isbn,
+
+            borrowDate: serverTimestamp(),
+            dueDate: due,
+            returnDate: null,
+            issueStatus: "Borrowed",
+
+            createdAt: serverTimestamp(),
             updatedAt: serverTimestamp(),
         });
+
+        // reset UI/state
+        selectedStudent = null;
+        selectedBook = null;
 
         closeIssueModal();
         resetAddIssue();
     } catch (err) {
         console.error(err);
-        alert("Failed to add student.");
+        alert("Failed to add issue.");
     }
 }
 
+
+
+
+
 // DROPDOWN SUGEESTOIN STUDENTS
+// ✅ add these globals somewhere near the top
+let selectedStudent = null; // { studentNum, firstName, lastName }
+let selectedBook = null;    // { bookId, bookName, author }
+
 let cachedStudents = [];
 let unsubscribeStudents = null;
 
@@ -336,6 +339,7 @@ document.addEventListener("pointerdown", (e) => {
 
     if (!clickedInsideInput && !clickedInsideBox) {
         box.style.display = "none";
+        stopFetchingStudents()
 
     }
 });
@@ -344,16 +348,16 @@ document.addEventListener("click", (e) => {
     const row = e.target.closest(".student-suggestion-row");
     if (!row) return;
 
-    const studentId = row.dataset.id;
-    const firstName = row.dataset.firstName; // from data-first-name
-    const lastName = row.dataset.lastName;   // from data-last-name
+    const studentNum = row.dataset.id;        // your <tr data-id="...">
+    const firstName = row.dataset.firstName;  // data-first-name
+    const lastName = row.dataset.lastName;    // data-last-name
 
-    console.log(row.dataset)
+    selectedStudent = { studentNum, firstName, lastName }; // ✅ store selection
 
     const input = document.querySelector("#studentnum");
     const box = document.querySelector(".student-suggestions");
 
-    input.value = lastName + ", " + firstName + " " + "(" + studentId + ")";
+    input.value = lastName + ", " + firstName + " " + "(" + studentNum + ")";
     box.style.display = "none";
 });
 
@@ -420,22 +424,22 @@ function createBooksRow(book) {
     const isbnOrId = isbn || id || "N/A";
 
     return `
-    <tr class="book-suggestion-row" data-book-name="${bookName}" data-author="${author}" data-isbn="${isbnOrId}">
+    <tr class="book-suggestion-row" data-book-name="${bookName}" data-author="${author}" data-isbn="${isbnOrId}" data-id="${id}">
         <td>
             <span class="td-title">${bookName}</span> <br>
-            <span>${author} • ${bookGenre}</span> <br>
-            <span>ISBN: ${isbn}  ${availableCopies}/${copies}</span> <br>
+            <span class="td-small">${author} • ${bookGenre}</span> <br>
+            <span class="td-small">ISBN: ${isbn}</span> <br>
         </td>
     </tr>
   `;
 }
 
-document.addEventListener("focusin", async (e) => {
+document.addEventListener("focusin", (e) => {
     if (e.target.closest("#booknum")) {
         const box = document.querySelector(".book-suggestions");
         if (!box) return;
 
-        await FetchingBooks();
+        FetchingBooks();
         box.style.display = "block";
     }
 });
@@ -460,20 +464,20 @@ document.addEventListener("click", (e) => {
     const row = e.target.closest(".book-suggestion-row");
     if (!row) return;
 
-    const bookId = row.dataset.id;
-    const bookName = row.dataset.bookName; // from data-book-name
-    const author = row.dataset.author;     // from data-author
-    const isbn = row.dataset.isbn;         // from data-isbn
+    const bookId = row.dataset.id;        // ✅ now exists
+    const bookName = row.dataset.bookName;
+    const author = row.dataset.author;
+    const isbn = row.dataset.isbn;
+
+    selectedBook = { bookId, bookName, author, isbn }; // ✅ include isbn
 
     const input = document.querySelector("#booknum");
     const box = document.querySelector(".book-suggestions");
 
-    // pick whatever format you want:
-    input.value = `${bookName} — ${author} (${isbn})`;
-    // input.value = isbn; // alternative
-    // input.value = bookId; // alternative
-
+    input.value = `${bookName} — ${author}`;
     box.style.display = "none";
 
-    console.log({ bookId, bookName, author, isbn });
+
 });
+
+
