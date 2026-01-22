@@ -1,5 +1,5 @@
 import { db } from "../../shared/scripts/firebaseConfig.js";
-import { collection, limit, getDocs, addDoc, onSnapshot, deleteDoc, doc, updateDoc, serverTimestamp, query, orderBy, setDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+import { collection, limit, getDocs, addDoc, onSnapshot, deleteDoc, increment, runTransaction, doc, updateDoc, serverTimestamp, query, orderBy, setDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 let unsubscribeIssues = null;
 
@@ -206,35 +206,55 @@ function resetAddIssue() {
 }
 
 async function handleAddIssue() {
-    // Ensure user picked from dropdowns (so we have structured data)
     if (!selectedStudent) return alert("Please select a student from the dropdown.");
     if (!selectedBook) return alert("Please select a book from the dropdown.");
+    if (!selectedBook.bookId) return alert("Invalid book selection. Please re-select a book.");
 
-    // Example due date: 14 days from now
     const due = new Date();
     due.setDate(due.getDate() + 7);
 
     try {
-        await addDoc(collection(db, "IssuedBooks"), {
-            studentNum: selectedStudent.studentNum,
-            firstName: selectedStudent.firstName,
-            lastName: selectedStudent.lastName,
+        await runTransaction(db, async (tx) => {
+            const bookRef = doc(db, "Books", selectedBook.bookId);
+            const bookSnap = await tx.get(bookRef);
 
-            bookId: selectedBook.bookId,
-            bookName: selectedBook.bookName,
-            author: selectedBook.author,
-            isbn: selectedBook.isbn,
+            if (!bookSnap.exists()) throw new Error("Book not found.");
 
-            borrowDate: serverTimestamp(),
-            dueDate: due,
-            returnDate: null,
-            issueStatus: "Borrowed",
+            const bookData = bookSnap.data();
+            const currentAvailable = Number(bookData.availableCopies ?? bookData.copies ?? 0);
 
-            createdAt: serverTimestamp(),
-            updatedAt: serverTimestamp(),
+            if (currentAvailable <= 0) {
+                throw new Error("No available copies left for this book.");
+            }
+
+            // Create issue doc inside the same transaction
+            const issueRef = doc(collection(db, "IssuedBooks"));
+            tx.set(issueRef, {
+                studentNum: selectedStudent.studentNum,
+                firstName: selectedStudent.firstName,
+                lastName: selectedStudent.lastName,
+
+                bookId: selectedBook.bookId,
+                bookName: selectedBook.bookName,
+                author: selectedBook.author,
+                isbn: selectedBook.isbn ?? null,
+
+                borrowDate: serverTimestamp(),
+                dueDate: due,
+                returnDate: null,
+                issueStatus: "Borrowed",
+
+                createdAt: serverTimestamp(),
+                updatedAt: serverTimestamp(),
+            });
+
+            // Decrement copies atomically
+            tx.update(bookRef, {
+                availableCopies: increment(-1),
+                updatedAt: serverTimestamp(),
+            });
         });
 
-        // reset UI/state
         selectedStudent = null;
         selectedBook = null;
 
@@ -242,10 +262,9 @@ async function handleAddIssue() {
         resetAddIssue();
     } catch (err) {
         console.error(err);
-        alert("Failed to add issue.");
+        alert(err?.message || "Failed to add issue.");
     }
 }
-
 
 
 
@@ -424,7 +443,7 @@ function createBooksRow(book) {
     const isbnOrId = isbn || id || "N/A";
 
     return `
-    <tr class="book-suggestion-row" data-book-name="${bookName}" data-author="${author}" data-isbn="${isbnOrId}" data-id="${id}">
+    <tr class="book-suggestion-row" data-book-name="${bookName}" data-author="${author}" data-isbn="${isbnOrId}" data-id="${id}" data-copies="${availableCopies}">
         <td>
             <span class="td-title">${bookName}</span> <br>
             <span class="td-small">${author} • ${bookGenre}</span> <br>
@@ -468,8 +487,9 @@ document.addEventListener("click", (e) => {
     const bookName = row.dataset.bookName;
     const author = row.dataset.author;
     const isbn = row.dataset.isbn;
+    const availableCopies = Number(row.dataset.availableCopies ?? 0);
 
-    selectedBook = { bookId, bookName, author, isbn }; // ✅ include isbn
+    selectedBook = { bookId, bookName, author, isbn, availableCopies }; // ✅ include isbn
 
     const input = document.querySelector("#booknum");
     const box = document.querySelector(".book-suggestions");

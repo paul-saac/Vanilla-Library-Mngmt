@@ -108,11 +108,14 @@ function createBookRow(book) {
     availableCopies,
   } = book;
 
-  const available = availableCopies ?? copies ?? 0;
-  const total = copies ?? 0;
+  
+  const available = Number(availableCopies ?? copies ?? 0);
+  const total = Number(copies ?? 0);
 
-  const normalizedStatus = (status || "").toLowerCase();
-  const statusClass = normalizedStatus === "available" ? "avail-light" : "unavail";
+  // ✅ derive UI status from available copies
+  const displayStatus = available > 0 ? "Available" : "Unavailable";
+  const statusClass = available > 0 ? "avail-light" : "unavail";
+
   const isbnOrId = isbn || id || "N/A";
 
   return `
@@ -127,7 +130,7 @@ function createBookRow(book) {
         <span class="td-genre"> ${bookGenre}</span>
       </td>
       <td> 
-        <span class="${statusClass}"> ${status}</span> 
+        <span class="${statusClass}"> ${displayStatus}</span>
       </td>
       <td>${available}/${total}</td>
       <td class="td-actions">
@@ -371,7 +374,7 @@ async function BookDetails(bookId) {
     published.textContent = data.publishDate;
     isbn.textContent = data.isbn;
     category.textContent = data.bookGenre;
-    availability.textContent =  `${data.copies} of ${data.availableCopies} copies available`
+    availability.textContent = `${data.availableCopies} of ${data.copies} copies available`
     description.textContent = data.description;
 
 
