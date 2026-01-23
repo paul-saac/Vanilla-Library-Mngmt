@@ -324,7 +324,9 @@ function resetAddBookForm() {
   }
   if (f.genre) f.genre.value = "";
   if (f.publishDate) f.publishDate.value = "";
-  if (f.copies) f.copies.value = "0";
+  if (f.copies) f.copies.value = "";
+  if (f.description) f.description.value = "";
+
 }
 
 // BOOK ACTIONS
