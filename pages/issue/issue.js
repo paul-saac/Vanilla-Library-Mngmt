@@ -127,7 +127,7 @@ function createIssuesRow(issue) {
             </td>
             <td> 
                 <div class="issue-actions">
-                    <div class="${actionclass}" data-action="return" data-id="${id}">
+                    <div id="returnbtn" class="${actionclass}" data-action="return" data-id="${id}">
                         <span>${actions}</span>
                     </div>
                 </div>
@@ -265,6 +265,61 @@ async function handleAddIssue() {
         alert(err?.message || "Failed to add issue.");
     }
 }
+
+document.addEventListener("click", async (e) => {
+    const btn = e.target.closest("#returnbtn");
+    if (!btn) return;
+
+    const action = btn.dataset.action;
+    if (action !== "return") return;
+
+    const issueId = btn.dataset.id;
+    if (!issueId) return;
+
+    try {
+        await IssueDelete(issueId);
+    } catch (err) {
+        console.error(err);
+        alert(err?.message || "Failed to return book.");
+    }
+});
+
+async function IssueDelete(issueId) {
+    const issueRef = doc(db, "IssuedBooks", issueId);
+
+    await runTransaction(db, async (tx) => {
+        const issueSnap = await tx.get(issueRef);
+        if (!issueSnap.exists()) throw new Error("Issue not found.");
+
+        const issueData = issueSnap.data();
+        const currentStatus = String(issueData.issueStatus || "").toLowerCase();
+
+        // Prevent double-increment if already returned
+        if (currentStatus === "returned") return;
+
+        const bookId = issueData.bookId;
+        if (!bookId) throw new Error("Missing bookId on issue document.");
+
+        const bookRef = doc(db, "Books", bookId);
+
+        // 1) Update the issue status
+        tx.update(issueRef, {
+            issueStatus: "Returned",
+            returnDate: serverTimestamp(),
+            updatedAt: serverTimestamp(),
+        });
+
+        // 2) Increment availableCopies back
+        tx.update(bookRef, {
+            availableCopies: increment(1),
+            updatedAt: serverTimestamp(),
+        });
+    });
+}
+
+
+
+
 
 
 
