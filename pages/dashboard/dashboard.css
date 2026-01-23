@@ -1,11 +1,11 @@
 
-.count-container div{
+.count-container .graph{
     display: flex;
     flex-direction: column;
-    gap: 7px;
+    gap: 20px;
     background: white;
     width: 100%;
-    height: 48px;
+    height: 68px;
     padding: 26px;
     border-radius: 5px;
     border: 1px solid var(--border-clr);
@@ -21,5 +21,10 @@
     color: #73737C;
 }
 .count-container p {
-    color: #73737C;
+    color: #878797;
+    font-weight: 500;
+}
+.graph div {
+    display: flex;
+    justify-content: space-between;
 }

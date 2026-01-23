@@ -300,7 +300,7 @@ aside ul li a svg {
     background: var(--base-clr);
     color: white;
 
-    svg {
+    img {
         fill: white;
     }
 }
