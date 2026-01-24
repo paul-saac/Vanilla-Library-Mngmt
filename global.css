@@ -320,7 +320,9 @@ main {
     background: #F9F9F9;
     grid-area: main;
     padding: 50px;
-    height: 100vh;
+    scrollbar-width: none;
+
+
     /* Or use a calculated height if you have a header/footer */
     overflow-y: auto;
 }

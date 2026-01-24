@@ -96,7 +96,7 @@
   border-radius: 6px;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
   overflow: hidden;
-  max-height: calc(100vh - 220px);
+  max-height: calc(100vh - 250px);
   overflow-y: auto;
   scrollbar-width: none;
 }

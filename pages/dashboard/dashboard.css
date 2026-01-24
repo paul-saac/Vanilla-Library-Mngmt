@@ -1,5 +1,4 @@
-
-.count-container .graph{
+.count-container .graph {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -11,20 +10,137 @@
     border: 1px solid var(--border-clr);
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
 }
+
 .count-container {
     display: flex;
     justify-content: start;
     align-items: center;
     gap: 16px;
 }
-.count-container h3  {
-    color: #73737C;
+
+.count-container h3 {
+    color: var(--base-clr);
 }
+
 .count-container p {
-    color: #878797;
+    color: var(--base-clr);
     font-weight: 500;
 }
+
 .graph div {
     display: flex;
     justify-content: space-between;
+}
+
+
+
+/* DASHBOARD CONTAINERS BUTTOM */
+.recent-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    gap: 16px;
+    height: 100%;
+}
+
+.recent-container .recent-graphs {
+    padding: 30px;
+    box-sizing: border-box;
+    color: var(--base-clr);
+}
+
+#recent-activity {
+    border: 1px solid var(--border-clr);
+    border-radius: 5px;
+    background: white;
+    width: 100%;
+
+}
+
+#recent-books {
+    border: 1px solid var(--border-clr);
+    border-radius: 5px;
+    background: white;
+    width: 700px;
+}
+
+.activity-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--border-clr);
+    border-radius: 5px;
+    margin-top: 15px;
+    padding: 13px 20px 13px 20px;
+
+}
+
+.activity-row span {
+    font-size: 13px;
+    color: #8a8aa0;
+
+}
+
+.recent-graphs h3 {
+    color: var(--base-clr);
+
+}
+
+.recent-graphs {
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
+
+}
+
+.activity-row h5 {
+    color: var(--base-clr);
+    font-weight: 550;
+}
+
+.status-borrowed {
+    border: 1px solid var(--border-clr);
+    border-radius: 4px;
+    padding: 8px 15px 8px 15px;
+    background: oklch(97.015% 0.00011 271.152);
+    color: #676775;
+    font-size: 12px;
+}
+
+
+/* RECENT BOOKS */
+.recentbook-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--border-clr);
+    border-radius: 5px;
+    margin-top: 15px;
+    padding: 13px 20px 13px 20px;
+    
+}
+
+.recentbook-row span {
+    font-size: 13px;
+    color: #8a8aa0;
+
+}
+
+.recentbook-graphs h3 {
+    color: #73737C;
+}
+
+.recentbook-details h5 {
+    color: var(--base-clr);
+    font-weight: 550;
+}
+
+.bookgenre {
+    border-radius: 3px;
+    padding: 6px 9px 6px 9px;
+    background: oklch(97.015% 0.00011 271.152);
+    border: 1px solid var(--border-clr);
+    color: var(--base-clr);
+    font-weight: 400;
+    font-size: 11px;
 }
