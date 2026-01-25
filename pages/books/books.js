@@ -136,10 +136,10 @@ function createBookRow(book) {
       <td class="td-actions">
         <div class="books-actions">
           <div class="edit-book" data-action="edit" data-id="${id}">
-            <img src="/shared/styles/icons/editstudent.svg" alt="Edit" width="13" height="13">
+            <img src="shared/styles/icons/editstudent.svg" alt="Edit" width="13" height="13">
           </div>
           <div class="delete-book" data-action="delete" data-id="${id}">
-            <img src="/shared/styles/icons/deletestudent.svg" alt="Delete" width="13" height="13">
+            <img src="shared/styles/icons/deletestudent.svg" alt="Delete" width="13" height="13">
           </div>
         </div>
       </td>
