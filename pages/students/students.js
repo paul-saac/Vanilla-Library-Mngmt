@@ -69,10 +69,10 @@ function createStudentsRow(student) {
             <td> 
                 <div class="student-actions">
                     <div class="edit-student" data-action="edit" data-id="${id}">
-                        <img src="/shared/styles/icons/editstudent.svg" alt="" width="13px" height="13px">
+                        <img src="./shared/styles/icons/editstudent.svg" alt="" width="13px" height="13px">
                     </div>
                     <div class="delete-student" data-action="delete" data-id="${id}">
-                        <img src="/shared/styles/icons/deletestudent.svg" alt="" width="13px" height="13px">
+                        <img src="./shared/styles/icons/deletestudent.svg" alt="" width="13px" height="13px">
                     </div>
                 </div>
             
