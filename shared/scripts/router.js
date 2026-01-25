@@ -9,8 +9,8 @@ const routes = {
 
 function router() {
   const hash = window.location.hash || "#/";
-  const path = hash.slice(1);
-  loadContent(path); // PINASA AS AN ARGUMENT YUNG PATH SA loadContent() function
+  const path = hash.startsWith("#/") ? hash.slice(1) : "/";
+  loadContent(path);
   Navtitle(path);
 }
 
@@ -43,6 +43,7 @@ function Navtitle(path) {
 }
 
 function loadContent(path) {
+  
   const file = routes[path] || "pages/dashboard/dashboard.html";
 
   fetch(file)
