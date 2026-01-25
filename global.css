@@ -1,5 +1,4 @@
-@import "../../shared/styles/common.css";
-
+@import "./shared/styles/common.css";
 /*======= NAVIGATION ==================*/
 nav {
     top: 0;
