@@ -89,12 +89,15 @@
 
 .recent-graphs {
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
+    max-height: calc(100vh - 180px);
+    overflow: hidden;
 
 }
 
 .activity-row h5 {
     color: var(--base-clr);
     font-weight: 550;
+
 }
 
 .status-borrowed {
@@ -115,13 +118,22 @@
     align-items: center;
     border: 1px solid var(--border-clr);
     border-radius: 5px;
-    margin-top: 15px;
     padding: 13px 20px 13px 20px;
-    
+}
+
+.recentbooks-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-height: calc(100vh - 250px);
+    overflow: hidden;
+    overflow-y: auto;
+    scrollbar-width: none;
+    margin-top: 15px;
 }
 
 .recentbook-row span {
-    font-size: 13px;
+    font-size: 12px;
     color: #8a8aa0;
 
 }
@@ -133,14 +145,15 @@
 .recentbook-details h5 {
     color: var(--base-clr);
     font-weight: 550;
+    font-size: 13px;
 }
 
 .bookgenre {
     border-radius: 3px;
-    padding: 6px 9px 6px 9px;
+    padding: 2px 6px 2px 8px;
     background: oklch(97.015% 0.00011 271.152);
     border: 1px solid var(--border-clr);
     color: var(--base-clr);
     font-weight: 400;
-    font-size: 11px;
+    font-size: 9px;
 }

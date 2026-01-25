@@ -325,7 +325,7 @@ async function IssueDelete(issueId) {
 
 
 // DROPDOWN SUGEESTOIN STUDENTS
-// ✅ add these globals somewhere near the top
+
 let selectedStudent = null; // { studentNum, firstName, lastName }
 let selectedBook = null;    // { bookId, bookName, author }
 
