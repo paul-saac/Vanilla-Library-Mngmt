@@ -64,17 +64,7 @@
     width: 700px;
 }
 
-.activity-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid var(--border-clr);
-    border-radius: 5px;
-    margin-top: 15px;
-    padding: 13px 20px 13px 20px;
 
-}
 
 .activity-row span {
     font-size: 13px;
@@ -97,7 +87,6 @@
 .activity-row h5 {
     color: var(--base-clr);
     font-weight: 550;
-
 }
 
 .status-borrowed {
@@ -107,6 +96,25 @@
     background: oklch(97.015% 0.00011 271.152);
     color: #676775;
     font-size: 12px;
+}
+.activity-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--border-clr);
+    border-radius: 5px;
+    padding: 13px 20px 13px 20px;
+}
+.recentactivity-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-height: calc(100vh - 250px);
+    overflow: hidden;
+    overflow-y: auto;
+    scrollbar-width: none;
+    margin-top: 15px;
 }
 
 
@@ -131,6 +139,8 @@
     scrollbar-width: none;
     margin-top: 15px;
 }
+
+
 
 .recentbook-row span {
     font-size: 12px;

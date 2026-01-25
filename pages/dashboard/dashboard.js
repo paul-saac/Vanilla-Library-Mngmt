@@ -62,6 +62,84 @@ async function renderOverdues() {
 }
 
 
+let cachedActivity = [];
+let unsubscribeActivity = null;
+
+// SIMPLE: start realtime listener once, keep updating cachedBooks + UI
+function FetchingActivity() {
+  if (unsubscribeActivity) return; // already listening
+
+  const q = query(collection(db, "Activity"), orderBy("at", "desc"));
+
+  unsubscribeActivity = onSnapshot(
+    q,
+    (snapshot) => {
+      cachedActivity = snapshot.docs.map((d) => ({
+        id: d.id,
+        ...d.data(),
+      }));
+      renderActivity(cachedActivity);
+    },
+    (err) => console.error(err)
+  );
+}
+
+// optional cleanup (call when leaving page / closing modal if you want)
+function stopFetchingActivity() {
+  if (!unsubscribeActivity) return;
+  unsubscribeActivity();
+  unsubscribeActivity = null;
+}
+
+
+function renderActivity(activity) {
+  const activityrow = document.querySelector(".recentactivity-rows");
+  if (!activityrow) {
+    requestAnimationFrame(() => renderActivity(activity));
+    return;
+  }
+  activityrow.innerHTML = activity.map(createActivityRow).join("");
+}
+
+function formatFirestoreDate(value) {
+  if (!value) return "—";
+  if (typeof value?.toDate === "function") return value.toDate().toLocaleString();
+  if (value instanceof Date) return value.toLocaleString();
+  const d = new Date(value);
+  return Number.isNaN(d.getTime()) ? String(value) : d.toLocaleString();
+}
+
+
+function createActivityRow(activity) {
+  const {
+    bookName = "N/A",
+    at = null,
+    studentName = "N/A",
+    status = "Unavailable",
+    type = "",
+  } = activity;
+
+  return `
+      <div class="activity-row">
+          <div class="activity-details">
+              <h5>${bookName}</h5>
+              <span>${status}: ${formatFirestoreDate(at)}</span>
+          </div>
+          <div class="status-borrowed">${status}</div>
+      </div>
+  `;
+}
+
+
+
+
+
+
+
+
+
+
+
 let cachedBooks = [];
 let unsubscribeBooks = null;
 
@@ -130,7 +208,7 @@ renderTotalBooksCount();
 renderIssuedBooks();
 renderOverdues();
 FetchingBooks();
-
+FetchingActivity();
 window.addEventListener("hashchange", () => {
   if (location.hash === "#/" || location.hash === "") {
     renderTotalBooksCount();
@@ -138,9 +216,11 @@ window.addEventListener("hashchange", () => {
     renderIssuedBooks();
     renderOverdues();
     FetchingBooks();
+    FetchingActivity();
   }
   else {
     stopFetchingBooks();
+    stopFetchingActivity();
   }
 });
 

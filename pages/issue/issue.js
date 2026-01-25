@@ -110,7 +110,7 @@ function createIssuesRow(issue) {
     }
 
     return `
-        <tr class="issue-row" data-id="${id}">
+        <tr class="issue-row" data-id="${id}" data-bookname="${bookName}" data-status="${issueStatus}" data-borrowdate="${borrowDate}">
             <td class="th-studentname">
                 <span class="td-name">${lastName}, ${firstName}</span> <br>
                 <span class="td-next">${studentNum}</span>
@@ -136,6 +136,9 @@ function createIssuesRow(issue) {
     `;
 
 }
+
+
+
 
 window.addEventListener("hashchange", () => {
     if (location.hash === "#/issue" || location.hash === "") {
@@ -253,6 +256,16 @@ async function handleAddIssue() {
                 availableCopies: increment(-1),
                 updatedAt: serverTimestamp(),
             });
+
+            logActivityInTx(tx, {
+                type: "ISSUED",
+                issueId: issueRef.id,
+                bookId: selectedBook.bookId,
+                bookName: selectedBook.bookName,
+                studentNum: selectedStudent.studentNum,
+                studentName: `${selectedStudent.lastName}, ${selectedStudent.firstName}`,
+                status: "Borrowed",
+            });
         });
 
         selectedStudent = null;
@@ -265,6 +278,23 @@ async function handleAddIssue() {
         alert(err?.message || "Failed to add issue.");
     }
 }
+
+function logActivityInTx(tx, payload) {
+    // Creates Activity/{autoId}
+    const activityRef = doc(collection(db, "Activity"));
+    tx.set(activityRef, {
+        type: payload.type,                 // "ISSUED" | "RETURNED"
+        issueId: payload.issueId ?? null,   // link to IssuedBooks doc
+        bookId: payload.bookId ?? null,
+        bookName: payload.bookName ?? null,
+        studentNum: payload.studentNum ?? null,
+        studentName: payload.studentName ?? null,
+        status: payload.status ?? null,     // e.g. "Borrowed" / "Returned"
+        at: serverTimestamp(),              // when the activity happened
+        createdAt: serverTimestamp(),
+    });
+}
+
 
 document.addEventListener("click", async (e) => {
     const btn = e.target.closest("#returnbtn");
@@ -313,6 +343,16 @@ async function IssueDelete(issueId) {
         tx.update(bookRef, {
             availableCopies: increment(1),
             updatedAt: serverTimestamp(),
+        });
+
+        logActivityInTx(tx, {
+            type: "RETURNED",
+            issueId,
+            bookId,
+            bookName: issueData.bookName ?? null,
+            studentNum: issueData.studentNum ?? null,
+            studentName: `${issueData.lastName ?? ""}, ${issueData.firstName ?? ""}`.trim(),
+            status: "Returned",
         });
     });
 }
