@@ -74,7 +74,7 @@ function loadAssets(path) {
   const section = path === "/" ? "dashboard" : path.slice(1);
 
   // Set base path for assets (e.g., "pages/dashboard/")
-  const basePath = `pages/${section}/`;
+  const basePath = `./pages/${section}/`;
 
   // Remove all per-page CSS stylesheets
   const allCssLinks = document.querySelectorAll('link[id$="-css"]');
