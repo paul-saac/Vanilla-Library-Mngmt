@@ -15,7 +15,7 @@ loginform.addEventListener("submit", (e) => {
   signInWithEmailAndPassword(auth, loginemail, loginpassword)
     .then((userCredential) => {
       //FUNCTION FOR LOGIN 
-      window.location.href = "./home.html#/";
+      window.location.href = "home.html";
       emailinput.value = "";
       passwordinput.value =  "";
       alert("Signed-in")
