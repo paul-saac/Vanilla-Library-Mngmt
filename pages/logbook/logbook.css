@@ -1,31 +1,66 @@
 .log-nav {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-bottom: 34px;
+  position: relative;
+}
+
+.search-container {
+  display: flex;
+  gap: 10px;
 }
 
 .search {
-    position: relative;
-    display: flex;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
-    align-items: center;
-    border: 1px solid var(--border-clr);
-    border-radius: 5px 5px 5px 5px;
-    padding-right: 10px;
-    background: white;
+  position: relative;
+  display: flex;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
+  align-items: center;
+  border: 1px solid var(--border-clr);
+  border-radius: 5px 5px 5px 5px;
+  background: white;
+  justify-content: space-between;
+  padding: 0px 10px 0px 7px;
+  box-sizing: border-box;
 }
 
-.search svg {
-    cursor: pointer;
+.filter-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px var(--border-clr);
+  height: auto;
+  width: 43px;
+  border-radius: 5px;
+  background: white;
+  cursor: pointer;
+}
+
+.search img {
+  cursor: pointer;
+  padding-right: 3px;
+}
+
+.search input::placeholder {
+  color: rgb(180, 177, 182);
 }
 
 .searchTerm {
-    padding: 10px;
-    height: 20px;
-    width: 250px;
-    outline: #cdcdd8;
-    border: none;
-    border-radius: 5px 5px 5px 5px;
+  padding: 10px;
+  height: 20px;
+  width: 450px;
+  outline: #cdcdd8;
+  border: none;
+  border-radius: 5px 5px 5px 5px;
 }
+
+.logbuttons {
+  display: flex;
+  position: relative;
+  gap: 10px;
+
+}
+
 .addBtn {
   display: flex;
   align-items: center;
@@ -40,22 +75,25 @@
 
 .addBtn i {
   color: white;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .addBtn a {
   color: white;
   padding-left: 6px;
-  font-size: 14px;
+  font-size: 13px;
   text-decoration: none;
 }
+
+
+
 
 .logs-wrapper {
   border: 1px solid var(--border-clr);
   border-radius: 6px;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
   overflow: hidden;
-  margin-top: 35px;
+
 }
 
 .logs-container {
@@ -67,7 +105,8 @@
   border-radius: 0;
 }
 
-th, td {
+th,
+td {
   border-bottom: 1px solid var(--border-clr);
   padding: 10px 10px 10px 20px;
   text-align: left;

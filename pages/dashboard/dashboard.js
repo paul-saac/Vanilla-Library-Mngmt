@@ -39,7 +39,8 @@ async function renderIssuedBooks() {
     return;
   }
   const issuedcol = collection(db, "IssuedBooks");
-  const issuedsnap = await getCountFromServer(issuedcol);
+  const issuedbooks = query(issuedcol, where('issueStatus', '==', 'Borrowed'))
+  const issuedsnap = await getCountFromServer(issuedbooks);
   const issuedcount = issuedsnap.data().count;
 
   totalissued.textContent = String(issuedcount);
@@ -119,13 +120,27 @@ function createActivityRow(activity) {
     type = "",
   } = activity;
 
+  const statusclass = status.toLowerCase();
+
+  let statusclassid;
+
+  switch (statusclass) {
+    case "returned":
+      statusclassid = "status-returned"
+      break;
+    case "borrowed":
+      statusclassid = "status-borrowed"
+      break;
+    default:
+  }
+
   return `
       <div class="activity-row">
           <div class="activity-details">
               <h5>${bookName}</h5>
               <span>${status}: ${formatFirestoreDate(at)}</span>
           </div>
-          <div class="status-borrowed">${status}</div>
+          <div class="${statusclassid}">${status}</div>
       </div>
   `;
 }

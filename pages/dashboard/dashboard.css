@@ -97,6 +97,7 @@
     color: #676775;
     font-size: 12px;
 }
+
 .activity-row {
     display: flex;
     flex-direction: row;
@@ -106,6 +107,7 @@
     border-radius: 5px;
     padding: 13px 20px 13px 20px;
 }
+
 .recentactivity-rows {
     display: flex;
     flex-direction: column;
@@ -166,4 +168,24 @@
     color: var(--base-clr);
     font-weight: 400;
     font-size: 9px;
+}
+
+.status-borrowed {
+    border-radius: 5px;
+    padding: 2px 8px 2px 8px;
+    background: oklch(97.015% 0.00011 271.152);
+    border: 1px solid var(--border-clr);
+    color: var(--base-clr);
+    font-weight: 400;
+    font-size: 11px;
+}
+
+.status-returned {
+    border-radius: 5px;
+    padding: 2px 8px 2px 8px;
+    background: var(--base-clr);
+    border: 1px solid var(--border-clr);
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 11px;
 }
