@@ -1,4 +1,4 @@
-@import '/shared/styles/variables.css';
+@import './variables.css';
 
 /* Reset/normalize */
 * {
