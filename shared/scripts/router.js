@@ -43,7 +43,7 @@ function Navtitle(path) {
 }
 
 function loadContent(path) {
-  
+
   const file = routes[path] || "pages/dashboard/dashboard.html";
 
   fetch(file)
@@ -69,37 +69,44 @@ function loadContent(path) {
     });
 }
 
-function loadAssets(path) {
-  // Determine section name (e.g., "dashboard" from "/dashboard")
-  const section = path === "/" ? "dashboard" : path.slice(1);
 
-  // Set base path for assets (e.g., "pages/dashboard/")
+async function loadAssets(path) {
+  const section = path === "/" ? "dashboard" : path.slice(1);
   const basePath = `pages/${section}/`;
 
-  // Remove all per-page CSS stylesheets
-  const allCssLinks = document.querySelectorAll('link[id$="-css"]');
-  allCssLinks.forEach(link => link.remove());
+  // Remove only per-route assets added by the router (do NOT touch global.css)
+  document.querySelectorAll('link[data-route-css="1"]').forEach((l) => l.remove());
+  document.querySelectorAll('script[data-route-js="1"]').forEach((s) => s.remove());
 
-  // Load per-page CSS
-  const cssId = `${section}-css`;
-  const css = document.createElement("link");
-  css.id = cssId;
-  css.rel = "stylesheet";
-  css.href = `${basePath}${section}.css`;
-  document.head.appendChild(css);
-
-  // Load per-page JS
-  const jsId = `${section}-js`;
-  const existingScript = document.getElementById(jsId);
-  if (existingScript) {
-    existingScript.remove(); // Remove old script to allow re-execution
+  // Page CSS (skip if missing to avoid 404 noise)
+  const cssUrl = new URL(`${basePath}${section}.css`, window.location.href);
+  try {
+    const cssHead = await fetch(cssUrl, { method: "HEAD" });
+    if (cssHead.ok) {
+      const css = document.createElement("link");
+      css.rel = "stylesheet";
+      css.href = cssUrl.toString();
+      css.setAttribute("data-route-css", "1");
+      document.head.appendChild(css);
+    }
+  } catch {
+    // ignore
   }
 
-  const js = document.createElement("script");
-  js.id = jsId;
-  js.type = "module"; // Add this line to enable ES6 imports
-  js.src = `${basePath}${section}.js`;
-  document.body.appendChild(js);
+  // Page JS (skip if missing to avoid 404 noise)
+  const jsUrl = new URL(`${basePath}${section}.js`, window.location.href);
+  try {
+    const jsHead = await fetch(jsUrl, { method: "HEAD" });
+    if (jsHead.ok) {
+      const js = document.createElement("script");
+      js.type = "module";
+      js.src = jsUrl.toString();
+      js.setAttribute("data-route-js", "1");
+      document.body.appendChild(js);
+    }
+  } catch {
+    // ignore
+  }
 }
 
 
