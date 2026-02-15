@@ -534,8 +534,8 @@ async function deleteBook(bookId) {
     }
 
     if (noDelete) {
-      closeConfirmationModal()
-      console.log("oeoe")
+      closeConfirmationModal();
+
     }
 
   });

@@ -52,17 +52,6 @@ onAuthStateChanged(auth, user => {
 
 
 
-// NOTIFICATION
-// const notifbtn = document.getElementById('notif-btn');
-// const notifmenu = document.querySelector('.notification-content');
-
-// if (notifbtn && notifmenu) {
-//     notifbtn.addEventListener('click', (e) => {
-//         e.preventDefault();
-//         notifmenu.classList.toggle('show');
-//         notifbtn.classList.toggle('highlight')
-//     });
-// }
 
 // DROP DOWN
 // ...existing code...
